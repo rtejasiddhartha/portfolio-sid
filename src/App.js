@@ -131,12 +131,12 @@ const linkedinPosts = [
 // Define education data
 const education = [
   {
-    degree: 'B.Tech - Electrical and Electronics Engineering',
-    institution: 'Maharaja Agrasen Institute of Technology, New Delhi',
+    degree: 'PG Diploma - Web Design and Development',
+    institution: 'Conestoga College, Ontario, Canada',
   },
   {
-    degree: 'Diploma - Electronics and Communication Engineering',
-    institution: 'Guru Nanak Dev Institute of Technology, New Delhi',
+    degree: 'B.Tech - Computer Science and Engineering',
+    institution: 'Siddhartha Acadmy of Higher Education, Vijayawada, India',
   },
 ];
 
