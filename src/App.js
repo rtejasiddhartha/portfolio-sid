@@ -268,7 +268,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
 };
 
 // Blog Page Component
-const BlogPage = ({ setCurrentPage, theme, blogPosts }) => { // Added blogPosts prop
+const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
   return (
     <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
       <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
@@ -425,6 +425,12 @@ const App = () => {
   const [selectedBlogPostId, setSelectedBlogPostId] = useState(null);
   const [currentProjectPageIndex, setCurrentProjectPageIndex] = useState(0); // For project slider
 
+  // State for contact form
+  const [contactName, setContactName] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactMessage, setContactMessage] = useState('');
+  const [formStatus, setFormStatus] = useState({ type: 'idle', message: '' });
+
   // Toggle dark/light mode
   const toggleTheme = () => {
     setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
@@ -450,6 +456,17 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Clear form status message after a few seconds
+  useEffect(() => {
+    if (formStatus.type === 'success' || formStatus.type === 'error') {
+      const timer = setTimeout(() => {
+        setFormStatus({ type: 'idle', message: '' });
+      }, 5000); // Message disappears after 5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [formStatus]);
+
+
   // Smooth scroll to section (only for home page sections)
   const scrollToSection = (id) => {
     setCurrentPage('home'); // Ensure we are on the home page before scrolling
@@ -472,6 +489,56 @@ const App = () => {
     }
     window.scrollTo(0, 0); // Scroll to top when navigating to a new page
   };
+
+  // Handle contact form submission
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus({ type: 'sending', message: 'Sending message...' });
+
+    // In a real application, you would send this data to a backend server
+    // or a service like Formspree, EmailJS, etc.
+    // Example using a placeholder fetch:
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // This is where you'd typically make a fetch request to your backend:
+      /*
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: contactName,
+          email: contactEmail,
+          message: contactMessage,
+        }),
+      });
+
+      if (response.ok) {
+        setFormStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
+        setContactName('');
+        setContactEmail('');
+        setContactMessage('');
+      } else {
+        const errorData = await response.json();
+        setFormStatus({ type: 'error', message: `Failed to send message: ${errorData.message || 'Unknown error'}` });
+      }
+      */
+
+      // For demonstration, always succeed:
+      setFormStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
+      setContactName('');
+      setContactEmail('');
+      setContactMessage('');
+
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setFormStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
+    }
+  };
+
 
   // Sample skills data (for Toolbox Zone)
   const skills = [
@@ -715,25 +782,63 @@ const App = () => {
                 </h2>
                 <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border
                   ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                  <form className="space-y-6">
+                  <form onSubmit={handleContactSubmit} className="space-y-6">
                     <div>
                       <label htmlFor="name" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Name</label>
-                      <input type="text" id="name" name="name" className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                        ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`} placeholder="Your Name" />
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
+                          ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                        placeholder="Your Name"
+                        required
+                      />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Email</label>
-                      <input type="email" id="email" name="email" className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                        ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`} placeholder="your@example.com" />
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
+                          ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                        placeholder="your@example.com"
+                        required
+                      />
                     </div>
                     <div>
                       <label htmlFor="message" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Message</label>
-                      <textarea id="message" name="message" rows="5" className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                        ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`} placeholder="Your message..."></textarea>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        value={contactMessage}
+                        onChange={(e) => setContactMessage(e.target.value)}
+                        className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
+                          ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                        placeholder="Your message..."
+                        required
+                      ></textarea>
                     </div>
-                    <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
-                      Send Message
+                    <button
+                      type="submit"
+                      disabled={formStatus.type === 'sending'}
+                      className={`w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105
+                        ${formStatus.type === 'sending' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                      {formStatus.type === 'sending' ? 'Sending...' : 'Send Message'}
                     </button>
+                    {formStatus.message && (
+                      <p className={`mt-4 text-center text-lg font-semibold
+                        ${formStatus.type === 'success' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                        {formStatus.message}
+                      </p>
+                    )}
                   </form>
                 </div>
                 <div className="mt-12 text-center">
