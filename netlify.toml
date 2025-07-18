@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build" # Or 'yarn build' if you use yarn
+  publish = "build"         # This is the default output directory for Create React App
+
+[functions]
+  directory = "netlify/functions" # Tells Netlify where your serverless functions are
+  node_bundler = "esbuild"      # Recommended for faster function builds
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

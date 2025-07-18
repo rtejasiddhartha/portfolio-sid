@@ -1,17 +1,21 @@
 {
-  "name": "react",
-  "version": "0.0.0",
+  "name": "react-portfolio-app",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "lucide-react": "^0.525.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
-  },
+  "description": "React data analyst portfolio with project showcase and contact email function",
+  "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "lucide-react": "^0.525.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "nodemailer": "^6.9.14",
+    "querystring": "^0.2.1"
   },
   "devDependencies": {
     "react-scripts": "latest"
@@ -27,5 +31,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
