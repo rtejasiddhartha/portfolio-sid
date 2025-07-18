@@ -1,27 +1,47 @@
-/* Custom CSS for patterns and animations */
+/* Base CSS for responsive behavior */
+html {
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+*, *::before, *::after {
+  box-sizing: inherit; /* Inherit box-sizing for all elements */
+}
+
+body {
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+  font-family: 'Inter', sans-serif; /* Apply Inter font globally */
+  -webkit-font-smoothing: antialiased; /* Improve font rendering on macOS/iOS */
+  -moz-osx-font-smoothing: grayscale; /* Improve font rendering on macOS/iOS */
+  overflow-x: hidden; /* Prevent horizontal scrolling caused by layout issues */
+}
+
+/* Custom CSS for patterns and animations (from your original file) */
 .font-inter {
   font-family: 'Inter', sans-serif;
 }
+
 .bg-dots-pattern {
   background-image: radial-gradient(#4a5568 1px, transparent 1px);
   background-size: 20px 20px;
 }
+
 .animate-pulse-slow {
   animation: pulse-slow 8s infinite ease-in-out;
 }
+
 @keyframes pulse-slow {
   0%, 100% { transform: scale(1); opacity: 0.1; }
   50% { transform: scale(1.05); opacity: 0.2; }
 }
-/* Ensure smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
-}
+
 .animate-fade-in-up {
   animation: fadeInUp 1s ease-out forwards;
   opacity: 0;
   transform: translateY(20px);
 }
+
 .animate-fade-in-up.delay-200 { animation-delay: 0.2s; }
 .animate-fade-in-up.delay-400 { animation-delay: 0.4s; }
 
@@ -31,7 +51,8 @@ html {
     transform: translateY(0);
   }
 }
-/* Fix for cropped 'g' in gradients */
+
+/* Fix for cropped 'g' in gradients (from your original file) */
 .bg-clip-text {
     line-height: 1.4; /* Increased line-height to prevent clipping of descenders */
     display: inline-block; /* Helps with gradient clipping issues */
