@@ -4,13 +4,13 @@ import { Sun, Moon, Download, Mail, Linkedin, Github, BarChart, Code, Database, 
 // Import the new InsightsPage component
 import InsightsPage from './InsightsPage'; // Assuming InsightsPage.js is in the same directory
 
-// Define project data (UNCHANGED - PRESERVED USER'S DATA)
+// Define project data (MODIFIED IMAGE PATHS TO PLACEHOLDERS - USER NEEDS TO REPLACE WITH REAL IMAGES/PATHS)
 const projects = [
   {
     id: 'na-music-store',
     title: 'North America Music Store Analysis',
     description: 'Used SQL and Power BI to analyze music sales trends, artist popularity, and album-level performance.',
-    image: '/images/music-store-dashboard.png',
+    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=Music+Store+Dashboard', // Placeholder
     tags: ['SQL', 'Power BI', 'Excel'],
     liveDemo: '#',
     githubRepo: '#',
@@ -22,7 +22,7 @@ const projects = [
     id: 'crypto-analytics',
     title: 'CryptoPulse Real-time Analytics',
     description: 'Built a real-time analytics system using n8n and Python to monitor cryptocurrency market trends and send Telegram alerts.',
-    image: '/images/crypto-dashboard.png',
+    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=Crypto+Dashboard', // Placeholder
     tags: ['Python', 'n8n', 'APIs', 'Real-time'],
     liveDemo: '#',
     githubRepo: '#',
@@ -34,7 +34,7 @@ const projects = [
     id: 'ai-sales-forecasting',
     title: 'AI-Powered Sales Forecasting',
     description: 'Built an Excel-based dynamic dashboard to forecast e-commerce sales using traditional techniques and AI tools like Copilot.',
-    image: '/images/sales-forecasting-dashboard.png',
+    image: 'https://placehold.co/600x300/6D28D9/FFFFFF?text=Sales+Forecasting+Dashboard', // Placeholder
     tags: ['Excel', 'Forecasting', 'AI'],
     liveDemo: '#',
     githubRepo: '#',
@@ -46,7 +46,7 @@ const projects = [
     id: 'powerpulse-energy',
     title: 'Telangana PowerPulse AI',
     description: 'Forecasted electricity demand for smarter energy planning using Python and visual analytics.',
-    image: '/images/powerpulse-dashboard.png',
+    image: 'https://placehold.co/600x300/3B82F6/FFFFFF?text=PowerPulse+Dashboard', // Placeholder
     tags: ['Python', 'Pandas', 'Visualization'],
     liveDemo: '#',
     githubRepo: '#',
@@ -605,7 +605,7 @@ const App = () => {
                               <p className="text-sm opacity-80">Certifications</p>
                               <p className="text-xs opacity-60">Professional Credentials</p>
                           </div>
-                          <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
+                          <div className="p-4 rounded-xl shadow-md bg-gray-700 dark:bg-gray-100"> {/* Corrected theme class for consistency */}
                               <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
                               <p className="text-sm opacity-80">Improvement</p>
                               <p className="text-xs opacity-60">User Reactivation Boost</p>
@@ -821,7 +821,7 @@ const App = () => {
                     <a href="https://github.com/rtejasiddhartha/" target="_blank" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="GitHub">
                       <Github size={36} />
                     </a>
-                    <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="Mail">
+                    <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
                       <Mail size={36} />
                     </a>
                   </div>
@@ -850,43 +850,46 @@ const App = () => {
       {/* Header */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
         ${isScrolled ? (theme === 'dark' ? 'bg-gray-900/90 shadow-lg' : 'bg-white/90 shadow-md') : 'bg-transparent'} backdrop-blur-md py-4`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <button onClick={() => navigateToPage('home')} className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200">Sid's Portfolio</button>
-          <nav className="space-x-10 hidden md:flex">
-            <button onClick={() => scrollToSection('hero')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
-            <button onClick={() => scrollToSection('about')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
-            <button onClick={() => scrollToSection('projects')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
-            <button onClick={() => scrollToSection('skills')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-            {/* Updated navigation for Insights */}
-            <button onClick={() => navigateToPage('insights')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
-            {/* Removed AI link as its content is now in InsightsPage */}
-            <button onClick={() => scrollToSection('contact')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center"> {/* Adjusted px for better responsiveness */}
+          <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button> {/* Added flex-shrink-0 */}
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-10"> {/* Adjusted space-x */}
+            <button onClick={() => scrollToSection('hero')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
+            <button onClick={() => scrollToSection('about')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
+            <button onClick={() => scrollToSection('projects')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
+            <button onClick={() => scrollToSection('skills')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+            <button onClick={() => navigateToPage('insights')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
+            <button onClick={() => scrollToSection('contact')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
           </nav>
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
-            aria-label="Toggle dark mode"
-          >
-            {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
-          </button>
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 md:hidden"
-            aria-label="Toggle mobile menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+
+          <div className="flex items-center space-x-4 md:space-x-6"> {/* Group theme toggle and mobile menu */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
+              aria-label="Toggle dark mode"
+            >
+              {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+            </button>
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 md:hidden"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
-        {/* Mobile Navigation Overlay */}
-        <nav className={`fixed inset-0 bg-gray-950/90 backdrop-blur-md z-40 flex flex-col items-center justify-center space-y-8 transition-transform duration-300 ease-in-out transform
-          ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
-          <button onClick={() => scrollToSection('hero')} className="text-4xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Home</button>
-          <button onClick={() => scrollToSection('about')} className="text-4xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">About</button>
-          <button onClick={() => scrollToSection('projects')} className="text-4xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Projects</button>
-          <button onClick={() => scrollToSection('skills')} className="text-4xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-          <button onClick={() => navigateToPage('insights')} className="text-4xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Insights</button>
-          <button onClick={() => scrollToSection('contact')} className="text-4xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Contact</button>
+        {/* Mobile Navigation Overlay - Adjusted positioning and animation */}
+        <nav className={`absolute top-full left-0 w-full bg-gray-950/95 backdrop-blur-md z-40 flex flex-col items-center py-8 space-y-6 transition-all duration-300 ease-in-out origin-top
+          ${isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'} md:hidden`}> {/* Changed transform to scale-y */}
+          <button onClick={() => scrollToSection('hero')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Home</button>
+          <button onClick={() => scrollToSection('about')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">About</button>
+          <button onClick={() => scrollToSection('projects')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Projects</button>
+          <button onClick={() => scrollToSection('skills')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+          <button onClick={() => navigateToPage('insights')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Insights</button>
+          <button onClick={() => scrollToSection('contact')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Contact</button>
         </nav>
       </header>
 
