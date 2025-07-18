@@ -47,7 +47,7 @@
       const mailOptionsToSender = {
         from: process.env.SENDER_EMAIL, // Your verified sender email
         to: email, // Sender's email address
-        subject: `Thank you for contacting Teja Siddhartha Rajam!`,
+        subject: `Thank you for contacting me`,
         html: `
           <p>Hi ${name},</p>
           <p>Thank you for reaching out to Teja Siddhartha Rajam. Your message has been received and I will get back to you as soon as possible.</p>
