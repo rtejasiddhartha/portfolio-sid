@@ -519,11 +519,12 @@ const App = () => {
                 <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent animate-pulse-slow"></div>
               </div>
               <div className="relative z-10 text-center max-w-4xl">
-                <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up">
-                  Transforming Data into <br className="hidden sm:inline" /> Actionable Insights
+                <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up">
+                  {/* Transforming Data into <br className="hidden sm:inline" /> Actionable Insights */}
+                  Hey, I’m Sid <br className="hidden sm:inline" /> Designing the Future of Data.
                 </h1>
                 <p className={`text-lg md:text-xl mb-8 opacity-90 animate-fade-in-up delay-200 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  A seasoned Data Analyst with expertise in Python, SQL, Power BI, and AI-driven solutions, crafting compelling narratives from complex datasets.
+                  I turn real-world data into powerful narratives using Python, SQL, Power BI, and AI.<br/>Driven by curiosity, clarity, and craft — I build solutions that don’t just inform, but inspire.
                 </p>
                 {/* Removed quick access buttons from here, they are now in About Me */}
               </div>
@@ -569,20 +570,20 @@ const App = () => {
                     <div className="order-1 md:order-2 flex flex-col items-center justify-center space-y-8">
                       <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-purple-500">
                         <img
-                          src="https://placehold.co/320x320/8B5CF6/FFFFFF?text=Teja+Sid" // Using a placeholder for the profile image
+                          src="/sid-photo.jpg" // Using a placeholder for the profile image
                           alt="Teja Siddhartha Rajam"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-left"
                           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/320x320/CCCCCC/000000?text=Profile+Photo"; }}
                         />
                       </div>
                       <div className="flex justify-center space-x-6 text-3xl">
-                        <a href="#" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
                           <Linkedin size={36} />
                         </a>
-                        <a href="#" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
+                        <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
                           <Github size={36} />
                         </a>
-                        <a href="#" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
+                        <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
                           <Mail size={36} />
                         </a>
                       </div>
@@ -826,13 +827,13 @@ const App = () => {
                 <div className="mt-12 text-center">
                   <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Connect with Me</h3>
                   <div className="flex justify-center space-x-8 text-3xl">
-                    <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="LinkedIn">
                       <Linkedin size={36} />
                     </a>
-                    <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="GitHub">
+                    <a href="https://github.com/rtejasiddhartha/" target="_blank" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="GitHub">
                       <Github size={36} />
                     </a>
-                    <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="Mail">
+                    <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="Mail">
                       <Mail size={36} />
                     </a>
                   </div>
@@ -860,15 +861,15 @@ const App = () => {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
         ${isScrolled ? (theme === 'dark' ? 'bg-gray-900/90 shadow-lg' : 'bg-white/90 shadow-md') : 'bg-transparent'} backdrop-blur-md py-4`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <button onClick={() => navigateToPage('home')} className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200">Sid Portfolio</button>
-          <nav className="space-x-8 hidden md:flex">
-            <button onClick={() => scrollToSection('hero')} className="text-lg font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
-            <button onClick={() => scrollToSection('about')} className="text-lg font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
-            <button onClick={() => scrollToSection('projects')} className="text-lg font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
-            <button onClick={() => scrollToSection('skills')} className="text-lg font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-            <button onClick={() => navigateToPage('blog')} className="text-lg font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Blog</button>
-            <button onClick={() => scrollToSection('ai-integration')} className="text-lg font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">AI</button>
-            <button onClick={() => scrollToSection('contact')} className="text-lg font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
+          <button onClick={() => navigateToPage('home')} className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200">Sid's Portfolio</button>
+          <nav className="space-x-10 hidden md:flex">
+            <button onClick={() => scrollToSection('hero')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
+            <button onClick={() => scrollToSection('about')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
+            <button onClick={() => scrollToSection('projects')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
+            <button onClick={() => scrollToSection('skills')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+            <button onClick={() => navigateToPage('blog')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Blog</button>
+            <button onClick={() => scrollToSection('ai-integration')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">AI</button>
+            <button onClick={() => scrollToSection('contact')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
           </nav>
           <button
             onClick={toggleTheme}

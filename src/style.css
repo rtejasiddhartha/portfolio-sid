@@ -33,6 +33,7 @@ html {
 }
 /* Fix for cropped 'g' in gradients */
 .bg-clip-text {
-    line-height: 1.2; /* Adjust as needed, or ensure container has enough padding */
+    line-height: 1.4; /* Increased line-height to prevent clipping of descenders */
     display: inline-block; /* Helps with gradient clipping issues */
+    /* You might also consider adding a small padding-bottom if needed, e.g., padding-bottom: 2px; */
 }
