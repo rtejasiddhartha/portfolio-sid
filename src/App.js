@@ -495,25 +495,21 @@ const App = () => {
     e.preventDefault();
     setFormStatus({ type: 'sending', message: 'Sending message...' });
 
-    // In a real application, you would send this data to a backend server
-    // or a service like Formspree, EmailJS, etc.
-    // Example using a placeholder fetch:
-    try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+    // Prepare form data for Netlify Function
+    // Netlify Functions expect URL-encoded form data or JSON
+    const formData = new URLSearchParams();
+    formData.append('name', contactName);
+    formData.append('email', contactEmail);
+    formData.append('message', contactMessage);
 
-      // This is where you'd typically make a fetch request to your backend:
-      /*
-      const response = await fetch('/api/send-email', {
+    try {
+      // Send data to Netlify Function
+      const response = await fetch('/.netlify/functions/send-contact-email', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded', // Important for Netlify Functions to parse form data
         },
-        body: JSON.stringify({
-          name: contactName,
-          email: contactEmail,
-          message: contactMessage,
-        }),
+        body: formData.toString(),
       });
 
       if (response.ok) {
@@ -522,20 +518,13 @@ const App = () => {
         setContactEmail('');
         setContactMessage('');
       } else {
+        // Attempt to parse error message from function response
         const errorData = await response.json();
         setFormStatus({ type: 'error', message: `Failed to send message: ${errorData.message || 'Unknown error'}` });
       }
-      */
-
-      // For demonstration, always succeed:
-      setFormStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
-      setContactName('');
-      setContactEmail('');
-      setContactMessage('');
-
     } catch (error) {
       console.error('Error sending message:', error);
-      setFormStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
+      setFormStatus({ type: 'error', message: 'Failed to send message. Please check your network connection.' });
     }
   };
 
