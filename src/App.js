@@ -4,72 +4,51 @@ import { Sun, Moon, Download, Mail, Linkedin, Github, BarChart, Code, Database, 
 // Define project data
 const projects = [
   {
-    id: 'ecommerce-sales',
-    title: 'E-commerce Sales Analysis',
-    description: 'Developed a comprehensive Power BI dashboard to track key e-commerce metrics, identify sales trends, and optimize marketing strategies.',
-    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=E-commerce+Dashboard',
-    tags: ['Power BI', 'SQL', 'Excel'],
+    id: 'na-music-store',
+    title: 'North America Music Store Analysis',
+    description: 'Used SQL and Power BI to analyze music sales trends, artist popularity, and album-level performance.',
+    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=Music+Store+Dashboard',
+    tags: ['SQL', 'Power BI', 'Excel'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'This project involved extracting sales data from a retail database, performing extensive data cleaning and transformation using SQL and Power Query, and building an interactive dashboard in Power BI. Key insights included identifying top-performing products, regional sales variations, and customer purchasing patterns. The dashboard empowered the marketing team to target campaigns more effectively and improve inventory management.'
+    fullDescription: 'This project leveraged the North America Music Store dataset to perform relational SQL queries and extract artist-album-track hierarchies, genre trends, and customer behaviors. Power BI was used to visualize artist popularity, regional trends, and track performance. The structured hierarchy helped in storytelling across music insights and business metrics.'
   },
   {
     id: 'crypto-analytics',
-    title: 'Real-time Crypto Analytics',
-    description: 'Built a Python-based real-time analytics system to monitor cryptocurrency market trends, volatility, and sentiment using public APIs.',
-    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=Crypto+Dashboard',
-    tags: ['Python', 'APIs', 'Real-time'],
+    title: 'CryptoPulse Real-time Analytics',
+    description: 'Built a real-time analytics system using n8n and Python to monitor cryptocurrency market trends and send Telegram alerts.',
+    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=CryptoPulse+Bot',
+    tags: ['Python', 'n8n', 'APIs', 'Real-time'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'Leveraging Python and libraries like Pandas and Requests, this project connected to various cryptocurrency APIs to fetch live market data. The system processed data streams to calculate real-time metrics such as price changes, trading volumes, and social media sentiment. The goal was to provide traders with immediate insights into market movements, helping them make informed decisions faster.'
+    fullDescription: 'Using n8n 2025+ workflows and Python logic, this system fetches live data from the CoinGecko API, filters top-performing coins, and sends automated alerts to Telegram. It categorizes coins as Bullish, Bearish, or Sideways based on price change, volume, market cap, and ATH deviation. Data is also logged into Google Sheets for visualization and trend tracking. This project demonstrates real-time data engineering, alert automation, and full analytics integration.'
   },
   {
-    id: 'churn-prediction',
-    title: 'AI-driven Churn Prediction',
-    description: 'Implemented machine learning models in Python to predict customer churn, enabling proactive retention strategies for a telecom client.',
-    image: 'https://placehold.co/600x300/6D28D9/FFFFFF?text=Customer+Churn+Prediction',
-    tags: ['Python', 'Machine Learning', 'AI Tools'],
+    id: 'ai-sales-forecasting',
+    title: 'AI-Powered Sales Forecasting',
+    description: 'Built an Excel-based dynamic dashboard to forecast e-commerce sales using traditional techniques and AI tools like Copilot.',
+    image: 'https://placehold.co/600x300/F472B6/FFFFFF?text=Sales+Forecasting',
+    tags: ['Excel', 'Forecasting', 'AI'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'This project focused on building a predictive model to identify customers at high risk of churning. Using Python with Scikit-learn, various classification algorithms (e.g., Logistic Regression, Random Forest, Gradient Boosting) were explored. Feature engineering was crucial, incorporating customer demographics, service usage, and historical interaction data. The final model achieved high accuracy, allowing the client to implement targeted retention campaigns.'
+    fullDescription: 'This project demonstrates beginner-to-advanced Excel skills through sales forecasting. Techniques include formulas, pivot tables, and Solver, layered with Microsoft Copilot. Documentation is embedded as Word with screenshots, showcasing analytics storytelling. It serves as an end-to-end Excel portfolio piece.'
   },
   {
-    id: 'marketing-campaign',
-    title: 'Marketing Campaign Performance',
-    description: 'Analyzed marketing campaign data to identify effective channels and optimize ROI using Tableau visualizations.',
-    image: 'https://placehold.co/600x300/3B82F6/FFFFFF?text=Marketing+Campaign',
-    tags: ['Tableau', 'SQL', 'Marketing Analytics'],
+    id: 'powerpulse-energy',
+    title: 'Telangana PowerPulse AI',
+    description: 'Forecasted electricity demand for smarter energy planning using Python and visual analytics.',
+    image: 'https://placehold.co/600x300/4F46E5/FFFFFF?text=PowerPulse+AI',
+    tags: ['Python', 'Pandas', 'Visualization'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'This project involved a deep dive into marketing campaign data from various sources. SQL was used to aggregate and clean the data, which was then imported into Tableau for visualization. Interactive dashboards were created to track key performance indicators (KPIs) such as conversion rates, cost per acquisition, and customer lifetime value. The analysis led to recommendations for reallocating marketing spend to more profitable channels.'
-  },
-  {
-    id: 'hr-analytics',
-    title: 'HR Employee Attrition Analysis',
-    description: 'Conducted an in-depth analysis of HR data to understand factors contributing to employee attrition and propose solutions.',
-    image: 'https://placehold.co/600x300/10B981/FFFFFF?text=HR+Analytics',
-    tags: ['Excel', 'Power BI', 'HR Analytics'],
-    liveDemo: '#',
-    githubRepo: '#',
-    caseStudy: '#',
-    fullDescription: 'Using a combination of Excel for initial data manipulation and Power BI for dashboarding, this project explored factors influencing employee attrition. Data points included salary, performance ratings, tenure, department, and job satisfaction. Visualizations highlighted trends and correlations, leading to actionable insights for improving employee retention strategies, such as targeted training programs and improved work-life balance initiatives.'
-  },
-  {
-    id: 'supply-chain',
-    title: 'Supply Chain Optimization',
-    description: 'Developed a dashboard to visualize and optimize supply chain logistics, reducing operational costs and improving efficiency.',
-    image: 'https://placehold.co/600x300/F59E0B/FFFFFF?text=Supply+Chain',
-    tags: ['Power BI', 'SQL', 'Supply Chain'],
-    liveDemo: '#',
-    githubRepo: '#',
-    caseStudy: '#',
-    fullDescription: 'This project focused on enhancing supply chain efficiency by analyzing data related to inventory levels, shipping times, and supplier performance. SQL queries were used to integrate data from disparate systems, and Power BI was utilized to create a centralized dashboard. The dashboard provided real-time visibility into the supply chain, enabling stakeholders to identify bottlenecks, optimize routes, and reduce overall operational costs.'
+    fullDescription: 'A data analytics project focused on forecasting electricity demand in Telangana using Pandas, Seaborn, and Matplotlib. It includes time series processing, demand anomaly alerts, and grid efficiency insights. Ideal for showcasing predictive analytics and energy sector understanding.'
   }
 ];
+
 
 // Define blog post data
 const blogPosts = [
