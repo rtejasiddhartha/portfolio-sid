@@ -1,4 +1,4 @@
-    const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
     const querystring = require('querystring');
 
     exports.handler = async function(event, context) {
@@ -16,24 +16,20 @@
         return { statusCode: 400, body: JSON.stringify({ message: 'Please fill in all required fields.' }) };
       }
 
-      // Configure your email transporter
-      // IMPORTANT: Replace with your actual email service credentials
-      // These should be set as Netlify Environment Variables for security!
-      // Example for SendGrid (recommended for production)
+      // --- START Gmail Specific Configuration ---
       const transporter = nodemailer.createTransport({
-        host: 'smtp.sendgrid.net',
-        port: 587,
-        secure: false, // Use 'true' if your SMTP server uses SSL/TLS on port 465 (e.g., Gmail on 465)
+        service: 'gmail', // Special service name for Gmail
         auth: {
-          user: 'apikey', // SendGrid username is always 'apikey'
-          pass: process.env.SENDGRID_API_KEY, // Your SendGrid API Key (set as Netlify ENV var)
+          user: process.env.GMAIL_USER, // Your Gmail address from Netlify ENV
+          pass: process.env.GMAIL_APP_PASSWORD, // Your generated App Password from Netlify ENV
         },
       });
+      // --- END Gmail Specific Configuration ---
 
       // Email options for YOU (the portfolio owner)
       const mailOptionsToOwner = {
-        from: process.env.SENDER_EMAIL, // Your verified sender email (e.g., no-reply@yourdomain.com)
-        to: process.env.RECEIVER_EMAIL, // Your personal email to receive messages (e.g., your-email@gmail.com)
+        from: process.env.SENDER_EMAIL, // Your verified sender email (your Gmail)
+        to: process.env.RECEIVER_EMAIL, // Your personal email to receive messages (your Gmail)
         subject: `New Contact Form Submission from ${name}`,
         html: `
           <p><strong>Name:</strong> ${name}</p>
@@ -45,8 +41,8 @@
 
       // Optional: Email options for the sender (confirmation email)
       const mailOptionsToSender = {
-        from: process.env.SENDER_EMAIL, // Your verified sender email
-        to: email, // Sender's email address
+        from: process.env.SENDER_EMAIL, // Your verified sender email (your Gmail)
+        to: email, // Sender's email address (from the form)
         subject: `Thank you for contacting me`,
         html: `
           <p>Hi ${name},</p>
@@ -83,4 +79,3 @@
         };
       }
     };
-    
