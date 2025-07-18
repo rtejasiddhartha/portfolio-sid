@@ -518,16 +518,20 @@ const App = () => {
                 {/* Subtle background pattern/texture */}
                 <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent animate-pulse-slow"></div>
               </div>
-              <div className="relative z-10 text-center max-w-4xl">
-                <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up">
-                  {/* Transforming Data into <br className="hidden sm:inline" /> Actionable Insights */}
-                  Hey, I’m Sid <br className="hidden sm:inline" /> Designing the Future of Data.
+              <div className="relative z-10 text-center max-w-5xl mx-auto px-4"> {/* Added max-w-5xl and px-4 for better control */}
+                {/* "Hey, I'm Sid" - now in its own H2 for independent styling */}
+                <h2 className="text-4xl md:text-5xl font-extrabold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up">
+                  Hey, I’m Sid
+                </h2>
+                {/* Main Headline - now in its own H1 */}
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up delay-100">
+                  Empowering Smarter Decisions with Data
                 </h1>
-                <p className={`text-lg md:text-xl mb-8 opacity-90 animate-fade-in-up delay-200 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  I turn real-world data into powerful narratives using Python, SQL, Power BI, and AI.<br/>Driven by curiosity, clarity, and craft — I build solutions that don’t just inform, but inspire.
-                </p>
+                <p className={`text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up delay-200 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  I strategically transform complex datasets into precise, actionable intelligence <br/>using Python, SQL, Power BI, and AI, driving optimal business outcomes. </p>
                 {/* Removed quick access buttons from here, they are now in About Me */}
               </div>
+
             </section>
 
             {/* About Section */}
