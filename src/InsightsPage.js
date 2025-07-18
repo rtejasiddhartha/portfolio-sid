@@ -10,7 +10,7 @@ const InsightsPage = ({ theme, navigateToPage, blogPosts, linkedinPosts }) => {
 
       {/* Page Title */}
       <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-        My Insights & Learning Journey
+        My Insights & Learning Journey & BLOG
       </h1>
 
       {/* Blog / Insights Section - Moved from Home */}
