@@ -1,54 +1,78 @@
 import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Download, Mail, Linkedin, Github, BarChart, Code, Database, FileText, Bot, TrendingUp, ChevronLeft, BookOpen, Layers, Zap, Briefcase, Award, GraduationCap, ExternalLink, ChevronRight, MessageSquare, Calendar } from 'lucide-react';
 
+// Import the new InsightsPage component
+import InsightsPage from './InsightsPage'; // Assuming InsightsPage.js is in the same directory
+
 // Define project data
 const projects = [
   {
-    id: 'na-music-store',
-    title: 'North America Music Store Analysis',
-    description: 'Used SQL and Power BI to analyze music sales trends, artist popularity, and album-level performance.',
-    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=Music+Store+Dashboard',
-    tags: ['SQL', 'Power BI', 'Excel'],
+    id: 'ecommerce-sales',
+    title: 'E-commerce Sales Analysis',
+    description: 'Developed a comprehensive Power BI dashboard to track key e-commerce metrics, identify sales trends, and optimize marketing strategies.',
+    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=E-commerce+Dashboard',
+    tags: ['Power BI', 'SQL', 'Excel'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'This project leveraged the North America Music Store dataset to perform relational SQL queries and extract artist-album-track hierarchies, genre trends, and customer behaviors. Power BI was used to visualize artist popularity, regional trends, and track performance. The structured hierarchy helped in storytelling across music insights and business metrics.'
+    fullDescription: 'This project involved extracting sales data from a retail database, performing extensive data cleaning and transformation using SQL and Power Query, and building an interactive dashboard in Power BI. Key insights included identifying top-performing products, regional sales variations, and customer purchasing patterns. The dashboard empowered the marketing team to target campaigns more effectively and improve inventory management.'
   },
   {
     id: 'crypto-analytics',
-    title: 'CryptoPulse Real-time Analytics',
-    description: 'Built a real-time analytics system using n8n and Python to monitor cryptocurrency market trends and send Telegram alerts.',
-    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=CryptoPulse+Bot',
-    tags: ['Python', 'n8n', 'APIs', 'Real-time'],
+    title: 'Real-time Crypto Analytics',
+    description: 'Built a Python-based real-time analytics system to monitor cryptocurrency market trends, volatility, and sentiment using public APIs.',
+    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=Crypto+Dashboard',
+    tags: ['Python', 'APIs', 'Real-time'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'Using n8n 2025+ workflows and Python logic, this system fetches live data from the CoinGecko API, filters top-performing coins, and sends automated alerts to Telegram. It categorizes coins as Bullish, Bearish, or Sideways based on price change, volume, market cap, and ATH deviation. Data is also logged into Google Sheets for visualization and trend tracking. This project demonstrates real-time data engineering, alert automation, and full analytics integration.'
+    fullDescription: 'Leveraging Python and libraries like Pandas and Requests, this project connected to various cryptocurrency APIs to fetch live market data. The system processed data streams to calculate real-time metrics suchs as price changes, trading volumes, and social media sentiment. The goal was to provide traders with immediate insights into market movements, helping them make informed decisions faster.'
   },
   {
-    id: 'ai-sales-forecasting',
-    title: 'AI-Powered Sales Forecasting',
-    description: 'Built an Excel-based dynamic dashboard to forecast e-commerce sales using traditional techniques and AI tools like Copilot.',
-    image: 'https://placehold.co/600x300/F472B6/FFFFFF?text=Sales+Forecasting',
-    tags: ['Excel', 'Forecasting', 'AI'],
+    id: 'churn-prediction',
+    title: 'AI-driven Churn Prediction',
+    description: 'Implemented machine learning models in Python to predict customer churn, enabling proactive retention strategies for a telecom client.',
+    image: 'https://placehold.co/600x300/6D28D9/FFFFFF?text=Customer+Churn+Prediction',
+    tags: ['Python', 'Machine Learning', 'AI Tools'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'This project demonstrates beginner-to-advanced Excel skills through sales forecasting. Techniques include formulas, pivot tables, and Solver, layered with Microsoft Copilot. Documentation is embedded as Word with screenshots, showcasing analytics storytelling. It serves as an end-to-end Excel portfolio piece.'
+    fullDescription: 'This project focused on building a predictive model to identify customers at high risk of churning. Using Python with Scikit-learn, various classification algorithms (e.g., Logistic Regression, Random Forest, Gradient Boosting) were explored. Feature engineering was crucial, incorporating customer demographics, service usage, and historical interaction data. The final model achieved high accuracy, allowing the client to implement targeted retention campaigns.'
   },
   {
-    id: 'powerpulse-energy',
-    title: 'Telangana PowerPulse AI',
-    description: 'Forecasted electricity demand for smarter energy planning using Python and visual analytics.',
-    image: 'https://placehold.co/600x300/4F46E5/FFFFFF?text=PowerPulse+AI',
-    tags: ['Python', 'Pandas', 'Visualization'],
+    id: 'marketing-campaign',
+    title: 'Marketing Campaign Performance',
+    description: 'Analyzed marketing campaign data to identify effective channels and optimize ROI using Tableau visualizations.',
+    image: 'https://placehold.co/600x300/3B82F6/FFFFFF?text=Marketing+Campaign',
+    tags: ['Tableau', 'SQL', 'Marketing Analytics'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'A data analytics project focused on forecasting electricity demand in Telangana using Pandas, Seaborn, and Matplotlib. It includes time series processing, demand anomaly alerts, and grid efficiency insights. Ideal for showcasing predictive analytics and energy sector understanding.'
+    fullDescription: 'This project involved a deep dive into marketing campaign data from various sources. SQL was used to aggregate and clean the data, which was then imported into Tableau for visualization. Interactive dashboards were created to track key performance indicators (KPIs) such as conversion rates, cost per acquisition, and customer lifetime value. The analysis led to recommendations for reallocating marketing spend to more profitable channels.'
+  },
+  {
+    id: 'hr-analytics',
+    title: 'HR Employee Attrition Analysis',
+    description: 'Conducted an in-depth analysis of HR data to understand factors contributing to employee attrition and propose solutions.',
+    image: 'https://placehold.co/600x300/10B981/FFFFFF?text=HR+Analytics',
+    tags: ['Excel', 'Power BI', 'HR Analytics'],
+    liveDemo: '#',
+    githubRepo: '#',
+    caseStudy: '#',
+    fullDescription: 'Using a combination of Excel for initial data manipulation and Power BI for dashboarding, this project explored factors influencing employee attrition. Data points included salary, performance ratings, tenure, department, and job satisfaction. Visualizations highlighted trends and correlations, leading to actionable insights for improving employee retention strategies, such as targeted training programs and improved work-life balance initiatives.'
+  },
+  {
+    id: 'supply-chain',
+    title: 'Supply Chain Optimization',
+    description: 'Developed a dashboard to visualize and optimize supply chain logistics, reducing operational costs and improving efficiency.',
+    image: 'https://placehold.co/600x300/F59E0B/FFFFFF?text=Supply+Chain',
+    tags: ['Power BI', 'SQL', 'Supply Chain'],
+    liveDemo: '#',
+    githubRepo: '#',
+    caseStudy: '#',
+    fullDescription: 'This project focused on enhancing supply chain efficiency by analyzing data related to inventory levels, shipping times, and supplier performance. SQL queries were used to integrate data from disparate systems, and Power BI was utilized to create a centralized dashboard. The dashboard provided real-time visibility into the supply chain, enabling stakeholders to identify bottlenecks, optimize routes, and reduce overall operational costs.'
   }
 ];
-
 
 // Define blog post data
 const blogPosts = [
@@ -244,7 +268,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
 };
 
 // Blog Page Component
-const BlogPage = ({ setCurrentPage, theme }) => {
+const BlogPage = ({ setCurrentPage, theme, blogPosts }) => { // Added blogPosts prop
   return (
     <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
       <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
@@ -396,7 +420,7 @@ const ProjectCard = ({ project, navigateToPage, theme }) => {
 const App = () => {
   const [theme, setTheme] = useState('light'); // Default to light mode
   const [isScrolled, setIsScrolled] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project-detail', 'blog', 'blog-post'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project-detail', 'blog', 'blog-post', 'insights'
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [selectedBlogPostId, setSelectedBlogPostId] = useState(null);
   const [currentProjectPageIndex, setCurrentProjectPageIndex] = useState(0); // For project slider
@@ -507,7 +531,8 @@ const App = () => {
                   Empowering Smarter Decisions with Data
                 </h1>
                 <p className={`text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up delay-200 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  I strategically transform complex datasets into precise, actionable intelligence <br/>using Python, SQL, Power BI, and AI, driving optimal business outcomes. </p>
+                  I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
+                </p>
                 {/* Removed quick access buttons from here, they are now in About Me */}
               </div>
 
@@ -681,102 +706,6 @@ const App = () => {
               </div>
             </section>
 
-            {/* Blog / Insights Section */}
-            <section id="blog" className={`py-20 px-6 md:px-12 lg:px-24
-              ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-              <div className="max-w-6xl mx-auto">
-                <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Insights & Musings: My Data Blog</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {blogPosts.map(post => (
-                    <div key={post.id} className={`rounded-xl p-6 shadow-xl transform hover:scale-[1.01] transition-all duration-300
-                      ${theme === 'dark' ? 'bg-gray-800 border border-gray-700 hover:border-purple-500' : 'bg-white border border-gray-200 hover:border-purple-500'}`}>
-                      <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{post.title}</h3>
-                      <p className="text-sm opacity-70 mb-3">{post.date}</p>
-                      <p className="mb-4 opacity-80">{post.snippet}</p>
-                      <button
-                        onClick={() => navigateToPage('blog-post', post.id)}
-                        className="flex items-center text-purple-600 hover:underline font-semibold"
-                      >
-                        Read More <span className="ml-2">→</span>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-                <div className="text-center mt-12">
-                  <button onClick={() => navigateToPage('blog')} className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
-                    View All Insights
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            {/* Timeline / Roadmap (Placeholder) */}
-            <section id="roadmap" className={`py-20 px-6 md:px-12 lg:px-24
-              ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-              <div className="max-w-5xl mx-auto text-center">
-                <h2 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-red-700">
-                  My Learning Journey: A Data Roadmap
-                </h2>
-                <p className={`text-lg mb-8 max-w-2xl mx-auto ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                  An interactive timeline showcasing my growth, key milestones, certifications, and future learning paths.
-                </p>
-                <div className={`bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 border
-                  ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Future Feature: Interactive Career Map</h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    This section will feature an engaging SVG or 3D journey map, highlighting certifications, skill acquisitions, and major project achievements over time.
-                  </p>
-                  <button className="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
-                    Explore My Milestones
-                  </button>
-                </div>
-              </div>
-            </section>
-
-            {/* AI Integration Section */}
-            <section id="ai-integration" className={`py-20 px-6 md:px-12 lg:px-24
-              ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-              <div className="max-w-6xl mx-auto">
-                <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                  AI Integration: Smarter Data Solutions
-                </h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border
-                    ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">GPT-Powered Project Explanations</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                      Leveraging AI to provide concise, layman's explanations for complex data projects.
-                    </p>
-                    <button className="text-indigo-600 dark:text-indigo-400 hover:underline text-sm">See in Action</button>
-                  </div>
-                  <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border
-                    ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">AI Resume Screener Simulator</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                      Upload a job description and see an AI-driven match score against my skills and projects.
-                    </p>
-                    <button className="text-indigo-600 dark:text-indigo-400 hover:underline text-sm">Try Simulator</button>
-                  </div>
-                  <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border
-                    ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">AutoML Use Cases & Demos</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                      Showcasing projects built with automated machine learning platforms for rapid model deployment.
-                    </p>
-                    <button className="text-indigo-600 dark:text-indigo-400 hover:underline text-sm">View Demos</button>
-                  </div>
-                  <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border
-                    ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">Copilot in Excel: Enhanced Analytics</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                      Examples of how AI-powered tools like Copilot streamline data analysis in Excel.
-                    </p>
-                    <button className="text-indigo-600 dark:text-indigo-400 hover:underline text-sm">Explore Examples</button>
-                  </div>
-                </div>
-              </div>
-            </section>
-
             {/* Contact Form & Social Links */}
             <section id="contact" className={`py-20 px-6 md:px-12 lg:px-24
               ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
@@ -828,11 +757,13 @@ const App = () => {
       case 'project-detail':
         const project = projects.find(p => p.id === selectedProjectId);
         return <ProjectDetailPage project={project} setCurrentPage={navigateToPage} theme={theme} />;
-      case 'blog':
-        return <BlogPage setCurrentPage={navigateToPage} theme={theme} />;
+      case 'blog': // This case is for the full blog listing (Daily Byte Blog & Posts)
+        return <BlogPage setCurrentPage={navigateToPage} theme={theme} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
       case 'blog-post':
         const post = blogPosts.find(p => p.id === selectedBlogPostId);
         return <BlogPostDetail post={post} setCurrentPage={navigateToPage} theme={theme} />;
+      case 'insights': // New case for the InsightsPage
+        return <InsightsPage theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
       default:
         return null;
     }
@@ -850,8 +781,9 @@ const App = () => {
             <button onClick={() => scrollToSection('about')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
             <button onClick={() => scrollToSection('projects')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
             <button onClick={() => scrollToSection('skills')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-            <button onClick={() => navigateToPage('blog')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Blog</button>
-            <button onClick={() => scrollToSection('ai-integration')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">AI</button>
+            {/* Updated navigation for Insights */}
+            <button onClick={() => navigateToPage('insights')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
+            {/* Removed AI link as its content is now in InsightsPage */}
             <button onClick={() => scrollToSection('contact')} className="text-2xl font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
           </nav>
           <button
