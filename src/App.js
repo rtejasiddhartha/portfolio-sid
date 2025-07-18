@@ -7,72 +7,55 @@ import InsightsPage from './InsightsPage'; // Assuming InsightsPage.js is in the
 // Define project data
 const projects = [
   {
-    id: 'ecommerce-sales',
-    title: 'E-commerce Sales Analysis',
-    description: 'Developed a comprehensive Power BI dashboard to track key e-commerce metrics, identify sales trends, and optimize marketing strategies.',
-    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=E-commerce+Dashboard',
-    tags: ['Power BI', 'SQL', 'Excel'],
+    id: 'na-music-store',
+    title: 'North America Music Store Analysis',
+    description: 'Used SQL and Power BI to analyze music sales trends, artist popularity, and album-level performance.',
+    image: '/images/music-store-dashboard.png',
+    tags: ['SQL', 'Power BI', 'Excel'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'This project involved extracting sales data from a retail database, performing extensive data cleaning and transformation using SQL and Power Query, and building an interactive dashboard in Power BI. Key insights included identifying top-performing products, regional sales variations, and customer purchasing patterns. The dashboard empowered the marketing team to target campaigns more effectively and improve inventory management.'
+    fullDescription: 'This project leveraged the North America Music Store dataset to perform relational SQL queries and extract artist-album-track hierarchies, genre trends, and customer behaviors. Power BI was used to visualize artist popularity, regional trends, and track performance. The structured hierarchy helped in storytelling across music insights and business metrics.',
+    aiSummary: 'This project leverages SQL and Power BI to analyze music data like a digital music librarian sorting trends. The core insight was how certain artists and genres perform across albums and regions, showing my skill in writing advanced SQL joins and transforming them into compelling dashboards.'
   },
   {
     id: 'crypto-analytics',
-    title: 'Real-time Crypto Analytics',
-    description: 'Built a Python-based real-time analytics system to monitor cryptocurrency market trends, volatility, and sentiment using public APIs.',
-    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=Crypto+Dashboard',
-    tags: ['Python', 'APIs', 'Real-time'],
+    title: 'CryptoPulse Real-time Analytics',
+    description: 'Built a real-time analytics system using n8n and Python to monitor cryptocurrency market trends and send Telegram alerts.',
+    image: '/images/crypto-dashboard.png',
+    tags: ['Python', 'n8n', 'APIs', 'Real-time'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'Leveraging Python and libraries like Pandas and Requests, this project connected to various cryptocurrency APIs to fetch live market data. The system processed data streams to calculate real-time metrics suchs as price changes, trading volumes, and social media sentiment. The goal was to provide traders with immediate insights into market movements, helping them make informed decisions faster.'
+    fullDescription: 'Using n8n 2025+ workflows and Python logic, this system fetches live data from the CoinGecko API, filters top-performing coins, and sends automated alerts to Telegram. It categorizes coins as Bullish, Bearish, or Sideways based on price change, volume, market cap, and ATH deviation. Data is also logged into Google Sheets for visualization and trend tracking. This project demonstrates real-time data engineering, alert automation, and full analytics integration.',
+    aiSummary: 'This project combines Python and n8n to act like an automated crypto analyst. It tracks price spikes, sentiment shifts, and alerts traders instantly. The core takeaway: real-time intelligence can be built without servers, proving my skills in automation, APIs, and streaming analytics.'
   },
   {
-    id: 'churn-prediction',
-    title: 'AI-driven Churn Prediction',
-    description: 'Implemented machine learning models in Python to predict customer churn, enabling proactive retention strategies for a telecom client.',
-    image: 'https://placehold.co/600x300/6D28D9/FFFFFF?text=Customer+Churn+Prediction',
-    tags: ['Python', 'Machine Learning', 'AI Tools'],
+    id: 'ai-sales-forecasting',
+    title: 'AI-Powered Sales Forecasting',
+    description: 'Built an Excel-based dynamic dashboard to forecast e-commerce sales using traditional techniques and AI tools like Copilot.',
+    image: '/images/sales-forecasting-dashboard.png',
+    tags: ['Excel', 'Forecasting', 'AI'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'This project focused on building a predictive model to identify customers at high risk of churning. Using Python with Scikit-learn, various classification algorithms (e.g., Logistic Regression, Random Forest, Gradient Boosting) were explored. Feature engineering was crucial, incorporating customer demographics, service usage, and historical interaction data. The final model achieved high accuracy, allowing the client to implement targeted retention campaigns.'
+    fullDescription: 'This project demonstrates beginner-to-advanced Excel skills through sales forecasting. Techniques include formulas, pivot tables, and Solver, layered with Microsoft Copilot. Documentation is embedded as Word with screenshots, showcasing analytics storytelling. It serves as an end-to-end Excel portfolio piece.',
+    aiSummary: 'Think of this project as an Excel crystal ball. By combining traditional formulas with AI like Copilot, I forecasted sales with precision. It shows how Excel isn’t just a spreadsheet tool—but a full analytics platform when used creatively.'
   },
   {
-    id: 'marketing-campaign',
-    title: 'Marketing Campaign Performance',
-    description: 'Analyzed marketing campaign data to identify effective channels and optimize ROI using Tableau visualizations.',
-    image: 'https://placehold.co/600x300/3B82F6/FFFFFF?text=Marketing+Campaign',
-    tags: ['Tableau', 'SQL', 'Marketing Analytics'],
+    id: 'powerpulse-energy',
+    title: 'Telangana PowerPulse AI',
+    description: 'Forecasted electricity demand for smarter energy planning using Python and visual analytics.',
+    image: '/images/powerpulse-dashboard.png',
+    tags: ['Python', 'Pandas', 'Visualization'],
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'This project involved a deep dive into marketing campaign data from various sources. SQL was used to aggregate and clean the data, which was then imported into Tableau for visualization. Interactive dashboards were created to track key performance indicators (KPIs) such as conversion rates, cost per acquisition, and customer lifetime value. The analysis led to recommendations for reallocating marketing spend to more profitable channels.'
-  },
-  {
-    id: 'hr-analytics',
-    title: 'HR Employee Attrition Analysis',
-    description: 'Conducted an in-depth analysis of HR data to understand factors contributing to employee attrition and propose solutions.',
-    image: 'https://placehold.co/600x300/10B981/FFFFFF?text=HR+Analytics',
-    tags: ['Excel', 'Power BI', 'HR Analytics'],
-    liveDemo: '#',
-    githubRepo: '#',
-    caseStudy: '#',
-    fullDescription: 'Using a combination of Excel for initial data manipulation and Power BI for dashboarding, this project explored factors influencing employee attrition. Data points included salary, performance ratings, tenure, department, and job satisfaction. Visualizations highlighted trends and correlations, leading to actionable insights for improving employee retention strategies, such as targeted training programs and improved work-life balance initiatives.'
-  },
-  {
-    id: 'supply-chain',
-    title: 'Supply Chain Optimization',
-    description: 'Developed a dashboard to visualize and optimize supply chain logistics, reducing operational costs and improving efficiency.',
-    image: 'https://placehold.co/600x300/F59E0B/FFFFFF?text=Supply+Chain',
-    tags: ['Power BI', 'SQL', 'Supply Chain'],
-    liveDemo: '#',
-    githubRepo: '#',
-    caseStudy: '#',
-    fullDescription: 'This project focused on enhancing supply chain efficiency by analyzing data related to inventory levels, shipping times, and supplier performance. SQL queries were used to integrate data from disparate systems, and Power BI was utilized to create a centralized dashboard. The dashboard provided real-time visibility into the supply chain, enabling stakeholders to identify bottlenecks, optimize routes, and reduce overall operational costs.'
+    fullDescription: 'A data analytics project focused on forecasting electricity demand in Telangana using Pandas, Seaborn, and Matplotlib. It includes time series processing, demand anomaly alerts, and grid efficiency insights. Ideal for showcasing predictive analytics and energy sector understanding.',
+    aiSummary: 'This project is like putting the state’s electricity grid on a smart alert system. By forecasting demand patterns and visualizing peaks, I showed how data can empower policy. It highlights my strengths in time series, forecasting, and energy analytics.'
   }
 ];
+
 
 // Define blog post data
 const blogPosts = [
@@ -188,23 +171,23 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
     <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
       <button
         onClick={() => setCurrentPage('projects')}
-        className={`flex items-center mb-8 px-4 py-2 rounded-full font-semibold transition-all duration-300
-          ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+        className={`flex items-center mb-8 px-4 py-2 rounded-full font-semibold transition-all duration-300 ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
       >
         <ChevronLeft size={20} className="mr-2" /> Back to Projects
       </button>
 
-      <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl
-        ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+      <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
         <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
           {project.title}
         </h1>
+
         <img
           src={project.image}
           alt={project.title}
           className="w-full h-80 object-cover rounded-lg mb-8 shadow-lg"
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
         />
+
         <p className="text-lg leading-relaxed mb-6 opacity-90">
           {project.fullDescription}
         </p>
@@ -234,8 +217,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
               href={project.githubRepo}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500
-                ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+              className={`flex items-center px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
             >
               <Github size={20} className="mr-2" /> GitHub Repo
             </a>
@@ -244,22 +226,19 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
             <a
               href={project.caseStudy}
               download={`${project.id}_CaseStudy.pdf`}
-              className={`flex items-center px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500
-                ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+              className={`flex items-center px-6 py-3 rounded-full font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
             >
               <Download size={20} className="mr-2" /> Case Study (PDF)
             </a>
           )}
         </div>
 
-        {/* Placeholder for AI Corner / GPT explanation */}
-        <div className={`mt-10 p-6 rounded-lg shadow-inner
-          ${theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-100/50'}`}>
+        <div className={`mt-10 p-6 rounded-lg shadow-inner ${theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-100/50'}`}>
           <h3 className="text-xl font-semibold mb-3 flex items-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
             <Bot size={24} className="mr-2" /> AI Corner: Project Explained
           </h3>
           <p className="text-base opacity-80">
-            "This project leverages [key technology] to solve [problem]. In simple terms, it's like [simple analogy]. The core insight was [key finding], leading to [impact]. This demonstrates my ability to [skill]."
+            {project.aiSummary}
           </p>
         </div>
       </div>
