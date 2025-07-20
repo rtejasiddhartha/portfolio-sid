@@ -1,23 +1,28 @@
-/* Base CSS for responsive behavior */
+/* ===== Tailwind Directives ===== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Global Reset ===== */
 html {
-  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *, *::before, *::after {
-  box-sizing: inherit; /* Inherit box-sizing for all elements */
+  box-sizing: inherit;
 }
 
 body {
-  margin: 0; /* Remove default body margin */
-  padding: 0; /* Remove default body padding */
-  font-family: 'Inter', sans-serif; /* Apply Inter font globally */
-  -webkit-font-smoothing: antialiased; /* Improve font rendering on macOS/iOS */
-  -moz-osx-font-smoothing: grayscale; /* Improve font rendering on macOS/iOS */
-  overflow-x: hidden; /* Prevent horizontal scrolling caused by layout issues */
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Custom CSS for patterns and animations (from your original file) */
+/* ===== Utility Classes ===== */
 .font-inter {
   font-family: 'Inter', sans-serif;
 }
@@ -27,13 +32,20 @@ body {
   background-size: 20px 20px;
 }
 
+/* ===== Animations ===== */
 .animate-pulse-slow {
   animation: pulse-slow 8s infinite ease-in-out;
 }
 
 @keyframes pulse-slow {
-  0%, 100% { transform: scale(1); opacity: 0.1; }
-  50% { transform: scale(1.05); opacity: 0.2; }
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
 }
 
 .animate-fade-in-up {
@@ -42,8 +54,13 @@ body {
   transform: translateY(20px);
 }
 
-.animate-fade-in-up.delay-200 { animation-delay: 0.2s; }
-.animate-fade-in-up.delay-400 { animation-delay: 0.4s; }
+.animate-fade-in-up.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-fade-in-up.delay-400 {
+  animation-delay: 0.4s;
+}
 
 @keyframes fadeInUp {
   to {
@@ -52,9 +69,9 @@ body {
   }
 }
 
-/* Fix for cropped 'g' in gradients (from your original file) */
+/* ===== Text Clipping Fixes ===== */
 .bg-clip-text {
-    line-height: 1.4; /* Increased line-height to prevent clipping of descenders */
-    display: inline-block; /* Helps with gradient clipping issues */
-    /* You might also consider adding a small padding-bottom if needed, e.g., padding-bottom: 2px; */
+  line-height: 1.4;
+  display: inline-block;
+  /* Optional: padding-bottom: 2px; */
 }
