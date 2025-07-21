@@ -848,15 +848,15 @@ const App = () => {
   return (
     <div className={`font-inter min-h-screen ${theme === 'dark' ? 'bg-gray-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       {/* Header */}
-      {/* <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        ${isScrolled ? (theme === 'dark' ? 'bg-gray-900/90 shadow-lg' : 'bg-white/90 shadow-md') : 'bg-transparent'} backdrop-blur-md py-4`}> */}
-      <header className={`py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300 ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
+      {/* The header needs to be relatively positioned to contain the absolutely positioned mobile menu */}
+      <header className={`relative py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300
+        ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
         
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center"> {/* Adjusted px for better responsiveness */}
-          <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button> {/* Added flex-shrink-0 */}
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
+          <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6 lg:space-x-10"> {/* Adjusted space-x */}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-10">
             <button onClick={() => scrollToSection('hero')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
             <button onClick={() => scrollToSection('about')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
             <button onClick={() => scrollToSection('projects')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
@@ -865,7 +865,7 @@ const App = () => {
             <button onClick={() => scrollToSection('contact')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
           </nav>
 
-          <div className="flex items-center space-x-4 md:space-x-6"> {/* Group theme toggle and mobile menu */}
+          <div className="flex items-center space-x-4 md:space-x-6">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
@@ -885,7 +885,7 @@ const App = () => {
         </div>
         {/* Mobile Navigation Overlay - Adjusted positioning and animation */}
         <nav className={`absolute top-full left-0 w-full bg-gray-950/95 backdrop-blur-md z-40 flex flex-col items-center py-8 space-y-6 transition-all duration-300 ease-in-out origin-top
-          ${isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'} md:hidden`}> {/* Changed transform to scale-y */}
+          ${isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'} md:hidden`}>
           <button onClick={() => scrollToSection('hero')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Home</button>
           <button onClick={() => scrollToSection('about')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">About</button>
           <button onClick={() => scrollToSection('projects')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Projects</button>
