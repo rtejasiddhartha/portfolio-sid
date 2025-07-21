@@ -4,25 +4,20 @@
   "private": true,
   "description": "React data analyst portfolio with project showcase and contact email function",
   "main": "index.js",
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "npm run build:css && react-scripts build", 
-    "build:css": "tailwindcss -i ./src/input.css -o ./src/tailwind.css --minify",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+},
   "dependencies": {
     "lucide-react": "^0.525.0",
     "nodemailer": "^6.9.14",
     "querystring": "^0.2.1",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "react-scripts": "latest",
-    "tailwindcss": "^3.4.17"
+    "react-dom": "^18.1.0",
+    "react-scripts": "^5.0.1",
+    "styled-components": "^6.1.19"
   },
   "browserslist": {
     "production": [

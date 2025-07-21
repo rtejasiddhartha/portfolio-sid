@@ -1,10 +1,167 @@
 import React, { useState, useEffect } from 'react';
+import styled, { keyframes, createGlobalStyle } from 'styled-components'; // Import styled and keyframes
 import { Sun, Moon, Download, Mail, Linkedin, Github, BarChart, Code, Database, FileText, Bot, TrendingUp, ChevronLeft, BookOpen, Layers, Zap, Briefcase, Award, GraduationCap, ExternalLink, ChevronRight, MessageSquare, Calendar, Menu, X } from 'lucide-react';
 
-// Import the new InsightsPage component
-import InsightsPage from './InsightsPage'; // Assuming InsightsPage.js is in the same directory
+// Import the new InsightsPage component (assuming it will also be converted or use basic CSS)
+import InsightsPage from './InsightsPage'; 
 
-// Define project data (MODIFIED IMAGE PATHS TO PLACEHOLDERS - USER NEEDS TO REPLACE WITH REAL IMAGES/PATHS)
+// Define global styles and animations (replaces parts of style.css)
+const GlobalStyle = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  /* Ensure Inter font is loaded from Google Fonts in public/index.html */
+  /* <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet"> */
+
+  /* Dark mode class on html element */
+  html.dark {
+    /* Define dark mode variables or direct styles if not using Tailwind's dark: prefix */
+    /* For Styled Components, you'd typically pass theme props */
+  }
+`;
+
+// Define Keyframes (moved from style.css)
+const pulseSlow = keyframes`
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+`;
+
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+// Styled Components for Hero Section
+const HeroSection = styled.section`
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem; /* p-6 */
+  overflow: hidden;
+
+  /* Background gradient based on theme */
+  background: ${props => props.theme === 'dark'
+    ? 'linear-gradient(to bottom right, #1a202c, #2d3748, #4c51bf)' /* from-gray-900 via-gray-800 to-indigo-900 */
+    : 'linear-gradient(to bottom right, #f7fafc, #edf2f7, #bfdbfe)'}; /* from-gray-100 via-gray-50 to-blue-100 */
+  transition: background 0.3s ease-in-out; /* transition-colors duration-300 */
+
+  @media (min-width: 768px) { /* md: */
+    padding: 3rem; /* md:p-12 */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    padding: 6rem; /* lg:p-24 */
+  }
+`;
+
+const HeroBackgroundPattern = styled.div`
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.1), transparent, transparent); /* from-purple-500/10 */
+  animation: ${pulseSlow} 8s infinite ease-in-out;
+`;
+
+const HeroContent = styled.div`
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 64rem; /* max-w-5xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+`;
+
+const HeroSubtitle = styled.h2`
+  font-size: 3rem; /* text-5xl */
+  font-weight: 800; /* font-extrabold */
+  margin-bottom: 0.75rem; /* mb-3 */
+  background-image: linear-gradient(to right, #a78bfa, #f87171); /* from-purple-400 to-pink-600 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ${fadeInUp} 1s ease-out forwards;
+
+  @media (min-width: 768px) { /* md: */
+    font-size: 3.75rem; /* md:text-6xl */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    font-size: 4.5rem; /* lg:text-7xl */
+  }
+`;
+
+const HeroTitle = styled.h1`
+  font-size: 4rem; /* text-6xl */
+  font-weight: 800; /* font-extrabold */
+  line-height: 1.25; /* leading-tight */
+  margin-bottom: 1.5rem; /* mb-6 */
+  padding-bottom: 0.5rem; /* pb-2 */
+  background-image: linear-gradient(to right, #a78bfa, #f87171); /* from-purple-400 to-pink-600 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ${fadeInUp} 1s ease-out forwards;
+  animation-delay: 0.1s; /* delay-100 */
+
+  @media (min-width: 768px) { /* md: */
+    font-size: 6rem; /* md:text-8xl */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    font-size: 8rem; /* lg:text-9xl */
+  }
+`;
+
+const HeroDescription = styled.p`
+  font-size: 1.25rem; /* text-xl */
+  margin-bottom: 2.5rem; /* mb-10 */
+  opacity: 0.9;
+  animation: ${fadeInUp} 1s ease-out forwards;
+  animation-delay: 0.2s; /* delay-200 */
+
+  color: ${props => props.theme === 'dark' ? '#d1d5db' : '#374151'}; /* text-gray-300 / text-gray-700 */
+
+  @media (min-width: 768px) { /* md: */
+    font-size: 1.5rem; /* md:text-2xl */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    font-size: 1.875rem; /* lg:text-3xl */
+  }
+`;
+
+// Define project data (UNCHANGED - PRESERVED USER'S DATA)
 const projects = [
   {
     id: 'na-music-store',
@@ -156,7 +313,7 @@ const certifications = [
 ];
 
 
-// Project Detail Page Component (UNCHANGED - PRESERVED USER'S DATA)
+// Project Detail Page Component (Will need conversion if you go full Styled Components)
 const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
   if (!project) {
     return (
@@ -246,7 +403,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
   );
 };
 
-// Blog Page Component (UNCHANGED - PRESERVED USER'S DATA)
+// Blog Page Component (Will need conversion if you go full Styled Components)
 const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
   return (
     <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
@@ -305,7 +462,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
   );
 };
 
-// Blog Post Detail Component (UNCHANGED - PRESERVED USER'S DATA)
+// Blog Post Detail Component (Will need conversion if you go full Styled Components)
 const BlogPostDetail = ({ post, setCurrentPage, theme }) => {
   if (!post) {
     return (
@@ -340,7 +497,7 @@ const BlogPostDetail = ({ post, setCurrentPage, theme }) => {
   );
 };
 
-// Project Card Component (Re-introduced for better modularity and styling)
+// Project Card Component (Will need conversion if you go full Styled Components)
 const ProjectCard = ({ project, navigateToPage, theme }) => {
   return (
     <div className={`rounded-xl p-6 shadow-xl transform hover:scale-[1.02] transition-all duration-300 group cursor-pointer
@@ -553,41 +710,34 @@ const App = () => {
         return (
           <>
             {/* Hero Section */}
-            <section id="hero" className={`relative h-screen flex items-center justify-center p-6 md:p-12 lg:p-24 overflow-hidden
-              ${theme === 'dark' ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'}`}>
-              <div className="absolute inset-0 opacity-10 flex items-center justify-center">
-                {/* Subtle background pattern/texture */}
-                <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent animate-pulse-slow"></div>
-              </div>
-              <div className="relative z-10 text-center max-w-5xl mx-auto px-4"> {/* Added max-w-5xl and px-4 for better control */}
-                {/* "Hey, I'm Sid" - now in its own H2 for independent styling */}
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up">
+            <HeroSection theme={theme}>
+              <HeroBackgroundPattern />
+              <HeroContent>
+                <HeroSubtitle theme={theme}>
                   Hey, I’m Sid
-                </h2>
-                {/* Main Headline - now in its own H1 */}
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up delay-100 pb-2"> {/* Increased font size */}
+                </HeroSubtitle>
+                <HeroTitle theme={theme}>
                   Empowering Smarter Decisions with Data
-                </h1>
-                <p className={`text-xl md:text-2xl lg:text-3xl mb-10 opacity-90 animate-fade-in-up delay-200 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}> {/* Increased font size */}
+                </HeroTitle>
+                <HeroDescription theme={theme}>
                   I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
-                </p>
-                {/* Removed quick access buttons from here, they are now in About Me */}
-              </div>
+                </HeroDescription>
+              </HeroContent>
+            </HeroSection>
 
-            </section>
-
-            {/* About Section */}
+            {/* About Section (still uses Tailwind classes for now) */}
+            {/* You would convert this section next, similar to the Hero section */}
             <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
               ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
               <div className="max-w-6xl mx-auto">
                 <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
                 <div className={`rounded-xl shadow-2xl p-8 border
-                  ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}> {/* Changed background to light */}
+                  ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
                   <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Left Column: Content */}
                     <div className="order-2 md:order-1">
-                      <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3> {/* Increased font size */}
-                      <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p> {/* Increased font size */}
+                      <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3>
+                      <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p>
                       <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
                         I'm a data analyst who doesn't just crunch numbers; I tell stories. My passion lies in transforming raw, complex datasets into clear, actionable insights that drive real-world impact. With a blend of analytical rigor and creative problem-solving, I bridge the gap between data and strategy.
                       </p>
@@ -646,7 +796,7 @@ const App = () => {
               </div>
             </section>
 
-            {/* Education & Certifications Section */}
+            {/* Education & Certifications Section (still uses Tailwind classes for now) */}
             <section id="education-certifications" className={`py-20 px-6 md:px-12 lg:px-24
               ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
               <div className="max-w-6xl mx-auto">
@@ -690,12 +840,12 @@ const App = () => {
               </div>
             </section>
 
-            {/* Projects Section */}
+            {/* Projects Section (still uses Tailwind classes for now) */}
             <section id="projects" className={`py-20 px-6 md:px-12 lg:px-24
               ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
               <div className="max-w-6xl mx-auto">
                 <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Projects</h2>
-                <div className="grid md:grid-cols-2 gap-8"> {/* Changed to 2 columns */}
+                <div className="grid md:grid-cols-2 gap-8">
                   {displayedProjects.map(project => (
                     <ProjectCard key={project.id} project={project} navigateToPage={navigateToPage} theme={theme} />
                   ))}
@@ -726,7 +876,7 @@ const App = () => {
               </div>
             </section>
 
-            {/* Skills Section (Toolbox Zone) */}
+            {/* Skills Section (Toolbox Zone - still uses Tailwind classes for now) */}
             <section id="skills" className={`py-20 px-6 md:px-12 lg:px-24
               ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
               <div className="max-w-5xl mx-auto">
@@ -744,7 +894,7 @@ const App = () => {
               </div>
             </section>
 
-            {/* Contact Form & Social Links */}
+            {/* Contact Form & Social Links (still uses Tailwind classes for now) */}
             <section id="contact" className={`py-20 px-6 md:px-12 lg:px-24
               ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
               <div className="max-w-xl mx-auto">
@@ -833,12 +983,12 @@ const App = () => {
       case 'project-detail':
         const project = projects.find(p => p.id === selectedProjectId);
         return <ProjectDetailPage project={project} setCurrentPage={navigateToPage} theme={theme} />;
-      case 'blog': // This case is for the full blog listing (Daily Byte Blog & Posts)
+      case 'blog': 
         return <BlogPage setCurrentPage={navigateToPage} theme={theme} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
       case 'blog-post':
         const post = blogPosts.find(p => p.id === selectedBlogPostId);
         return <BlogPostDetail post={post} setCurrentPage={navigateToPage} theme={theme} />;
-      case 'insights': // New case for the InsightsPage
+      case 'insights': 
         return <InsightsPage theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
       default:
         return null;
@@ -846,62 +996,65 @@ const App = () => {
   };
 
   return (
-    <div className={`font-inter min-h-screen ${theme === 'dark' ? 'bg-gray-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
-      {/* Header */}
-      {/* The header needs to be relatively positioned to contain the absolutely positioned mobile menu */}
-      <header className={`relative py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300
-        ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
-        
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
-          <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
+    <>
+      <GlobalStyle /> {/* Apply global styles */}
+      <div className={`font-inter min-h-screen ${theme === 'dark' ? 'bg-gray-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+        {/* Header (still uses Tailwind classes for now) */}
+        {/* You would convert this section next, similar to the Hero section */}
+        <header className={`relative py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300
+          ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
           
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6 lg:space-x-10">
-            <button onClick={() => scrollToSection('hero')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
-            <button onClick={() => scrollToSection('about')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
-            <button onClick={() => scrollToSection('projects')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
-            <button onClick={() => scrollToSection('skills')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-            <button onClick={() => navigateToPage('insights')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
-            <button onClick={() => scrollToSection('contact')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
-          </nav>
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
+            <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
+            
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-6 lg:space-x-10">
+              <button onClick={() => scrollToSection('hero')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
+              <button onClick={() => scrollToSection('about')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
+              <button onClick={() => scrollToSection('projects')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
+              <button onClick={() => scrollToSection('skills')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+              <button onClick={() => navigateToPage('insights')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
+              <button onClick={() => scrollToSection('contact')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
+            </nav>
 
-          <div className="flex items-center space-x-4 md:space-x-6">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
-              aria-label="Toggle dark mode"
-            >
-              {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
-            </button>
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 md:hidden"
-              aria-label="Toggle mobile menu"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="flex items-center space-x-4 md:space-x-6">
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
+                aria-label="Toggle dark mode"
+              >
+                {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+              </button>
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 md:hidden"
+                aria-label="Toggle mobile menu"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
-        </div>
-        {/* Mobile Navigation Overlay - Adjusted positioning and animation */}
-        <nav className={`absolute top-full left-0 w-full bg-gray-950/95 backdrop-blur-md z-40 flex flex-col items-center py-8 space-y-6 transition-all duration-300 ease-in-out origin-top
-          ${isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'} md:hidden`}>
-          <button onClick={() => scrollToSection('hero')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Home</button>
-          <button onClick={() => scrollToSection('about')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">About</button>
-          <button onClick={() => scrollToSection('projects')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Projects</button>
-          <button onClick={() => scrollToSection('skills')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-          <button onClick={() => navigateToPage('insights')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Insights</button>
-          <button onClick={() => scrollToSection('contact')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Contact</button>
-        </nav>
-      </header>
+          {/* Mobile Navigation Overlay */}
+          <nav className={`absolute top-full left-0 w-full bg-gray-950/95 backdrop-blur-md z-40 flex flex-col items-center py-8 space-y-6 transition-all duration-300 ease-in-out origin-top
+            ${isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'} md:hidden`}>
+            <button onClick={() => scrollToSection('hero')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Home</button>
+            <button onClick={() => scrollToSection('about')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">About</button>
+            <button onClick={() => scrollToSection('projects')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Projects</button>
+            <button onClick={() => scrollToSection('skills')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+            <button onClick={() => navigateToPage('insights')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Insights</button>
+            <button onClick={() => scrollToSection('contact')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Contact</button>
+          </nav>
+        </header>
 
-      {renderPageContent()}
+        {renderPageContent()}
 
-      {/* Footer */}
-      <footer className={`py-10 px-6 ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-800'} text-gray-300 text-center`}>
-        <p>&copy; 2025 Teja Siddhartha Rajam. All rights reserved.</p>
-      </footer>
-    </div>
+        {/* Footer (still uses Tailwind classes for now) */}
+        <footer className={`py-10 px-6 ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-800'} text-gray-300 text-center`}>
+          <p>&copy; 2025 Teja Siddhartha Rajam. All rights reserved.</p>
+        </footer>
+      </div>
+    </>
   );
 };
 
