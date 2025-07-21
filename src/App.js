@@ -605,7 +605,7 @@ const App = () => {
                               <p className="text-sm opacity-80">Certifications</p>
                               <p className="text-xs opacity-60">Professional Credentials</p>
                           </div>
-                          <div className="p-4 rounded-xl shadow-md bg-gray-700 dark:bg-gray-100"> {/* Corrected theme class for consistency */}
+                          <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
                               <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
                               <p className="text-sm opacity-80">Improvement</p>
                               <p className="text-xs opacity-60">User Reactivation Boost</p>
