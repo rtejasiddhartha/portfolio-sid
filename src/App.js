@@ -851,6 +851,7 @@ const App = () => {
       {/* <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
         ${isScrolled ? (theme === 'dark' ? 'bg-gray-900/90 shadow-lg' : 'bg-white/90 shadow-md') : 'bg-transparent'} backdrop-blur-md py-4`}> */}
       <header className={`py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300 ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
+        
         <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center"> {/* Adjusted px for better responsiveness */}
           <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button> {/* Added flex-shrink-0 */}
           
