@@ -2,6 +2,10 @@
   command = "npm run build" # Or 'yarn build' if you use yarn
   publish = "build"         # This is the default output directory for Create React App
 
+[build.environment]
+  # Explicitly set the Node.js version to match your local environment (Node 24)
+  NODE_VERSION = "24" # Set to "24" to match your local v24.3.0  
+
 [functions]
   directory = "netlify/functions" # Tells Netlify where your serverless functions are
   node_bundler = "esbuild"      # Recommended for faster function builds
