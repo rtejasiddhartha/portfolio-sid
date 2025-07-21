@@ -7,7 +7,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run build:css && react-scripts build", 
-    "build:css": "tailwindcss -i ./src/style.css -o ./src/tailwind.css --minify",
+    "build:css": "tailwindcss -i ./src/input.css -o ./src/tailwind.css --minify",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
