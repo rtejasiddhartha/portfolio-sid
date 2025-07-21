@@ -56,6 +56,10 @@ body {
   transform: translateY(20px);
 }
 
+.animate-fade-in-up.delay-100 { /* Added for more granular animation control */
+  animation-delay: 0.1s;
+}
+
 .animate-fade-in-up.delay-200 {
   animation-delay: 0.2s;
 }
@@ -64,7 +68,7 @@ body {
   animation-delay: 0.4s;
 }
 
-.animate-fade-in-up.delay-600 {
+.animate-fade-in-up.delay-600 { /* Added for more granular animation control */
   animation-delay: 0.6s;
 }
 
@@ -114,6 +118,8 @@ body {
 }
 
 /* Custom button styles - expanded from @apply for CDN compatibility */
+/* These are generally better handled directly with Tailwind classes in JSX */
+/* Keeping them here for now as they were in your original style.css */
 .btn-primary {
   background-color: #4f46e5; /* bg-indigo-600 */
   color: #ffffff; /* text-white */

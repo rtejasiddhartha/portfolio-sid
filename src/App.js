@@ -561,14 +561,14 @@ const App = () => {
               </div>
               <div className="relative z-10 text-center max-w-5xl mx-auto px-4"> {/* Added max-w-5xl and px-4 for better control */}
                 {/* "Hey, I'm Sid" - now in its own H2 for independent styling */}
-                <h2 className="text-4xl md:text-5xl font-extrabold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up">
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up">
                   Hey, I’m Sid
                 </h2>
                 {/* Main Headline - now in its own H1 */}
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up delay-100 pb-2"> {/* Added pb-2 here */}
+                <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 animate-fade-in-up delay-100 pb-2"> {/* Increased font size */}
                   Empowering Smarter Decisions with Data
                 </h1>
-                <p className={`text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up delay-200 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                <p className={`text-xl md:text-2xl lg:text-3xl mb-10 opacity-90 animate-fade-in-up delay-200 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}> {/* Increased font size */}
                   I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
                 </p>
                 {/* Removed quick access buttons from here, they are now in About Me */}
@@ -586,8 +586,8 @@ const App = () => {
                   <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Left Column: Content */}
                     <div className="order-2 md:order-1">
-                      <h3 className="text-4xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3>
-                      <p className={`text-lg mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p>
+                      <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3> {/* Increased font size */}
+                      <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p> {/* Increased font size */}
                       <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
                         I'm a data analyst who doesn't just crunch numbers; I tell stories. My passion lies in transforming raw, complex datasets into clear, actionable insights that drive real-world impact. With a blend of analytical rigor and creative problem-solving, I bridge the gap between data and strategy.
                       </p>
