@@ -107,7 +107,7 @@ body {
 }
 
 /* ===== Replacements for link-underline ===== */
-.link-underline {
+/* .link-underline {
   position: relative;
 }
 
@@ -118,8 +118,8 @@ body {
   bottom: 0;
   height: 2px;
   width: 100%;
-  background-color: #6366f1; /* Tailwind bg-indigo-500 */
-  transform: scaleX(0);
+  background-color: #6366f1; Tailwind bg-indigo-500 */
+  /* transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
 }
@@ -129,8 +129,8 @@ body {
 }
 
 .dark .link-underline::after {
-  background-color: #a5b4fc; /* Tailwind bg-indigo-300 */
-}
+  background-color: #a5b4fc; Tailwind bg-indigo-300 }*/
+
 .project-card-image-container {
   position: relative;
   overflow: hidden;
