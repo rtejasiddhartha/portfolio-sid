@@ -22,11 +22,6 @@
       "devDependencies": {
         "babel-plugin-styled-components": "^2.x.x"
       },
-      "babel": {
-        "plugins": [
-          "babel-plugin-styled-components"
-        ]
-      },
       "browserslist": {
         "production": [
           ">0.2%",
