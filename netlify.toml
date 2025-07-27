@@ -1,16 +1,20 @@
 [build]
-  command = "npm run build" # Or 'yarn build' if you use yarn
-  publish = "build"         # This is the default output directory for Create React App
+  command = "npm run build"
+  publish = "build"
 
 [build.environment]
-  # Explicitly set the Node.js version to match your local environment (Node 24)
-  NODE_VERSION = "24" # Set to "24" to match your local v24.3.0  
+  NODE_VERSION = "24"
 
 [functions]
-  directory = "netlify/functions" # Tells Netlify where your serverless functions are
-  node_bundler = "esbuild"      # Recommended for faster function builds
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
+# BEGIN MODIFIED REDIRECTS
+# Redirect all requests to index.html, but EXCLUDE files that exist (like static assets)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  # Ensure existing files (including CSS, JS bundles, images) are served directly.
+  # This is the key part of the fix.
+  force = false
