@@ -110,7 +110,7 @@ const HeroSubtitle = styled.h2`
   font-size: 3rem; /* text-5xl */
   font-weight: 800; /* font-extrabold */
   margin-bottom: 0.75rem; /* mb-3 */
-  /* NO GRADIENT CSS HERE. Will be applied via Tailwind classes in JSX */
+  /* --- REMOVED: background-image, -webkit-background-clip, background-clip, color: transparent; --- */
   animation: ${fadeInUp} 1s ease-out forwards;
 
   @media (min-width: 768px) { /* md: */
@@ -128,7 +128,7 @@ const HeroTitle = styled.h1`
   line-height: 1.25; /* leading-tight */
   margin-bottom: 1.5rem; /* mb-6 */
   padding-bottom: 0.5rem; /* pb-2 */
-  /* NO GRADIENT CSS HERE. Will be applied via Tailwind classes in JSX */
+  /* --- REMOVED: background-image, -webkit-background-clip, background-clip, color: transparent; --- */
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s; /* delay-100 */
 
@@ -786,10 +786,10 @@ const App = () => {
                               <Mail size={36} />
                             </a>
                           </div>
-                          <a href="#" className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-content-center">
+                          <a href="#" className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
                             <Download size={20} className="mr-2" /> Download Resume (PDF)
                           </a>
-                          <a href="#" className={`px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-content-center
+                          <a href="#" className={`px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center
                             ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
                             <Award size={20} className="mr-2" /> View Certifications
                           </a>
@@ -968,7 +968,7 @@ const App = () => {
                     <div className="mt-12 text-center">
                       <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Connect with Me</h3>
                       <div className="flex justify-center space-x-8 text-3xl">
-                        <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
                           <Linkedin size={36} />
                         </a>
                         <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
