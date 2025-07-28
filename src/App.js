@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     line-height: 1.5;
   }
-
+  
   /* Ensure Inter font is loaded from Google Fonts in public/index.html */
   /* <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet"> */
 
@@ -59,29 +59,19 @@ const fadeInUp = keyframes`
   }
 `;
 
-// Styled Components for Hero Section
-const HeroSection = styled.section`
-  position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem; /* p-6 */
-  overflow: hidden;
-
-  /* Background gradient based on theme */
-  background: ${props => props.theme === 'dark'
-    ? 'linear-gradient(to bottom right, #1a202c, #2d3748, #4c51bf)' /* from-gray-900 via-gray-800 to-indigo-900 */
-    : 'linear-gradient(to bottom right, #f7fafc, #edf2f7, #bfdbfe)'}; /* from-gray-100 via-gray-50 to-blue-100 */
-  transition: background 0.3s ease-in-out; /* transition-colors duration-300 */
-
-  @media (min-width: 768px) { /* md: */
-    padding: 3rem; /* md:p-12 */
-  }
-  @media (min-width: 1024px) { /* lg: */
-    padding: 6rem; /* lg:p-24 */
-  }
-`;
+// Converting HeroSection from styled.section to a regular functional component using Tailwind classes
+const HeroSection = ({ theme, children }) => {
+  return (
+    <section className={`relative h-screen flex items-center justify-center p-6 overflow-hidden 
+      ${theme === 'dark' 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' 
+        : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'} 
+      transition-colors duration-300 md:p-12 lg:p-24`}>
+      <HeroBackgroundPattern />
+      {children}
+    </section>
+  );
+};
 
 const HeroBackgroundPattern = styled.div`
   position: absolute;
@@ -94,23 +84,20 @@ const HeroBackgroundPattern = styled.div`
   animation: ${pulseSlow} 8s infinite ease-in-out;
 `;
 
-const HeroContent = styled.div`
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  max-width: 64rem; /* max-w-5xl */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem; /* px-4 */
-  padding-right: 1rem; /* px-4 */
-`;
+// Converting HeroContent from styled.div to a regular functional component using Tailwind classes
+const HeroContent = ({ children }) => {
+  return (
+    <div className="relative z-10 text-center max-w-5xl mx-auto px-4">
+      {children}
+    </div>
+  );
+};
 
-// HeroSubtitle: Removed gradient CSS, keeping other styles for positioning/animation
+// HeroSubtitle: Now ONLY for animation and responsive font-size (no gradient CSS here)
 const HeroSubtitle = styled.h2`
   font-size: 3rem; /* text-5xl */
   font-weight: 800; /* font-extrabold */
   margin-bottom: 0.75rem; /* mb-3 */
-  /* --- REMOVED: background-image, -webkit-background-clip, background-clip, color: transparent; --- */
   animation: ${fadeInUp} 1s ease-out forwards;
 
   @media (min-width: 768px) { /* md: */
@@ -121,14 +108,13 @@ const HeroSubtitle = styled.h2`
   }
 `;
 
-// HeroTitle: Removed gradient CSS, keeping other styles for positioning/animation
+// HeroTitle: Now ONLY for animation and responsive font-size (no gradient CSS here)
 const HeroTitle = styled.h1`
   font-size: 4rem; /* text-6xl */
   font-weight: 800; /* font-extrabold */
   line-height: 1.25; /* leading-tight */
   margin-bottom: 1.5rem; /* mb-6 */
   padding-bottom: 0.5rem; /* pb-2 */
-  /* --- REMOVED: background-image, -webkit-background-clip, background-clip, color: transparent; --- */
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s; /* delay-100 */
 
@@ -657,409 +643,407 @@ const App = () => {
         const errorData = await response.json();
         setFormStatus({ type: 'error', message: `Failed to send message: ${errorData.message || 'Unknown error'}` });
       }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      setFormStatus({ type: 'error', message: 'Failed to send message. Please check your network connection.' });
-    }
-  };
+      } catch (error) {
+        console.error('Error sending message:', error);
+        setFormStatus({ type: 'error', message: 'Failed to send message. Please check your network connection.' });
+      }
+    };
 
 
-  // Sample skills data (for Toolbox Zone)
-  const skills = [
-    { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
-    { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
-    { name: 'Python', icon: <Code size={48} className="text-blue-500 mb-4" />, description: 'Pandas, NumPy, Scikit-learn, Matplotlib' },
-    { name: 'SQL', icon: <Database size={48} className="text-green-500 mb-4" />, description: 'Database Querying, Data Manipulation' },
-    { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
-    { name: 'Power BI', icon: <BarChart size={48} className="text-indigo-500 mb-4" />, description: 'Dashboard Design, Data Modeling, DAX' },
-    { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
-    { name: 'Real-time Analytics', icon: <Zap size={48} className="text-red-500 mb-4" />, description: 'Streaming Data, Live Dashboards' },
-    { name: 'Cloud Platforms', icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
-    { name: 'Data Warehousing', icon: <Database size={48} className="text-purple-700 mb-4" />, description: 'ETL, Data Modeling, OLAP' },
-  ];
+    // Sample skills data (for Toolbox Zone)
+    const skills = [
+      { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
+      { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
+      { name: 'Python', icon: <Code size={48} className="text-blue-500 mb-4" />, description: 'Pandas, NumPy, Scikit-learn, Matplotlib' },
+      { name: 'SQL', icon: <Database size={48} className="text-green-500 mb-4" />, description: 'Database Querying, Data Manipulation' },
+      { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
+      { name: 'Power BI', icon: <BarChart size={48} className="text-indigo-500 mb-4" />, description: 'Dashboard Design, Data Modeling, DAX' },
+      { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
+      { name: 'Real-time Analytics', icon: <Zap size={48} className="text-red-500 mb-4" />, description: 'Streaming Data, Live Dashboards' },
+      { name: 'Cloud Platforms', icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
+      { name: 'Data Warehousing', icon: <Database size={48} className="text-purple-700 mb-4" />, description: 'ETL, Data Modeling, OLAP' },
+    ];
 
-  // Logic for project slider
-  const projectsPerPage = 2;
-  const totalProjectPages = Math.ceil(projects.length / projectsPerPage);
+    // Logic for project slider
+    const projectsPerPage = 2;
+    const totalProjectPages = Math.ceil(projects.length / projectsPerPage);
 
-  const displayedProjects = projects.slice(
-    currentProjectPageIndex * projectsPerPage,
-    (currentProjectPageIndex + 1) * projectsPerPage
-  );
-
-  const goToNextProjects = () => {
-    setCurrentProjectPageIndex((prevIndex) =>
-      (prevIndex + 1) % totalProjectPages
+    const displayedProjects = projects.slice(
+      currentProjectPageIndex * projectsPerPage,
+      (currentProjectPageIndex + 1) * projectsPerPage
     );
-  };
 
-  const goToPrevProjects = () => {
-    setCurrentProjectPageIndex((prevIndex) =>
-      (prevIndex - 1 + totalProjectPages) % totalProjectPages
-    );
-  };
-
-
-  const renderPageContent = () => {
-    switch (currentPage) {
-      case 'home':
-        return (
-          <>
-            {/* Hero Section */}
-            <HeroSection theme={theme}>
-              <HeroBackgroundPattern />
-              <HeroContent>
-                {/* Apply Tailwind classes for gradient text directly here */}
-                <HeroSubtitle
-                  theme={theme}
-                  className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
-                >
-                  Hey, I’m Sid
-                </HeroSubtitle>
-                <HeroTitle
-                  theme={theme}
-                  className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
-                >
-                  Empowering Smarter Decisions with Data
-                </HeroTitle>
-                <HeroDescription theme={theme}>
-                  I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
-                </HeroDescription>
-              </HeroContent>
-            </HeroSection>
-
-            {/* About Section (still uses Tailwind classes for now) */}
-            {/* You would convert this section next, similar to the Hero section */}
-            <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
-              ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                  <div className="max-w-6xl mx-auto">
-                    <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
-                    <div className={`rounded-xl shadow-2xl p-8 border
-                      ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                      <div className="grid md:grid-cols-2 gap-12 items-center">
-                        {/* Left Column: Content */}
-                        <div className="order-2 md:order-1">
-                          <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3>
-                          <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p>
-                          <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
-                            I'm a data analyst who doesn't just crunch numbers; I tell stories. My passion lies in transforming raw, complex datasets into clear, actionable insights that drive real-world impact. With a blend of analytical rigor and creative problem-solving, I bridge the gap between data and strategy.
-                          </p>
-                          <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
-                            My expertise spans the entire data lifecycle, from meticulous cleaning and robust modeling to compelling visualization and predictive analytics. I thrive on uncovering hidden patterns and empowering businesses with the intelligence they need to innovate and grow. Let's turn your data into your next big advantage.
-                          </p>
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mt-8">
-                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
-                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
-                                  <p className="text-sm opacity-80">Major Projects</p>
-                                  <p className="text-xs opacity-60">Data Analysis Projects</p>
-                              </div>
-                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">5+</h3>
-                                  <p className="text-sm opacity-80">Certifications</p>
-                                  <p className="text-xs opacity-60">Professional Credentials</p>
-                              </div>
-                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
-                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
-                                  <p className="text-sm opacity-80">Improvement</p>
-                                  <p className="text-xs opacity-60">User Reactivation Boost</p>
-                              </div>
-                          </div>
-                        </div>
-                        {/* Right Column: Photo and Social Media */}
-                        <div className="order-1 md:order-2 flex flex-col items-center justify-center space-y-8">
-                          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-purple-500">
-                            <img
-                              src="/sid-photo.jpg" // Using a placeholder for the profile image
-                              alt="Teja Siddhartha Rajam"
-                              className="w-full h-full object-cover object-left"
-                              onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/320x320/CCCCCC/000000?text=Profile+Photo"; }}
-                            />
-                          </div>
-                          <div className="flex justify-center space-x-6 text-3xl">
-                            <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
-                              <Linkedin size={36} />
-                            </a>
-                            <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
-                              <Github size={36} />
-                            </a>
-                            <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
-                              <Mail size={36} />
-                            </a>
-                          </div>
-                          <a href="#" className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
-                            <Download size={20} className="mr-2" /> Download Resume (PDF)
-                          </a>
-                          <a href="#" className={`px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center
-                            ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
-                            <Award size={20} className="mr-2" /> View Certifications
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                {/* Education & Certifications Section (still uses Tailwind classes for now) */}
-                <section id="education-certifications" className={`py-20 px-6 md:px-12 lg:px-24
-                  ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-                  <div className="max-w-6xl mx-auto">
-                    <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Education & Certifications</h2>
-                    <div className="grid md:grid-cols-2 gap-12">
-                      {/* Education Column */}
-                      <div>
-                        <h3 className="text-3xl font-semibold mb-8 flex items-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-500">
-                          <GraduationCap size={32} className="mr-3" /> Education
-                        </h3>
-                        <div className="space-y-6">
-                          {education.map((item, index) => (
-                            <div key={index} className={`p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01]
-                              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
-                              <h4 className="text-xl font-semibold mb-1">{item.degree}</h4>
-                              <p className="text-gray-600 dark:text-gray-300 text-sm">{item.institution}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Certifications Column */}
-                      <div>
-                        <h3 className="text-3xl font-semibold mb-8 flex items-center bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-cyan-500">
-                          <Award size={32} className="mr-3" /> Certifications
-                        </h3>
-                        <div className="space-y-6">
-                          {certifications.map((item, index) => (
-                            <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-between p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01] group
-                              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700 hover:border-green-500' : 'bg-white border border-gray-200 hover:border-green-500'}`}>
-                              <div>
-                                <h4 className="text-xl font-semibold mb-1">{item.name}</h4>
-                                <p className="text-gray-600 dark:text-gray-300 text-sm">{item.issuer}</p>
-                              </div>
-                              <ExternalLink size={20} className="text-gray-500 group-hover:text-green-500 transition-colors duration-200" />
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                {/* Projects Section (still uses Tailwind classes for now) */}
-                <section id="projects" className={`py-20 px-6 md:px-12 lg:px-24
-                  ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                  <div className="max-w-6xl mx-auto">
-                    <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Projects</h2>
-                    <div className="grid md:grid-cols-2 gap-8">
-                      {displayedProjects.map(project => (
-                        <ProjectCard key={project.id} project={project} navigateToPage={navigateToPage} theme={theme} />
-                      ))}
-                    </div>
-                    {totalProjectPages > 1 && (
-                      <div className="flex justify-center items-center mt-12 space-x-4">
-                        <button
-                          onClick={goToPrevProjects}
-                          disabled={currentProjectPageIndex === 0}
-                          className={`p-3 rounded-full shadow-md transition-all duration-300
-                            ${currentProjectPageIndex === 0 ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed' : 'bg-purple-600 text-white hover:bg-purple-700 transform hover:scale-110'}`}
-                        >
-                          <ChevronLeft size={24} />
-                        </button>
-                        <span className="text-lg font-semibold">
-                          {currentProjectPageIndex + 1} / {totalProjectPages}
-                        </span>
-                        <button
-                          onClick={goToNextProjects}
-                          disabled={currentProjectPageIndex === totalProjectPages - 1}
-                          className={`p-3 rounded-full shadow-md transition-all duration-300
-                            ${currentProjectPageIndex === totalProjectPages - 1 ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed' : 'bg-purple-600 text-white hover:bg-purple-700 transform hover:scale-110'}`}
-                        >
-                          <ChevronRight size={24} />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </section>
-
-                {/* Skills Section (Toolbox Zone - still uses Tailwind classes for now) */}
-                <section id="skills" className={`py-20 px-6 md:px-12 lg:px-24
-                  ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-                  <div className="max-w-5xl mx-auto">
-                    <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Toolbox</h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
-                      {skills.map((skill, index) => (
-                        <div key={index} className={`flex flex-col items-center p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 group
-                          ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
-                          {skill.icon}
-                          <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
-                          <p className="text-center text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">{skill.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-
-                {/* Contact Form & Social Links (still uses Tailwind classes for now) */}
-                <section id="contact" className={`py-20 px-6 md:px-12 lg:px-24
-                  ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                  <div className="max-w-xl mx-auto">
-                    <h2 className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-700">
-                      Get in Touch
-                    </h2>
-                    <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border
-                      ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
-                      <form onSubmit={handleContactSubmit} className="space-y-6">
-                        <div>
-                          <label htmlFor="name" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Name</label>
-                          <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={contactName}
-                            onChange={(e) => setContactName(e.target.value)}
-                            className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                              ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
-                            placeholder="Your Name"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor="email" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Email</label>
-                          <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={contactEmail}
-                            onChange={(e) => setContactEmail(e.target.value)}
-                            className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                              ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
-                            placeholder="your@example.com"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor="message" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Message</label>
-                          <textarea
-                            id="message"
-                            name="message"
-                            rows="5"
-                            value={contactMessage}
-                            onChange={(e) => setContactMessage(e.target.value)}
-                            className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                              ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
-                            placeholder="Your message..."
-                            required
-                          ></textarea>
-                        </div>
-                        <button
-                          type="submit"
-                          disabled={formStatus.type === 'sending'}
-                          className={`w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105
-                            ${formStatus.type === 'sending' ? 'opacity-50 cursor-not-allowed' : ''}`}
-                        >
-                          {formStatus.type === 'sending' ? 'Sending...' : 'Send Message'}
-                        </button>
-                        {formStatus.message && (
-                          <p className={`mt-4 text-center text-lg font-semibold
-                            ${formStatus.type === 'success' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-                            {formStatus.message}
-                          </p>
-                        )}
-                      </form>
-                    </div>
-                    <div className="mt-12 text-center">
-                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Connect with Me</h3>
-                      <div className="flex justify-center space-x-8 text-3xl">
-                        <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
-                          <Linkedin size={36} />
-                        </a>
-                        <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
-                          <Github size={36} />
-                        </a>
-                        <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
-                          <Mail size={36} />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </>
-            );
-          case 'project-detail':
-            const project = projects.find(p => p.id === selectedProjectId);
-            return <ProjectDetailPage project={project} setCurrentPage={navigateToPage} theme={theme} />;
-          case 'blog':
-            return <BlogPage setCurrentPage={navigateToPage} theme={theme} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
-          case 'blog-post':
-            const post = blogPosts.find(p => p.id === selectedBlogPostId);
-            return <BlogPostDetail post={post} setCurrentPage={navigateToPage} theme={theme} />;
-          case 'insights':
-            return <InsightsPage theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
-          default:
-            return null;
-        }
-      };
-
-      return (
-        <>
-          <GlobalStyle /> {/* Apply global styles */}
-          <div className={`font-inter min-h-screen ${theme === 'dark' ? 'bg-gray-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
-            {/* Header (still uses Tailwind classes for now) */}
-            {/* You would convert this section next, similar to the Hero section */}
-            <header className={`relative py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300
-              ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>
-
-              <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
-                <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
-
-                {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center space-x-6 lg:space-x-10">
-                  <button onClick={() => scrollToSection('hero')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
-                  <button onClick={() => scrollToSection('about')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
-                  <button onClick={() => scrollToSection('projects')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
-                  <button onClick={() => scrollToSection('skills')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-                  <button onClick={() => navigateToPage('insights')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
-                  <button onClick={() => scrollToSection('contact')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
-                </nav>
-
-                <div className="flex items-center space-x-4 md:space-x-6">
-                  <button
-                    onClick={toggleTheme}
-                    className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
-                    aria-label="Toggle dark mode"
-                  >
-                    {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
-                  </button>
-                  {/* Mobile menu button */}
-                  <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 md:hidden"
-                    aria-label="Toggle mobile menu"
-                  >
-                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                  </button>
-                </div>
-              </div>
-              {/* Mobile Navigation Overlay */}
-              <nav className={`absolute top-full left-0 w-full bg-gray-950/95 backdrop-blur-md z-40 flex flex-col items-center py-8 space-y-6 transition-all duration-300 ease-in-out origin-top
-                ${isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'} md:hidden`}>
-                <button onClick={() => scrollToSection('hero')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Home</button>
-                <button onClick={() => scrollToSection('about')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">About</button>
-                <button onClick={() => scrollToSection('projects')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Projects</button>
-                <button onClick={() => scrollToSection('skills')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-                <button onClick={() => navigateToPage('insights')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Insights</button>
-                <button onClick={() => scrollToSection('contact')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Contact</button>
-              </nav>
-            </header>
-
-            {renderPageContent()}
-
-            {/* Footer (still uses Tailwind classes for now) */}
-            <footer className={`py-10 px-6 ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-800'} text-gray-300 text-center`}>
-              <p>&copy; 2025 Teja Siddhartha Rajam. All rights reserved.</p>
-            </footer>
-          </div>
-        </>
+    const goToNextProjects = () => {
+      setCurrentProjectPageIndex((prevIndex) =>
+        (prevIndex + 1) % totalProjectPages
       );
     };
 
-    export default App;
-    
+    const goToPrevProjects = () => {
+      setCurrentProjectPageIndex((prevIndex) =>
+        (prevIndex - 1 + totalProjectPages) % totalProjectPages
+      );
+    };
+
+
+    const renderPageContent = () => {
+      switch (currentPage) {
+        case 'home':
+          return (
+            <>
+              {/* Hero Section - Now using direct Tailwind classes */}
+              <HeroSection theme={theme}>
+                <HeroBackgroundPattern />
+                <HeroContent>
+                  {/* Apply Tailwind classes for gradient text directly here */}
+                  <HeroSubtitle
+                    theme={theme}
+                    className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
+                  >
+                    Hey, I’m Sid
+                  </HeroSubtitle>
+                  <HeroTitle
+                    theme={theme}
+                    className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
+                  >
+                    Empowering Smarter Decisions with Data
+                  </HeroTitle>
+                  <HeroDescription theme={theme}>
+                    I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
+                  </HeroDescription>
+                </HeroContent>
+              </HeroSection>
+
+              {/* About Section - (already uses Tailwind classes) */}
+              <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
+                ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
+                    <div className="max-w-6xl mx-auto">
+                      <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
+                      <div className={`rounded-xl shadow-2xl p-8 border
+                        ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                        <div className="grid md:grid-cols-2 gap-12 items-center">
+                          {/* Left Column: Content */}
+                          <div className="order-2 md:order-1">
+                            <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3>
+                            <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p>
+                            <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
+                              I'm a data analyst who doesn't just crunch numbers; I tell stories. My passion lies in transforming raw, complex datasets into clear, actionable insights that drive real-world impact. With a blend of analytical rigor and creative problem-solving, I bridge the gap between data and strategy.
+                            </p>
+                            <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
+                              My expertise spans the entire data lifecycle, from meticulous cleaning and robust modeling to compelling visualization and predictive analytics. I thrive on uncovering hidden patterns and empowering businesses with the intelligence they need to innovate and grow. Let's turn your data into your next big advantage.
+                            </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mt-8">
+                                <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
+                                    <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
+                                    <p className="text-sm opacity-80">Major Projects</p>
+                                    <p className="text-xs opacity-60">Data Analysis Projects</p>
+                                </div>
+                                <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
+                                    <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">5+</h3>
+                                    <p className="text-sm opacity-80">Certifications</p>
+                                    <p className="text-xs opacity-60">Professional Credentials</p>
+                                </div>
+                                <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
+                                    <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
+                                    <p className="text-sm opacity-80">Improvement</p>
+                                    <p className="text-xs opacity-60">User Reactivation Boost</p>
+                                </div>
+                            </div>
+                          </div>
+                          {/* Right Column: Photo and Social Media */}
+                          <div className="order-1 md:order-2 flex flex-col items-center justify-center space-y-8">
+                            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-purple-500">
+                              <img
+                                src="/sid-photo.jpg" // Using a placeholder for the profile image
+                                alt="Teja Siddhartha Rajam"
+                                className="w-full h-full object-cover object-left"
+                                onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/320x320/CCCCCC/000000?text=Profile+Photo"; }}
+                              />
+                            </div>
+                            <div className="flex justify-center space-x-6 text-3xl">
+                              <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
+                                <Linkedin size={36} />
+                              </a>
+                              <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
+                                <Github size={36} />
+                              </a>
+                              <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
+                                <Mail size={36} />
+                              </a>
+                            </div>
+                            <a href="#" className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                              <Download size={20} className="mr-2" /> Download Resume (PDF)
+                            </a>
+                            <a href="#" className={`px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center
+                              ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
+                              <Award size={20} className="mr-2" /> View Certifications
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* Education & Certifications Section - (already uses Tailwind classes) */}
+                  <section id="education-certifications" className={`py-20 px-6 md:px-12 lg:px-24
+                    ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+                    <div className="max-w-6xl mx-auto">
+                      <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Education & Certifications</h2>
+                      <div className="grid md:grid-cols-2 gap-12">
+                        {/* Education Column */}
+                        <div>
+                          <h3 className="text-3xl font-semibold mb-8 flex items-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-500">
+                            <GraduationCap size={32} className="mr-3" /> Education
+                          </h3>
+                          <div className="space-y-6">
+                            {education.map((item, index) => (
+                              <div key={index} className={`p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01]
+                                ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+                                <h4 className="text-xl font-semibold mb-1">{item.degree}</h4>
+                                <p className="text-gray-600 dark:text-gray-300 text-sm">{item.institution}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Certifications Column */}
+                        <div>
+                          <h3 className="text-3xl font-semibold mb-8 flex items-center bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-cyan-500">
+                            <Award size={32} className="mr-3" /> Certifications
+                          </h3>
+                          <div className="space-y-6">
+                            {certifications.map((item, index) => (
+                              <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-between p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01] group
+                                ${theme === 'dark' ? 'bg-gray-800 border border-gray-700 hover:border-green-500' : 'bg-white border border-gray-200 hover:border-green-500'}`}>
+                                <div>
+                                  <h4 className="text-xl font-semibold mb-1">{item.name}</h4>
+                                  <p className="text-gray-600 dark:text-gray-300 text-sm">{item.issuer}</p>
+                                </div>
+                                <ExternalLink size={20} className="text-gray-500 group-hover:text-green-500 transition-colors duration-200" />
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* Projects Section - (already uses Tailwind classes) */}
+                  <section id="projects" className={`py-20 px-6 md:px-12 lg:px-24
+                    ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
+                    <div className="max-w-6xl mx-auto">
+                      <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Projects</h2>
+                      <div className="grid md:grid-cols-2 gap-8">
+                        {displayedProjects.map(project => (
+                          <ProjectCard key={project.id} project={project} navigateToPage={navigateToPage} theme={theme} />
+                        ))}
+                      </div>
+                      {totalProjectPages > 1 && (
+                        <div className="flex justify-center items-center mt-12 space-x-4">
+                          <button
+                            onClick={goToPrevProjects}
+                            disabled={currentProjectPageIndex === 0}
+                            className={`p-3 rounded-full shadow-md transition-all duration-300
+                              ${currentProjectPageIndex === 0 ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed' : 'bg-purple-600 text-white hover:bg-purple-700 transform hover:scale-110'}`}
+                          >
+                            <ChevronLeft size={24} />
+                          </button>
+                          <span className="text-lg font-semibold">
+                            {currentProjectPageIndex + 1} / {totalProjectPages}
+                          </span>
+                          <button
+                            onClick={goToNextProjects}
+                            disabled={currentProjectPageIndex === totalProjectPages - 1}
+                            className={`p-3 rounded-full shadow-md transition-all duration-300
+                              ${currentProjectPageIndex === totalProjectPages - 1 ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed' : 'bg-purple-600 text-white hover:bg-purple-700 transform hover:scale-110'}`}
+                          >
+                            <ChevronRight size={24} />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </section>
+
+                  {/* Skills Section (already uses Tailwind classes) */}
+                  <section id="skills" className={`py-20 px-6 md:px-12 lg:px-24
+                    ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+                    <div className="max-w-5xl mx-auto">
+                      <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Toolbox</h2>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+                        {skills.map((skill, index) => (
+                          <div key={index} className={`flex flex-col items-center p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 group
+                            ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
+                            {skill.icon}
+                            <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
+                            <p className="text-center text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">{skill.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* Contact Form & Social Links (already uses Tailwind classes) */}
+                  <section id="contact" className={`py-20 px-6 md:px-12 lg:px-24
+                    ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
+                    <div className="max-w-xl mx-auto">
+                      <h2 className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-700">
+                        Get in Touch
+                      </h2>
+                      <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border
+                        ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+                        <form onSubmit={handleContactSubmit} className="space-y-6">
+                          <div>
+                            <label htmlFor="name" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Name</label>
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              value={contactName}
+                              onChange={(e) => setContactName(e.target.value)}
+                              className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
+                                ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                              placeholder="Your Name"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="email" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Email</label>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              value={contactEmail}
+                              onChange={(e) => setContactEmail(e.target.value)}
+                              className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
+                                ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                              placeholder="your@example.com"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="message" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Message</label>
+                            <textarea
+                              id="message"
+                              name="message"
+                              rows="5"
+                              value={contactMessage}
+                              onChange={(e) => setContactMessage(e.target.value)}
+                              className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
+                                ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                              placeholder="Your message..."
+                              required
+                            ></textarea>
+                          </div>
+                          <button
+                            type="submit"
+                            disabled={formStatus.type === 'sending'}
+                            className={`w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105
+                              ${formStatus.type === 'sending' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          >
+                            {formStatus.type === 'sending' ? 'Sending...' : 'Send Message'}
+                          </button>
+                          {formStatus.message && (
+                            <p className={`mt-4 text-center text-lg font-semibold
+                              ${formStatus.type === 'success' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                              {formStatus.message}
+                            </p>
+                          )}
+                        </form>
+                      </div>
+                      <div className="mt-12 text-center">
+                        <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">Connect with Me</h3>
+                        <div className="flex justify-center space-x-8 text-3xl">
+                          <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
+                            <Linkedin size={36} />
+                          </a>
+                          <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
+                            <Github size={36} />
+                          </a>
+                          <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
+                            <Mail size={36} />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </>
+              );
+            case 'project-detail':
+              const project = projects.find(p => p.id === selectedProjectId);
+              return <ProjectDetailPage project={project} setCurrentPage={navigateToPage} theme={theme} />;
+            case 'blog':
+              return <BlogPage setCurrentPage={navigateToPage} theme={theme} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
+            case 'blog-post':
+              const post = blogPosts.find(p => p.id === selectedBlogPostId);
+              return <BlogPostDetail post={post} setCurrentPage={navigateToPage} theme={theme} />;
+            case 'insights':
+              return <InsightsPage theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
+            default:
+              return null;
+          }
+        };
+
+        return (
+          <>
+            <GlobalStyle /> {/* Apply global styles */}
+            <div className={`font-inter min-h-screen ${theme === 'dark' ? 'bg-gray-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+              {/* Header - Converted to direct Tailwind classes for full control */}
+              <header className={`relative py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300
+                ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>
+
+                <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
+                  <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
+
+                  {/* Desktop Navigation */}
+                  <nav className="hidden md:flex items-center space-x-6 lg:space-x-10">
+                    <button onClick={() => scrollToSection('hero')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
+                    <button onClick={() => scrollToSection('about')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
+                    <button onClick={() => scrollToSection('projects')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
+                    <button onClick={() => scrollToSection('skills')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+                    <button onClick={() => navigateToPage('insights')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
+                    <button onClick={() => scrollToSection('contact')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
+                  </nav>
+
+                  <div className="flex items-center space-x-4 md:space-x-6">
+                    <button
+                      onClick={toggleTheme}
+                      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
+                      aria-label="Toggle dark mode"
+                    >
+                      {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+                    </button>
+                    {/* Mobile menu button */}
+                    <button
+                      onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 md:hidden"
+                      aria-label="Toggle mobile menu"
+                    >
+                      {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                  </div>
+                </div>
+                {/* Mobile Navigation Overlay */}
+                <nav className={`absolute top-full left-0 w-full bg-gray-950/95 backdrop-blur-md z-40 flex flex-col items-center py-8 space-y-6 transition-all duration-300 ease-in-out origin-top
+                  ${isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'} md:hidden`}>
+                  <button onClick={() => scrollToSection('hero')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Home</button>
+                  <button onClick={() => scrollToSection('about')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">About</button>
+                  <button onClick={() => scrollToSection('projects')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Projects</button>
+                  <button onClick={() => scrollToSection('skills')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+                  <button onClick={() => navigateToPage('insights')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Insights</button>
+                  <button onClick={() => scrollToSection('contact')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Contact</button>
+                </nav>
+              </header>
+
+              {renderPageContent()}
+
+              {/* Footer (already uses Tailwind classes) */}
+              <footer className={`py-10 px-6 ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-800'} text-gray-300 text-center`}>
+                <p>&copy; 2025 Teja Siddhartha Rajam. All rights reserved.</p>
+              </footer>
+            </div>
+          </>
+        );
+      };
+
+      export default App;
+      
