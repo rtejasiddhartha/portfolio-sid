@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes, createGlobalStyle } from 'styled-components'; // Import styled and keyframes
+import styled, { keyframes, createGlobalStyle } from 'styled-components'; // Keep styled and keyframes
 import { Sun, Moon, Download, Mail, Linkedin, Github, BarChart, Code, Database, FileText, Bot, TrendingUp, ChevronLeft, BookOpen, Layers, Zap, Briefcase, Award, GraduationCap, ExternalLink, ChevronRight, MessageSquare, Calendar, Menu, X } from 'lucide-react';
 
-// Import the new InsightsPage component (assuming it will also be converted or use basic CSS)
+// Import the new InsightsPage component
 import InsightsPage from './InsightsPage';
 
-// Define global styles and animations (replaces parts of style.css)
+// Define global styles and animations
 const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
@@ -36,7 +36,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-// Define Keyframes (moved from style.css)
+// Define Keyframes
 const pulseSlow = keyframes`
   0%, 100% {
     transform: scale(1);
@@ -59,20 +59,22 @@ const fadeInUp = keyframes`
   }
 `;
 
-// HeroSection remains the same, using Tailwind classes
+// HeroSection - Adjusted padding and ensured single background element
 const HeroSection = ({ theme, children }) => {
   return (
-    <section className={`relative h-screen flex items-center justify-center p-6 overflow-hidden 
+    <section className={`relative h-screen flex items-center justify-center px-2 py-4 md:px-4 md:py-8 lg:px-6 lg:py-12 overflow-hidden 
       ${theme === 'dark' 
         ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' 
         : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'} 
-      transition-colors duration-300 md:p-12 lg:p-24`}>
-      <HeroBackgroundPattern />
+      transition-colors duration-300`}>
+      {/* CORRECTED: Only render HeroBackgroundPattern component here */}
+      <HeroBackgroundPattern /> 
       {children}
     </section>
   );
 };
 
+// HeroBackgroundPattern styled component definition (UNCHANGED, still provides radial gradient and animation)
 const HeroBackgroundPattern = styled.div`
   position: absolute;
   inset: 0;
@@ -82,6 +84,7 @@ const HeroBackgroundPattern = styled.div`
   justify-content: center;
   background-image: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.1), transparent, transparent); /* from-purple-500/10 */
   animation: ${pulseSlow} 8s infinite ease-in-out;
+  transition: opacity 0.5s ease-in-out; 
 `;
 
 // HeroContent remains the same, using Tailwind classes
@@ -93,41 +96,76 @@ const HeroContent = ({ children }) => {
   );
 };
 
-// NEW: Combined Hero Heading Component using styled-components
+// Combined Hero Heading Component using styled-components (AGRESSIVELY FINE-TUNED FONT SIZES FOR 2-3 LINES)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
-  line-height: 1.25; /* leading-tight */
   margin-bottom: 1.5rem; /* mb-6 */
   padding-bottom: 0.5rem; /* pb-2 */
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s; /* delay-100 */
   color: ${props => props.theme === 'dark' ? '#f3f4f6' : '#111827'}; /* text-gray-100 / text-gray-900 */
+  
+  /* Adjusted overall line-height for better fit */
+  line-height: 1.0; /* Keep it tight */
 
-  & > span:first-child { /* "Hey, I'm Sid" */
+  /* Styles for "Hey, I'm Sid" span */
+  & > span.hero-subtitle-text {
     display: block;
-    font-size: 3rem; /* text-5xl */
-    margin-bottom: 0.75rem; /* mb-3 */
+    font-size: 1.1rem; /* Further reduced for very small screens (smaller than text-xl) */
+    margin-bottom: 0.1rem; 
+    line-height: 1.0; 
   }
 
-  & > span:last-child { /* "Empowering Smarter Decisions with Data" */
+  /* Styles for "Empowering Smarter Decisions with Data" span */
+  & > span.hero-title-text {
     display: block;
-    font-size: 4rem; /* text-6xl */
+    font-size: 1.8rem; /* Further reduced for very small screens */
+    line-height: 1.0; 
   }
 
-  @media (min-width: 768px) { /* md: */
-    & > span:first-child {
-      font-size: 3.75rem; /* md:text-6xl */
+  /* Responsive font sizes */
+  @media (min-width: 400px) { /* Small phone landscape / larger small phones */
+    & > span.hero-subtitle-text {
+      font-size: 1.3rem; 
+      margin-bottom: 0.15rem; 
     }
-    & > span:last-child {
-      font-size: 6rem; /* md:text-8xl */
+    & > span.hero-title-text {
+      font-size: 2.2rem; 
     }
   }
-  @media (min-width: 1024px) { /* lg: */
-    & > span:first-child {
-      font-size: 4.5rem; /* lg:text-7xl */
+
+  @media (min-width: 640px) { /* sm: screens */
+    & > span.hero-subtitle-text {
+      font-size: 1.6rem; /* Adjusted for sm screens */
+      margin-bottom: 0.25rem; 
     }
-    & > span:last-child {
-      font-size: 8rem; /* lg:text-9xl */
+    & > span.hero-title-text {
+      font-size: 2.6rem; /* Adjusted for sm screens */
+    }
+  }
+
+  @media (min-width: 768px) { /* md: screens */
+    /* Target for "Empowering Smarter Decisions with Data" to fit in 2 lines STRICTLY */
+    & > span.hero-subtitle-text {
+      font-size: 2.2rem; /* Reduced from 2.5rem */
+      margin-bottom: 0.4rem; 
+      line-height: 1.1; 
+    }
+    & > span.hero-title-text {
+      font-size: 3.0rem; /* Reduced from 3.5rem to fit 2 lines on MD */
+      line-height: 1.1; 
+    }
+  }
+  @media (min-width: 1024px) { /* lg: screens */
+    /* Restore to larger sizes for desktop, assuming ample space */
+    & > span.hero-subtitle-text {
+      font-size: 3.5rem; /* Adjusted from 4.5rem to fit better on slightly smaller desktops */
+      margin-bottom: 0.75rem; 
+      line-height: 1.25; 
+    }
+    & > span.hero-title-text {
+      font-size: 6rem; /* Adjusted from 8rem to fit better on slightly smaller desktops */
+      line-height: 1.25; 
     }
   }
 `;
@@ -217,7 +255,7 @@ const blogPosts = [
     title: 'Creating Impactful Visualizations in Power BI',
     date: 'July 10, 2025',
     snippet: 'Beyond default charts: techniques for truly impactful Power BI dashboards.',
-    content: 'Power BI offers a vast array of visualization options. To create impactful dashboards, focus on: 1. Choosing the right chart type for your data. 2. Using consistent color palettes. 3. Minimizing clutter and maximizing data-ink ratio. 4. Incorporating interactive elements like slicers and drill-throughs. 5. Telling a clear story with your data. Remember, a good visualization simplifies complex information.'
+    content: 'Power BI offers a vast array of visualization options. To create impactful dashboards, focus on: 1. Choosing the right chart type for your data. 2. Using consistent color palettes. 3. Minimizing clutter and maximizing data-ink ratio. 4. Incorporating interactive elements like slicers and and drill-throughs. 5. Telling a clear story with your data. Remember, a good visualization simplifies complex information.'
   },
   {
     id: 'ai-trends-2025',
@@ -392,7 +430,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
   );
 };
 
-// Blog Page Component (Will need conversion if you go full Styled Components)
+// Blog Page Component (keeping original Tailwind classes)
 const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
   return (
     <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
@@ -451,7 +489,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       );
     };
 
-    // Blog Post Detail Component (Will need conversion if you go full Styled Components)
+    // Blog Post Detail Component (keeping original Tailwind classes)
     const BlogPostDetail = ({ post, setCurrentPage, theme }) => {
       if (!post) {
         return (
@@ -486,7 +524,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       );
     };
 
-    // Project Card Component (Will need conversion if you go full Styled Components)
+    // Project Card Component (keeping original Tailwind classes)
     const ProjectCard = ({ project, navigateToPage, theme }) => {
       return (
         <div className={`rounded-xl p-6 shadow-xl transform hover:scale-[1.02] transition-all duration-300 group cursor-pointer
@@ -547,7 +585,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       const [isScrolled, setIsScrolled] = useState(false);
       const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project-detail', 'blog', 'blog-post', 'insights'
       const [selectedProjectId, setSelectedProjectId] = useState(null);
-      const [selectedBlogPostId, setSelectedBlogPostId] = useState(null);
+      const [selectedBlogPostId, setSelectedBlogPostId] = useState(null); 
       const [currentProjectPageIndex, setCurrentProjectPageIndex] = useState(0); // For project slider
       const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // New state for mobile menu
 
@@ -594,6 +632,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
 
 
       // Smooth scroll to section (only for home page sections)
+      // Moved inside App component to have access to its state setters
       const scrollToSection = (id) => {
         setCurrentPage('home'); // Ensure we are on the home page before scrolling
         setIsMobileMenuOpen(false); // Close mobile menu on navigation
@@ -602,6 +641,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         }, 100);
       };
 
+      // Moved inside App component to have access to its state setters
       const navigateToPage = (page, id = null) => {
         setCurrentPage(page);
         setIsMobileMenuOpen(false); // Close mobile menu on navigation
@@ -693,7 +733,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       };
 
 
-      const renderPageContent = () => {
+      // renderPageContent now accepts props (navigateToPage, theme, scrollToSection, setIsMobileMenuOpen)
+      // These functions are correctly passed down from the App component.
+      const renderPageContent = (navigateToPage, theme, scrollToSection, setIsMobileMenuOpen) => {
         switch (currentPage) {
           case 'home':
             return (
@@ -702,7 +744,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 <HeroSection theme={theme}>
                   <HeroBackgroundPattern />
                   <HeroContent>
-                    {/* NEW: Using the combined heading component */}
+                    {/* MODIFIED: Use the new combined heading component */}
                     <StyledCombinedHeroHeading theme={theme}>
                         <span className="hero-subtitle-text">Hey, I’m Sid</span>
                         <span className="hero-title-text">Empowering Smarter Decisions with Data</span>
@@ -714,10 +756,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 </HeroSection>
 
                 {/* About Section (still uses Tailwind classes for now) */}
-                {/* You would convert this section next, similar to the Hero section */}
                 <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                  <div className="max-w-6xl mx-auto">
+                  <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
                     <div className={`rounded-xl shadow-2xl p-8 border
                       ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
@@ -733,7 +774,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             My expertise spans the entire data lifecycle, from meticulous cleaning and robust modeling to compelling visualization and predictive analytics. I thrive on uncovering hidden patterns and empowering businesses with the intelligence they need to innovate and grow. Let's turn your data into your next big advantage.
                           </p>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mt-8">
-                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
+                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
                                   <p className="text-sm opacity-80">Major Projects</p>
                                   <p className="text-xs opacity-60">Data Analysis Projects</p>
@@ -743,7 +784,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                                   <p className="text-sm opacity-80">Certifications</p>
                                   <p className="text-xs opacity-60">Professional Credentials</p>
                               </div>
-                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
+                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
                                   <p className="text-sm opacity-80">Improvement</p>
                                   <p className="text-xs opacity-60">User Reactivation Boost</p>
@@ -928,7 +969,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             rows="5"
                             value={contactMessage}
                             onChange={(e) => setContactMessage(e.target.value)}
-                            className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
+                            className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:focus-border-indigo-500
                               ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
                             placeholder="Your message..."
                             required
@@ -987,8 +1028,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         <>
           <GlobalStyle /> {/* Apply global styles */}
           <div className={`font-inter min-h-screen ${theme === 'dark' ? 'bg-gray-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
-            {/* Header (still uses Tailwind classes for now) */}
-            {/* You would convert this section next, similar to the Hero section */}
+            {/* Header */}
             <header className={`relative py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300
               ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
               
@@ -1035,7 +1075,8 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
               </nav>
             </header>
 
-            {renderPageContent()}
+            {/* Pass all necessary props to renderPageContent */}
+            {renderPageContent(navigateToPage, theme, scrollToSection, setIsMobileMenuOpen)} 
 
             {/* Footer (still uses Tailwind classes for now) */}
             <footer className={`py-10 px-6 ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-800'} text-gray-300 text-center`}>
