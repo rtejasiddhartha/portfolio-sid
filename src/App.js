@@ -62,7 +62,7 @@ const fadeInUp = keyframes`
 // HeroSection - Adjusted padding and ensured single background element
 const HeroSection = ({ theme, children }) => {
   return (
-    <section className={`relative h-screen flex items-center justify-center px-4 py-4 md:px-8 md:py-8 overflow-hidden 
+    <section className={`relative h-screen flex items-center justify-center px-4 py-4 md:px-8 md:py-8 lg:px-24 lg:py-12 overflow-hidden 
       ${theme === 'dark' 
         ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' 
         : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'} 
@@ -96,7 +96,7 @@ const HeroContent = ({ children }) => {
   );
 };
 
-// Combined Hero Heading Component using styled-components (AGRESSIVELY FINE-TUNED FONT SIZES FOR 2-3 LINES)
+// Combined Hero Heading Component using styled-components (GRANULAR FONT SIZES & LINE HEIGHT)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
   margin-bottom: 1.5rem; /* mb-6 */
@@ -105,74 +105,73 @@ const StyledCombinedHeroHeading = styled.h1`
   animation-delay: 0.1s; /* delay-100 */
   color: ${props => props.theme === 'dark' ? '#f3f4f6' : '#111827'}; /* text-gray-100 / text-gray-900 */
   
-  /* Adjusted overall line-height for better fit */
-  line-height: 1.0; /* Keep it tight */
+  /* Overall line-height for headings (tighter by default) */
+  line-height: 1.0; 
 
-  /* Styles for "Hey, I'm Sid" span */
+  /* Default (very small mobile - e.g., iPhone SE/mini portrait, <400px) */
   & > span.hero-subtitle-text {
     display: block;
-    font-size: 1.1rem; /* Further reduced for very small screens (smaller than text-xl) */
+    font-size: 1.2rem; 
     margin-bottom: 0.1rem; 
-    line-height: 1.0; 
+    line-height: 1.1; 
   }
 
-  /* Styles for "Empowering Smarter Decisions with Data" span */
   & > span.hero-title-text {
     display: block;
-    font-size: 1.8rem; /* Further reduced for very small screens */
-    line-height: 1.0; 
+    font-size: 2.0rem; /* Tightly fitted for 2 lines */
+    line-height: 1.1; 
   }
 
-  /* Responsive font sizes */
-  @media (min-width: 400px) { /* Small phone landscape / larger small phones */
+  /* Mobile (min-width: 400px - larger phones portrait) */
+  @media (min-width: 400px) {
     & > span.hero-subtitle-text {
-      font-size: 1.3rem; 
+      font-size: 1.4rem; 
       margin-bottom: 0.15rem; 
     }
     & > span.hero-title-text {
-      font-size: 2.2rem; 
+      font-size: 2.4rem; 
     }
   }
 
-  @media (min-width: 640px) { /* sm: screens */
+  /* Small (min-width: 640px - smaller tablets portrait, larger phones landscape) */
+  @media (min-width: 640px) {
     & > span.hero-subtitle-text {
-      font-size: 1.6rem; /* Adjusted for sm screens */
+      font-size: 1.8rem; 
       margin-bottom: 0.25rem; 
     }
     & > span.hero-title-text {
-      font-size: 2.6rem; /* Adjusted for sm screens */
+      font-size: 3.0rem; /* Should strictly fit 2 lines here */
     }
   }
 
-  @media (min-width: 768px) { /* md: screens */
-    /* Target for "Empowering Smarter Decisions with Data" to fit in 2 lines STRICTLY */
+  /* Medium (min-width: 768px - iPad portrait, larger tablets, small desktops) */
+  @media (min-width: 768px) {
     & > span.hero-subtitle-text {
-      font-size: 2.2rem; /* Reduced from 2.5rem */
-      margin-bottom: 0.4rem; 
-      line-height: 1.1; 
+      font-size: 2.5rem; /* Reduced from 3rem for iPad/smaller desktop */
+      margin-bottom: 0.5rem; 
+      line-height: 1.2; 
     }
     & > span.hero-title-text {
-      font-size: 3.0rem; /* Reduced from 3.5rem to fit 2 lines on MD */
-      line-height: 1.1; 
+      font-size: 4.0rem; /* Reduced from 4.5rem to ensure 2 lines on iPad */
+      line-height: 1.2; 
     }
   }
-  @media (min-width: 1024px) { /* lg: screens */
-    /* Restore to larger sizes for desktop, assuming ample space */
+  @media (min-width: 1024px) { /* Large (min-width: 1024px - standard desktops) */
     & > span.hero-subtitle-text {
-      font-size: 3.5rem; /* Adjusted from 4.5rem to fit better on slightly smaller desktops */
+      font-size: 3.5rem; /* Adjusted from 4.5rem for better desktop fit */
       margin-bottom: 0.75rem; 
       line-height: 1.25; 
     }
     & > span.hero-title-text {
-      font-size: 6rem; /* Adjusted from 8rem to fit better on slightly smaller desktops */
+      font-size: 6rem; /* Adjusted from 8rem for better desktop fit */
       line-height: 1.25; 
     }
   }
 `;
 
-// HeroDescription now has reduced font sizes for smaller screens
+// HeroDescription remains the same, using styled-components
 const HeroDescription = styled.p`
-  font-size: 1rem; /* Reduced from 1.25rem (text-xl) for very small screens */
+  font-size: 0.9rem; /* Further reduced for very small screens */
   margin-bottom: 2.5rem; /* mb-10 */
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
@@ -181,13 +180,13 @@ const HeroDescription = styled.p`
   color: ${props => props.theme === 'dark' ? '#d1d5db' : '#374151'}; /* text-gray-300 / text-gray-700 */
 
   @media (min-width: 640px) { /* sm: */
-    font-size: 1.125rem; /* text-lg */
+    font-size: 1rem; 
   }
   @media (min-width: 768px) { /* md: */
-    font-size: 1.25rem; /* text-xl */
+    font-size: 1.125rem; /* text-lg */
   }
   @media (min-width: 1024px) { /* lg: */
-    font-size: 1.5rem; /* md:text-2xl */
+    font-size: 1.25rem; /* text-xl */
   }
 `;
 
@@ -238,7 +237,7 @@ const projects = [
     liveDemo: '#',
     githubRepo: '#',
     caseStudy: '#',
-    fullDescription: 'A data analytics project focused on forecasting electricity demand in Telangana using Pandas, Seaborn, and Matplotlib. It includes time series processing, demand anomaly alerts, and grid efficiency insights. Ideal for showcasing predictive analytics and energy sector understanding.',
+    fullDescription: 'This project leveraged the North America Music Store dataset to perform relational SQL queries and extract artist-album-track hierarchies, genre trends, and customer behaviors. Power BI was used to visualize artist popularity, regional trends, and track performance. The structured hierarchy helped in storytelling across music insights and business metrics.',
     aiSummary: 'This project is like putting the state’s electricity grid on a smart alert system. By forecasting demand patterns and visualizing peaks, I showed how data can empower policy. It highlights my strengths in time series, forecasting, and energy analytics.'
   }
 ];
@@ -496,7 +495,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
     const BlogPostDetail = ({ post, setCurrentPage, theme }) => {
       if (!post) {
         return (
-          <div className={`min-h-screen flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'}`}>
+          <div className={`min-h-screen flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
             <p className="text-xl mb-4">Blog post not found.</p>
             <button onClick={() => setCurrentPage('blog')} className="px-6 py-3 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-700 transition-colors duration-200">Back to Blog</button>
           </div>
@@ -640,7 +639,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         setCurrentPage('home'); // Ensure we are on the home page before scrolling
         setIsMobileMenuOpen(false); // Close mobile menu on navigation
         setTimeout(() => { // Small delay to allow page state to update
-          document.getElementById(id).scrollInView({ behavior: 'smooth' });
+          document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }, 100);
       };
 
@@ -758,11 +757,11 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   </HeroContent>
                 </HeroSection>
 
-                {/* About Section (still uses Tailwind classes for now) */}
+                {/* About Section */}
                 <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
                   {/* MODIFIED: Adjusted container flex properties for centering */}
-                  <div className="container mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center">
+                  <div className="container mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center"> {/* Added flex-col items-center */}
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
                     <div className={`rounded-xl shadow-2xl p-8 border
                       ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
@@ -1040,7 +1039,8 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
                 
                 {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center space-x-6 lg:space-x-10">
+                {/* MODIFIED: Adjusted spacing for nav links */}
+                <nav className="hidden md:flex items-center space-x-4 lg:space-x-8"> {/* Adjusted space-x */}
                   <button onClick={() => scrollToSection('hero')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
                   <button onClick={() => scrollToSection('about')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
                   <button onClick={() => scrollToSection('projects')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
