@@ -96,82 +96,86 @@ const HeroContent = ({ children }) => {
   );
 };
 
-// Combined Hero Heading Component using styled-components (GRANULAR FONT SIZES & LINE HEIGHT)
+// Combined Hero Heading Component using styled-components (ADDED GRADIENT, FINE-TUNED FONT SIZES & LINE HEIGHT)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
   margin-bottom: 1.5rem; /* mb-6 */
   padding-bottom: 0.5rem; /* pb-2 */
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s; /* delay-100 */
-  color: ${props => props.theme === 'dark' ? '#f3f4f6' : '#111827'}; /* text-gray-100 / text-gray-900 */
+  
+  /* ADDED: Gradient colors for text, replacing solid color */
+  background-image: linear-gradient(to right, #a855f7, #ec4899); /* Example: purple-500 to pink-500 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Makes the text transparent so background-clip shows */
+  
+  /* Ensure dark mode colors don't override the gradient, keep text transparent */
+  ${props => props.theme === 'dark' ? `color: transparent;` : `color: transparent;`}
   
   /* Overall line-height for headings (tighter by default) */
   line-height: 1.0; 
 
-  /* Default (very small mobile - e.g., iPhone SE/mini portrait, <400px) */
+  /* Styles for "Hey, I'm Sid" span */
   & > span.hero-subtitle-text {
     display: block;
-    font-size: 1.2rem; 
-    margin-bottom: 0.1rem; 
-    line-height: 1.1; 
+    font-size: 1.6rem; /* Original text-5xl (3rem) adjusted to fit */
+    margin-bottom: 0.2rem; /* Adjusted spacing */
+    line-height: 1.1; /* Adjusted line-height */
   }
 
+  /* Styles for "Empowering Smarter Decisions with Data" span */
   & > span.hero-title-text {
     display: block;
-    font-size: 2.0rem; /* Tightly fitted for 2 lines */
-    line-height: 1.1; 
+    font-size: 2.5rem; /* Original text-6xl (4rem) adjusted to fit */
+    line-height: 1.1; /* Adjusted line-height */
   }
 
-  /* Mobile (min-width: 400px - larger phones portrait) */
-  @media (min-width: 400px) {
-    & > span.hero-subtitle-text {
-      font-size: 1.4rem; 
-      margin-bottom: 0.15rem; 
-    }
-    & > span.hero-title-text {
-      font-size: 2.4rem; 
-    }
-  }
-
-  /* Small (min-width: 640px - smaller tablets portrait, larger phones landscape) */
-  @media (min-width: 640px) {
+  /* Responsive font sizes */
+  @media (min-width: 400px) { /* Small phone landscape / larger small phones */
     & > span.hero-subtitle-text {
       font-size: 1.8rem; 
-      margin-bottom: 0.25rem; 
+      margin-bottom: 0.3rem; 
     }
     & > span.hero-title-text {
-      font-size: 3.0rem; /* Should strictly fit 2 lines here */
+      font-size: 2.8rem; 
     }
   }
 
-  /* Medium (min-width: 768px - iPad portrait, larger tablets, small desktops) */
-  @media (min-width: 768px) {
+  @media (min-width: 640px) { /* sm: screens (smaller tablets portrait, larger phones landscape) */
     & > span.hero-subtitle-text {
-      font-size: 2.5rem; /* Reduced from 3rem for iPad/smaller desktop */
-      margin-bottom: 0.5rem; 
-      line-height: 1.2; 
+      font-size: 2.2rem; 
+      margin-bottom: 0.4rem; 
     }
     & > span.hero-title-text {
-      font-size: 4.0rem; /* Reduced from 4.5rem to ensure 2 lines on iPad */
-      line-height: 1.2; 
+      font-size: 3.4rem; /* Adjusted to fit 2 lines strictly for sm */
     }
   }
-  @media (min-width: 1024px) { /* Large (min-width: 1024px - standard desktops) */
+
+  @media (min-width: 768px) { /* md: screens (iPad portrait, larger tablets, small desktops) */
     & > span.hero-subtitle-text {
-      font-size: 3.5rem; /* Adjusted from 4.5rem for better desktop fit */
+      font-size: 3.0rem; /* Adjusted to approximate original md:text-6xl */
       margin-bottom: 0.75rem; 
       line-height: 1.25; 
     }
     & > span.hero-title-text {
-      font-size: 6rem; /* Adjusted from 8rem for better desktop fit */
+      font-size: 4.5rem; /* Adjusted to approximate original md:text-8xl and fit 2 lines */
       line-height: 1.25; 
+    }
+  }
+  @media (min-width: 1024px) { /* lg: screens (standard desktops) */
+    & > span.hero-subtitle-text {
+      font-size: 4.5rem; /* lg:text-7xl */
+    }
+    & > span.hero-title-text {
+      font-size: 8rem; /* lg:text-9xl */
     }
   }
 `;
 
 // HeroDescription remains the same, using styled-components
 const HeroDescription = styled.p`
-  font-size: 0.9rem; /* Further reduced for very small screens */
+  font-size: 1rem; /* Reduced from 1.25rem (text-xl) for very small screens */
   margin-bottom: 2.5rem; /* mb-10 */
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
@@ -180,13 +184,13 @@ const HeroDescription = styled.p`
   color: ${props => props.theme === 'dark' ? '#d1d5db' : '#374151'}; /* text-gray-300 / text-gray-700 */
 
   @media (min-width: 640px) { /* sm: */
-    font-size: 1rem; 
-  }
-  @media (min-width: 768px) { /* md: */
     font-size: 1.125rem; /* text-lg */
   }
-  @media (min-width: 1024px) { /* lg: */
+  @media (min-width: 768px) { /* md: */
     font-size: 1.25rem; /* text-xl */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    font-size: 1.5rem; /* md:text-2xl */
   }
 `;
 
