@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   /* Ensure Inter font is loaded from Google Fonts in public/index.html */
-  /* <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet"> */
+  /* <link href="https://fonts.googleapis.com/css2?family=Inter:wght[300;400;600;700;800]&display=swap" rel="stylesheet"> */
 
   /* Dark mode class on html element */
   html.dark {
@@ -59,7 +59,7 @@ const fadeInUp = keyframes`
   }
 `;
 
-// Converting HeroSection from styled.section to a regular functional component using Tailwind classes
+// HeroSection remains the same, using Tailwind classes
 const HeroSection = ({ theme, children }) => {
   return (
     <section className={`relative h-screen flex items-center justify-center p-6 overflow-hidden 
@@ -84,7 +84,7 @@ const HeroBackgroundPattern = styled.div`
   animation: ${pulseSlow} 8s infinite ease-in-out;
 `;
 
-// Converting HeroContent from styled.div to a regular functional component using Tailwind classes
+// HeroContent remains the same, using Tailwind classes
 const HeroContent = ({ children }) => {
   return (
     <div className="relative z-10 text-center max-w-5xl mx-auto px-4">
@@ -93,39 +93,46 @@ const HeroContent = ({ children }) => {
   );
 };
 
-// HeroSubtitle: Now ONLY for animation and responsive font-size (no gradient CSS here)
-const HeroSubtitle = styled.h2`
-  font-size: 3rem; /* text-5xl */
-  font-weight: 800; /* font-extrabold */
-  margin-bottom: 0.75rem; /* mb-3 */
-  animation: ${fadeInUp} 1s ease-out forwards;
-
-  @media (min-width: 768px) { /* md: */
-    font-size: 3.75rem; /* md:text-6xl */
-  }
-  @media (min-width: 1024px) { /* lg: */
-    font-size: 4.5rem; /* lg:text-7xl */
-  }
-`;
-
-// HeroTitle: Now ONLY for animation and responsive font-size (no gradient CSS here)
-const HeroTitle = styled.h1`
-  font-size: 4rem; /* text-6xl */
+// NEW: Combined Hero Heading Component using styled-components
+const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
   line-height: 1.25; /* leading-tight */
   margin-bottom: 1.5rem; /* mb-6 */
   padding-bottom: 0.5rem; /* pb-2 */
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s; /* delay-100 */
+  color: ${props => props.theme === 'dark' ? '#f3f4f6' : '#111827'}; /* text-gray-100 / text-gray-900 */
+
+  & > span:first-child { /* "Hey, I'm Sid" */
+    display: block;
+    font-size: 3rem; /* text-5xl */
+    margin-bottom: 0.75rem; /* mb-3 */
+  }
+
+  & > span:last-child { /* "Empowering Smarter Decisions with Data" */
+    display: block;
+    font-size: 4rem; /* text-6xl */
+  }
 
   @media (min-width: 768px) { /* md: */
-    font-size: 6rem; /* md:text-8xl */
+    & > span:first-child {
+      font-size: 3.75rem; /* md:text-6xl */
+    }
+    & > span:last-child {
+      font-size: 6rem; /* md:text-8xl */
+    }
   }
   @media (min-width: 1024px) { /* lg: */
-    font-size: 8rem; /* lg:text-9xl */
+    & > span:first-child {
+      font-size: 4.5rem; /* lg:text-7xl */
+    }
+    & > span:last-child {
+      font-size: 8rem; /* lg:text-9xl */
+    }
   }
 `;
 
+// HeroDescription remains the same, using styled-components
 const HeroDescription = styled.p`
   font-size: 1.25rem; /* text-xl */
   margin-bottom: 2.5rem; /* mb-10 */
@@ -295,7 +302,7 @@ const certifications = [
 ];
 
 
-// Project Detail Page Component (Will need conversion if you go full Styled Components)
+// Project Detail Page Component (keeping original Tailwind classes)
 const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
   if (!project) {
     return (
@@ -695,12 +702,11 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 <HeroSection theme={theme}>
                   <HeroBackgroundPattern />
                   <HeroContent>
-                    <HeroSubtitle theme={theme}>
-                      Hey, I’m Sid
-                    </HeroSubtitle>
-                    <HeroTitle theme={theme}>
-                      Empowering Smarter Decisions with Data
-                    </HeroTitle>
+                    {/* NEW: Using the combined heading component */}
+                    <StyledCombinedHeroHeading theme={theme}>
+                        <span className="hero-subtitle-text">Hey, I’m Sid</span>
+                        <span className="hero-title-text">Empowering Smarter Decisions with Data</span>
+                    </StyledCombinedHeroHeading>
                     <HeroDescription theme={theme}>
                       I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
                     </HeroDescription>
@@ -1041,4 +1047,3 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
     };
 
     export default App;
-    
