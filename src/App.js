@@ -401,316 +401,316 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
             {linkedinPosts.map(post => (
               <div key={post.id} className={`p-4 rounded-lg shadow-md
                 ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-300'}`}>
-                <div className="flex items-center mb-3">
-                  <img src={post.profilePic} alt={post.author} className="w-10 h-10 rounded-full mr-3" />
-                  <div>
-                    <p className="font-semibold text-lg">{post.author}</p>
-                    <p className="text-sm opacity-70">{post.date}</p>
+                    <div className="flex items-center mb-3">
+                      <img src={post.profilePic} alt={post.author} className="w-10 h-10 rounded-full mr-3" />
+                      <div>
+                        <p className="font-semibold text-lg">{post.author}</p>
+                        <p className="text-sm opacity-70">{post.date}</p>
+                      </div>
+                    </div>
+                    <p className="mb-3 opacity-90">{post.content}</p>
+                    <div className="flex items-center text-sm opacity-80">
+                      <span className="flex items-center mr-4"><Layers size={16} className="mr-1" /> {post.likes} Likes</span>
+                      <span className="flex items-center"><MessageSquare size={16} className="mr-1" /> {post.comments} Comments</span>
+                    </div>
                   </div>
-                </div>
-                <p className="mb-3 opacity-90">{post.content}</p>
-                <div className="flex items-center text-sm opacity-80">
-                  <span className="flex items-center mr-4"><Layers size={16} className="mr-1" /> {post.likes} Likes</span>
-                  <span className="flex items-center"><MessageSquare size={16} className="mr-1" /> {post.comments} Comments</span>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Regular Blog Articles Section */}
+            <div className={`rounded-xl p-6 shadow-xl
+              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+              <h2 className="text-3xl font-semibold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">In-depth Articles</h2>
+              <div className="space-y-6">
+                {blogPosts.map(post => (
+                  <div key={post.id} className={`rounded-xl p-6 shadow-md transform hover:scale-[1.01] transition-all duration-300
+                    ${theme === 'dark' ? 'bg-gray-700 border border-gray-600 hover:border-purple-500' : 'bg-gray-100 border border-gray-300 hover:border-purple-500'}`}>
+                    <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{post.title}</h3>
+                    <p className="text-sm opacity-70 mb-3">{post.date}</p>
+                    <p className="mb-4 opacity-80">{post.snippet}</p>
+                    <button
+                      onClick={() => setCurrentPage('blog-post', post.id)}
+                      className="flex items-center text-purple-600 hover:underline font-semibold"
+                    >
+                      Read More <span className="ml-2">→</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Regular Blog Articles Section */}
-        <div className={`rounded-xl p-6 shadow-xl
-          ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
-          <h2 className="text-3xl font-semibold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">In-depth Articles</h2>
-          <div className="space-y-6">
-            {blogPosts.map(post => (
-              <div key={post.id} className={`rounded-xl p-6 shadow-md transform hover:scale-[1.01] transition-all duration-300
-                ${theme === 'dark' ? 'bg-gray-700 border border-gray-600 hover:border-purple-500' : 'bg-gray-100 border border-gray-300 hover:border-purple-500'}`}>
-                <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{post.title}</h3>
-                <p className="text-sm opacity-70 mb-3">{post.date}</p>
-                <p className="mb-4 opacity-80">{post.snippet}</p>
-                <button
-                  onClick={() => setCurrentPage('blog-post', post.id)}
-                  className="flex items-center text-purple-600 hover:underline font-semibold"
-                >
-                  Read More <span className="ml-2">→</span>
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Blog Post Detail Component (Will need conversion if you go full Styled Components)
-const BlogPostDetail = ({ post, setCurrentPage, theme }) => {
-  if (!post) {
-    return (
-      <div className={`min-h-screen flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'}`}>
-        <p className="text-xl mb-4">Blog post not found.</p>
-        <button onClick={() => setCurrentPage('blog')} className="px-6 py-3 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-700 transition-colors duration-200">Back to Blog</button>
-      </div>
-    );
-  }
-
-  return (
-    <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
-      <button
-        onClick={() => setCurrentPage('blog')}
-        className={`flex items-center mb-8 px-4 py-2 rounded-full font-semibold transition-all duration-300
-          ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-      >
-        <ChevronLeft size={20} className="mr-2" /> Back to Blog
-      </button>
-
-      <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl
-        ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-          {post.title}
-        </h1>
-        <p className="text-sm opacity-70 mb-6">{post.date}</p>
-        <p className="text-lg leading-relaxed opacity-90">
-          {post.content}
-        </p>
-      </div>
-    </div>
-  );
-};
-
-// Project Card Component (Will need conversion if you go full Styled Components)
-const ProjectCard = ({ project, navigateToPage, theme }) => {
-  return (
-    <div className={`rounded-xl p-6 shadow-xl transform hover:scale-[1.02] transition-all duration-300 group cursor-pointer
-      ${theme === 'dark' ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-purple-500' : 'bg-gradient-to-br from-white to-gray-100 border border-gray-200 hover:border-purple-500'}`}
-      onClick={() => navigateToPage('project-detail', project.id)} // Main card click navigates to detail page
-    >
-      <div className="relative h-48 mb-4 rounded-lg overflow-hidden shadow-md">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Project+Image+Error"; }}
-        />
-        <div className={`absolute inset-0 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300
-          ${theme === 'dark' ? 'bg-black/60' : 'bg-white/60'}`}>
-          <button className="px-4 py-2 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-700">View Details</button>
-        </div>
-      </div>
-      <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{project.title}</h3>
-      <p className="mb-4 opacity-80">
-        {project.description}
-      </p>
-      <div className="flex flex-wrap gap-2 text-sm font-medium mb-4">
-        {project.tags.map(tag => (
-          <span key={tag} className={`px-3 py-1 rounded-full ${theme === 'dark' ? 'bg-purple-900/50 text-purple-300' : 'bg-purple-100 text-purple-700'}`}>
-            {tag}
-          </span>
-        ))}
-      </div>
-      <div className="flex space-x-3">
-        <a
-          href={project.liveDemo}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()} // Prevent card click from triggering
-          className="flex items-center text-purple-600 hover:underline font-semibold text-sm"
-        >
-          <BarChart size={16} className="mr-1" /> Live Demo
-        </a>
-        <a
-          href={project.caseStudy}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()} // Prevent card click from triggering
-          className="flex items-center text-purple-600 hover:underline font-semibold text-sm"
-        >
-          <BookOpen size={16} className="mr-1" /> Case Study
-        </a>
-      </div>
-    </div>
-  );
-};
-
-
-// Main App component
-const App = () => {
-  const [theme, setTheme] = useState('light'); // Default to light mode
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project-detail', 'blog', 'blog-post', 'insights'
-  const [selectedProjectId, setSelectedProjectId] = useState(null);
-  const [selectedBlogPostId, setSelectedBlogPostId] = useState(null);
-  const [currentProjectPageIndex, setCurrentProjectPageIndex] = useState(0); // For project slider
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // New state for mobile menu
-
-  // State for contact form
-  const [contactName, setContactName] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [contactMessage, setContactMessage] = useState('');
-  const [formStatus, setFormStatus] = useState({ type: 'idle', message: '' });
-
-  // Toggle dark/light mode
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
-  };
-
-  // Add a class to the html element based on the theme
-  useEffect(() => {
-    document.documentElement.classList.remove('dark', 'light');
-    document.documentElement.classList.add(theme);
-  }, [theme]);
-
-  // Handle scroll for sticky header effect
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      );
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Clear form status message after a few seconds
-  useEffect(() => {
-    if (formStatus.type === 'success' || formStatus.type === 'error') {
-      const timer = setTimeout(() => {
-        setFormStatus({ type: 'idle', message: '' });
-      }, 5000); // Message disappears after 5 seconds
-      return () => clearTimeout(timer);
-    }
-  }, [formStatus]);
-
-
-  // Smooth scroll to section (only for home page sections)
-  const scrollToSection = (id) => {
-    setCurrentPage('home'); // Ensure we are on the home page before scrolling
-    setIsMobileMenuOpen(false); // Close mobile menu on navigation
-    setTimeout(() => { // Small delay to allow page state to update
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
-  const navigateToPage = (page, id = null) => {
-    setCurrentPage(page);
-    setIsMobileMenuOpen(false); // Close mobile menu on navigation
-    if (page === 'project-detail') {
-      setSelectedProjectId(id);
-    } else {
-      setSelectedProjectId(null);
-    }
-    if (page === 'blog-post') {
-      setSelectedBlogPostId(id);
-    } else {
-      setSelectedBlogPostId(null);
-    }
-    window.scrollTo(0, 0); // Scroll to top when navigating to a new page
-  };
-
-  // Handle contact form submission
-  const handleContactSubmit = async (e) => {
-    e.preventDefault();
-    setFormStatus({ type: 'sending', message: 'Sending message...' });
-
-    // Prepare form data for Netlify Function
-    // Netlify Functions expect URL-encoded form data or JSON
-    const formData = new URLSearchParams();
-    formData.append('name', contactName);
-    formData.append('email', contactEmail);
-    formData.append('message', contactMessage);
-
-    try {
-      // Send data to Netlify Function
-      const response = await fetch('/.netlify/functions/send-contact-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded', // Important for Netlify Functions to parse form data
-        },
-        body: formData.toString(),
-      });
-
-      if (response.ok) {
-        setFormStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
-        setContactName('');
-        setContactEmail('');
-        setContactMessage('');
-      } else {
-        // Attempt to parse error message from function response
-        const errorData = await response.json();
-        setFormStatus({ type: 'error', message: `Failed to send message: ${errorData.message || 'Unknown error'}` });
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      setFormStatus({ type: 'error', message: 'Failed to send message. Please check your network connection.' });
-    }
-  };
-
-
-  // Sample skills data (for Toolbox Zone)
-  const skills = [
-    { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
-    { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
-    { name: 'Python', icon: <Code size={48} className="text-blue-500 mb-4" />, description: 'Pandas, NumPy, Scikit-learn, Matplotlib' },
-    { name: 'SQL', icon: <Database size={48} className="text-green-500 mb-4" />, description: 'Database Querying, Data Manipulation' },
-    { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
-    { name: 'Power BI', icon: <BarChart size={48} className="text-indigo-500 mb-4" />, description: 'Dashboard Design, Data Modeling, DAX' },
-    { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
-    { name: 'Real-time Analytics', icon: <Zap size={48} className="text-red-500 mb-4" />, description: 'Streaming Data, Live Dashboards' },
-    { name: 'Cloud Platforms', icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
-    { name: 'Data Warehousing', icon: <Database size={48} className="text-purple-700 mb-4" />, description: 'ETL, Data Modeling, OLAP' },
-  ];
-
-  // Logic for project slider
-  const projectsPerPage = 2;
-  const totalProjectPages = Math.ceil(projects.length / projectsPerPage);
-
-  const displayedProjects = projects.slice(
-    currentProjectPageIndex * projectsPerPage,
-    (currentProjectPageIndex + 1) * projectsPerPage
-  );
-
-  const goToNextProjects = () => {
-    setCurrentProjectPageIndex((prevIndex) =>
-      (prevIndex + 1) % totalProjectPages
-    );
-  };
-
-  const goToPrevProjects = () => {
-    setCurrentProjectPageIndex((prevIndex) =>
-      (prevIndex - 1 + totalProjectPages) % totalProjectPages
-    );
-  };
-
-
-  const renderPageContent = () => {
-    switch (currentPage) {
-      case 'home':
+    // Blog Post Detail Component (Will need conversion if you go full Styled Components)
+    const BlogPostDetail = ({ post, setCurrentPage, theme }) => {
+      if (!post) {
         return (
-          <>
-            {/* Hero Section */}
-            <HeroSection theme={theme}>
-              <HeroBackgroundPattern />
-              <HeroContent>
-                <HeroSubtitle theme={theme}>
-                  Hey, I’m Sid
-                </HeroSubtitle>
-                <HeroTitle theme={theme}>
-                  Empowering Smarter Decisions with Data
-                </HeroTitle>
-                <HeroDescription theme={theme}>
-                  I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
-                </HeroDescription>
-              </HeroContent>
-            </HeroSection>
+          <div className={`min-h-screen flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'}`}>
+            <p className="text-xl mb-4">Blog post not found.</p>
+            <button onClick={() => setCurrentPage('blog')} className="px-6 py-3 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-700 transition-colors duration-200">Back to Blog</button>
+          </div>
+        );
+      }
 
-            {/* About Section (still uses Tailwind classes for now) */}
-            {/* You would convert this section next, similar to the Hero section */}
-            <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
-              ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
+      return (
+        <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
+          <button
+            onClick={() => setCurrentPage('blog')}
+            className={`flex items-center mb-8 px-4 py-2 rounded-full font-semibold transition-all duration-300
+              ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+          >
+            <ChevronLeft size={20} className="mr-2" /> Back to Blog
+          </button>
+
+          <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl
+            ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+              {post.title}
+            </h1>
+            <p className="text-sm opacity-70 mb-6">{post.date}</p>
+            <p className="text-lg leading-relaxed opacity-90">
+              {post.content}
+            </p>
+          </div>
+        </div>
+      );
+    };
+
+    // Project Card Component (Will need conversion if you go full Styled Components)
+    const ProjectCard = ({ project, navigateToPage, theme }) => {
+      return (
+        <div className={`rounded-xl p-6 shadow-xl transform hover:scale-[1.02] transition-all duration-300 group cursor-pointer
+          ${theme === 'dark' ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-purple-500' : 'bg-gradient-to-br from-white to-gray-100 border border-gray-200 hover:border-purple-500'}`}
+          onClick={() => navigateToPage('project-detail', project.id)} // Main card click navigates to detail page
+        >
+          <div className="relative h-48 mb-4 rounded-lg overflow-hidden shadow-md">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Project+Image+Error"; }}
+            />
+            <div className={`absolute inset-0 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300
+              ${theme === 'dark' ? 'bg-black/60' : 'bg-white/60'}`}>
+              <button className="px-4 py-2 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-700">View Details</button>
+            </div>
+          </div>
+          <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{project.title}</h3>
+          <p className="mb-4 opacity-80">
+            {project.description}
+          </p>
+          <div className="flex flex-wrap gap-2 text-sm font-medium mb-4">
+            {project.tags.map(tag => (
+              <span key={tag} className={`px-3 py-1 rounded-full ${theme === 'dark' ? 'bg-purple-900/50 text-purple-300' : 'bg-purple-100 text-purple-700'}`}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="flex space-x-3">
+            <a
+              href={project.liveDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()} // Prevent card click from triggering
+              className="flex items-center text-purple-600 hover:underline font-semibold text-sm"
+            >
+              <BarChart size={16} className="mr-1" /> Live Demo
+            </a>
+            <a
+              href={project.caseStudy}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()} // Prevent card click from triggering
+              className="flex items-center text-purple-600 hover:underline font-semibold text-sm"
+            >
+              <BookOpen size={16} className="mr-1" /> Case Study
+            </a>
+          </div>
+        </div>
+      );
+    };
+
+
+    // Main App component
+    const App = () => {
+      const [theme, setTheme] = useState('light'); // Default to light mode
+      const [isScrolled, setIsScrolled] = useState(false);
+      const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project-detail', 'blog', 'blog-post', 'insights'
+      const [selectedProjectId, setSelectedProjectId] = useState(null);
+      const [selectedBlogPostId, setSelectedBlogPostId] = useState(null);
+      const [currentProjectPageIndex, setCurrentProjectPageIndex] = useState(0); // For project slider
+      const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // New state for mobile menu
+
+      // State for contact form
+      const [contactName, setContactName] = useState('');
+      const [contactEmail, setContactEmail] = useState('');
+      const [contactMessage, setContactMessage] = useState('');
+      const [formStatus, setFormStatus] = useState({ type: 'idle', message: '' });
+
+      // Toggle dark/light mode
+      const toggleTheme = () => {
+        setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
+      };
+
+      // Add a class to the html element based on the theme
+      useEffect(() => {
+        document.documentElement.classList.remove('dark', 'light');
+        document.documentElement.classList.add(theme);
+      }, [theme]);
+
+      // Handle scroll for sticky header effect
+      useEffect(() => {
+        const handleScroll = () => {
+          if (window.scrollY > 50) {
+            setIsScrolled(true);
+          } else {
+            setIsScrolled(false);
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      // Clear form status message after a few seconds
+      useEffect(() => {
+        if (formStatus.type === 'success' || formStatus.type === 'error') {
+          const timer = setTimeout(() => {
+            setFormStatus({ type: 'idle', message: '' });
+          }, 5000); // Message disappears after 5 seconds
+          return () => clearTimeout(timer);
+        }
+      }, [formStatus]);
+
+
+      // Smooth scroll to section (only for home page sections)
+      const scrollToSection = (id) => {
+        setCurrentPage('home'); // Ensure we are on the home page before scrolling
+        setIsMobileMenuOpen(false); // Close mobile menu on navigation
+        setTimeout(() => { // Small delay to allow page state to update
+          document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      };
+
+      const navigateToPage = (page, id = null) => {
+        setCurrentPage(page);
+        setIsMobileMenuOpen(false); // Close mobile menu on navigation
+        if (page === 'project-detail') {
+          setSelectedProjectId(id);
+        } else {
+          setSelectedProjectId(null);
+        }
+        if (page === 'blog-post') {
+          setSelectedBlogPostId(id);
+        } else {
+          setSelectedBlogPostId(null);
+        }
+        window.scrollTo(0, 0); // Scroll to top when navigating to a new page
+      };
+
+      // Handle contact form submission
+      const handleContactSubmit = async (e) => {
+        e.preventDefault();
+        setFormStatus({ type: 'sending', message: 'Sending message...' });
+
+        // Prepare form data for Netlify Function
+        // Netlify Functions expect URL-encoded form data or JSON
+        const formData = new URLSearchParams();
+        formData.append('name', contactName);
+        formData.append('email', contactEmail);
+        formData.append('message', contactMessage);
+
+        try {
+          // Send data to Netlify Function
+          const response = await fetch('/.netlify/functions/send-contact-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded', // Important for Netlify Functions to parse form data
+            },
+            body: formData.toString(),
+          });
+
+          if (response.ok) {
+            setFormStatus({ type: 'success', message: 'Message sent successfully! I will get back to you soon.' });
+            setContactName('');
+            setContactEmail('');
+            setContactMessage('');
+          } else {
+            // Attempt to parse error message from function response
+            const errorData = await response.json();
+            setFormStatus({ type: 'error', message: `Failed to send message: ${errorData.message || 'Unknown error'}` });
+          }
+        } catch (error) {
+          console.error('Error sending message:', error);
+          setFormStatus({ type: 'error', message: 'Failed to send message. Please check your network connection.' });
+        }
+      };
+
+
+      // Sample skills data (for Toolbox Zone)
+      const skills = [
+        { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
+        { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
+        { name: 'Python', icon: <Code size={48} className="text-blue-500 mb-4" />, description: 'Pandas, NumPy, Scikit-learn, Matplotlib' },
+        { name: 'SQL', icon: <Database size={48} className="text-green-500 mb-4" />, description: 'Database Querying, Data Manipulation' },
+        { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
+        { name: 'Power BI', icon: <BarChart size={48} className="text-indigo-500 mb-4" />, description: 'Dashboard Design, Data Modeling, DAX' },
+        { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
+        { name: 'Real-time Analytics', icon: <Zap size={48} className="text-red-500 mb-4" />, description: 'Streaming Data, Live Dashboards' },
+        { name: 'Cloud Platforms', icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
+        { name: 'Data Warehousing', icon: <Database size={48} className="text-purple-700 mb-4" />, description: 'ETL, Data Modeling, OLAP' },
+      ];
+
+      // Logic for project slider
+      const projectsPerPage = 2;
+      const totalProjectPages = Math.ceil(projects.length / projectsPerPage);
+
+      const displayedProjects = projects.slice(
+        currentProjectPageIndex * projectsPerPage,
+        (currentProjectPageIndex + 1) * projectsPerPage
+      );
+
+      const goToNextProjects = () => {
+        setCurrentProjectPageIndex((prevIndex) =>
+          (prevIndex + 1) % totalProjectPages
+        );
+      };
+
+      const goToPrevProjects = () => {
+        setCurrentProjectPageIndex((prevIndex) =>
+          (prevIndex - 1 + totalProjectPages) % totalProjectPages
+        );
+      };
+
+
+      const renderPageContent = () => {
+        switch (currentPage) {
+          case 'home':
+            return (
+              <>
+                {/* Hero Section */}
+                <HeroSection theme={theme}>
+                  <HeroBackgroundPattern />
+                  <HeroContent>
+                    <HeroSubtitle theme={theme}>
+                      Hey, I’m Sid
+                    </HeroSubtitle>
+                    <HeroTitle theme={theme}>
+                      Empowering Smarter Decisions with Data
+                    </HeroTitle>
+                    <HeroDescription theme={theme}>
+                      I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
+                    </HeroDescription>
+                  </HeroContent>
+                </HeroSection>
+
+                {/* About Section (still uses Tailwind classes for now) */}
+                {/* You would convert this section next, similar to the Hero section */}
+                <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
+                  ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
                   <div className="max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
                     <div className={`rounded-xl shadow-2xl p-8 border
@@ -965,12 +965,12 @@ const App = () => {
           case 'project-detail':
             const project = projects.find(p => p.id === selectedProjectId);
             return <ProjectDetailPage project={project} setCurrentPage={navigateToPage} theme={theme} />;
-          case 'blog':
+          case 'blog': 
             return <BlogPage setCurrentPage={navigateToPage} theme={theme} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
           case 'blog-post':
             const post = blogPosts.find(p => p.id === selectedBlogPostId);
             return <BlogPostDetail post={post} setCurrentPage={navigateToPage} theme={theme} />;
-          case 'insights':
+          case 'insights': 
             return <InsightsPage theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
           default:
             return null;
@@ -1041,4 +1041,4 @@ const App = () => {
     };
 
     export default App;
-   
+    
