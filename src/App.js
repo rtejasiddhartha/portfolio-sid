@@ -62,7 +62,7 @@ const fadeInUp = keyframes`
 // HeroSection - Adjusted padding and ensured single background element
 const HeroSection = ({ theme, children }) => {
   return (
-    <section className={`relative h-screen flex items-center justify-center px-2 py-4 md:px-4 md:py-8 lg:px-6 lg:py-12 overflow-hidden 
+    <section className={`relative h-screen flex items-center justify-center px-4 py-4 md:px-8 md:py-8 overflow-hidden 
       ${theme === 'dark' 
         ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' 
         : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'} 
@@ -170,9 +170,9 @@ const StyledCombinedHeroHeading = styled.h1`
   }
 `;
 
-// HeroDescription remains the same, using styled-components
+// HeroDescription now has reduced font sizes for smaller screens
 const HeroDescription = styled.p`
-  font-size: 1.25rem; /* text-xl */
+  font-size: 1rem; /* Reduced from 1.25rem (text-xl) for very small screens */
   margin-bottom: 2.5rem; /* mb-10 */
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
@@ -180,11 +180,14 @@ const HeroDescription = styled.p`
 
   color: ${props => props.theme === 'dark' ? '#d1d5db' : '#374151'}; /* text-gray-300 / text-gray-700 */
 
+  @media (min-width: 640px) { /* sm: */
+    font-size: 1.125rem; /* text-lg */
+  }
   @media (min-width: 768px) { /* md: */
-    font-size: 1.5rem; /* md:text-2xl */
+    font-size: 1.25rem; /* text-xl */
   }
   @media (min-width: 1024px) { /* lg: */
-    font-size: 1.875rem; /* lg:text-3xl */
+    font-size: 1.5rem; /* md:text-2xl */
   }
 `;
 
@@ -637,7 +640,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         setCurrentPage('home'); // Ensure we are on the home page before scrolling
         setIsMobileMenuOpen(false); // Close mobile menu on navigation
         setTimeout(() => { // Small delay to allow page state to update
-          document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+          document.getElementById(id).scrollInView({ behavior: 'smooth' });
         }, 100);
       };
 
@@ -758,7 +761,8 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 {/* About Section (still uses Tailwind classes for now) */}
                 <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                  <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
+                  {/* MODIFIED: Adjusted container flex properties for centering */}
+                  <div className="container mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
                     <div className={`rounded-xl shadow-2xl p-8 border
                       ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
