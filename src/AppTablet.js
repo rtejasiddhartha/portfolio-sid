@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes, createGlobalStyle } from 'styled-components'; // Keep styled and keyframes
+import styled, { keyframes, createGlobalStyle } from 'styled-components';
 import { Sun, Moon, Download, Mail, Linkedin, Github, BarChart, Code, Database, FileText, Bot, TrendingUp, ChevronLeft, BookOpen, Layers, Zap, Briefcase, Award, GraduationCap, ExternalLink, ChevronRight, MessageSquare, Calendar, Menu, X } from 'lucide-react';
 
-// Import the new InsightsPage component
-import InsightsPage from './InsightsPage';
+// Import the InsightsPage component (will be duplicated and adjusted for tablet)
+import InsightsPageTablet from './InsightsPageTablet';
 
-// Define global styles and animations
+// Define global styles for tablet
 const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
@@ -26,17 +26,13 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
   }
   
-  /* Ensure Inter font is loaded from Google Fonts in public/index.html */
-  /* <link href="https://fonts.googleapis.com/css2?family=Inter:wght[300;400;600;700;800]&display=swap" rel="stylesheet"> */
-
   /* Dark mode class on html element */
   html.dark {
     /* Define dark mode variables or direct styles if not using Tailwind's dark: prefix */
-    /* For Styled Components, you'd typically pass theme props */
   }
 `;
 
-// Define Keyframes
+// Define Keyframes (duplicated for tablet)
 const pulseSlow = keyframes`
   0%, 100% {
     transform: scale(1);
@@ -59,22 +55,21 @@ const fadeInUp = keyframes`
   }
 `;
 
-// HeroSection - Adjusted padding and ensured single background element
+// HeroSection - Adjusted padding and ensured single background element for tablet
 const HeroSection = ({ theme, children }) => {
   return (
-    <section className={`relative h-screen flex items-center justify-center px-4 py-4 md:px-8 md:py-8 lg:px-24 lg:py-12 overflow-hidden 
+    <section className={`relative h-screen flex items-center justify-center px-8 py-10 overflow-hidden 
       ${theme === 'dark' 
         ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' 
         : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'} 
       transition-colors duration-300`}>
-      {/* CORRECTED: Only render HeroBackgroundPattern component here */}
       <HeroBackgroundPattern /> 
       {children}
     </section>
   );
 };
 
-// HeroBackgroundPattern styled component definition (UNCHANGED, still provides radial gradient and animation)
+// HeroBackgroundPattern styled component definition (duplicated for tablet)
 const HeroBackgroundPattern = styled.div`
   position: absolute;
   inset: 0;
@@ -82,102 +77,65 @@ const HeroBackgroundPattern = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.1), transparent, transparent); /* from-purple-500/10 */
+  background-image: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.1), transparent, transparent);
   animation: ${pulseSlow} 8s infinite ease-in-out;
   transition: opacity 0.5s ease-in-out; 
 `;
 
-// HeroContent remains the same, using Tailwind classes
+// HeroContent remains the same, using Tailwind classes (duplicated for tablet)
 const HeroContent = ({ children }) => {
   return (
-    <div className="relative z-10 text-center max-w-5xl mx-auto px-4">
+    <div className="relative z-10 text-center max-w-2xl mx-auto px-4">
       {children}
     </div>
   );
 };
 
-// Combined Hero Heading Component using styled-components (GRANULAR FONT SIZES FOR EACH DEVICE)
+// Combined Hero Heading Component using styled-components (GRANULAR FONT SIZES FOR TABLET)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
-  margin-bottom: 1.5rem; /* mb-6 */
-  padding-bottom: 0.5rem; /* pb-2 */
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
   animation: ${fadeInUp} 1s ease-out forwards;
-  animation-delay: 0.1s; /* delay-100 */
+  animation-delay: 0.1s;
   
-  /* ADDED: Gradient colors for text, replacing solid color */
-  background-image: linear-gradient(to right, #a855f7, #ec4899); /* Example: purple-500 to pink-500 */
+  background-image: linear-gradient(to right, #a855f7, #ec4899);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent; /* Makes the text transparent so background-clip shows */
+  color: transparent;
   
-  /* Ensure dark mode colors don't override the gradient, keep text transparent */
-  ${props => props.theme === 'dark' ? `color: transparent;` : `color: transparent;`}
-  
-  /* Overall line-height for headings (tighter by default) */
   line-height: 1.0; 
 
-  /* --- MOBILE SPECIFIC STYLES (<640px) --- */
+  /* --- TABLET SPECIFIC STYLES --- */
   & > span.hero-subtitle-text {
     display: block;
-    font-size: 1.5rem; /* Adjusted for mobile */
-    margin-bottom: 0.1rem; /* Adjusted spacing */
+    font-size: 2.5rem; /* Larger for tablets */
+    margin-bottom: 0.25rem; 
     line-height: 1.1; 
   }
 
   & > span.hero-title-text {
     display: block;
-    font-size: 2.2rem; /* Adjusted for mobile to fit 2 lines strictly */
+    font-size: 4.0rem; /* Larger for tablets, strictly 2 lines */
     line-height: 1.1; 
   }
-
-  /* --- TABLET SPECIFIC STYLES (640px to 1023px) --- */
-  @media (min-width: 640px) and (max-width: 1023px) { /* sm: and md: screens */
-    & > span.hero-subtitle-text {
-      font-size: 2.5rem; /* Larger for tablets */
-      margin-bottom: 0.25rem; 
-    }
-    & > span.hero-title-text {
-      font-size: 4.0rem; /* Larger for tablets, strictly 2 lines */
-      line-height: 1.1; 
-    }
-  }
-
-  /* --- DESKTOP SPECIFIC STYLES (>= 1024px) --- */
-  @media (min-width: 1024px) { /* lg: screens */
-    & > span.hero-subtitle-text {
-      font-size: 4.5rem; /* Original lg:text-7xl */
-      margin-bottom: 0.75rem; 
-      line-height: 1.25; 
-    }
-    & > span.hero-title-text {
-      font-size: 8rem; /* Original lg:text-9xl */
-      line-height: 1.25; 
-    }
-  }
 `;
 
-// HeroDescription remains the same, using styled-components
+// HeroDescription remains the same, using styled-components (duplicated and adjusted for tablet)
 const HeroDescription = styled.p`
-  font-size: 0.9rem; /* Reduced for very small screens */
-  margin-bottom: 2.5rem; /* mb-10 */
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
-  animation-delay: 0.2s; /* delay-200 */
+  animation-delay: 0.2s;
 
-  color: ${props => props.theme === 'dark' ? '#d1d5db' : '#374151'}; /* text-gray-300 / text-gray-700 */
+  color: ${props => props.theme === 'dark' ? '#d1d5db' : '#374151'};
 
-  @media (min-width: 640px) { /* sm: */
-    font-size: 1rem; 
-  }
-  @media (min-width: 768px) { /* md: */
-    font-size: 1.125rem; /* text-lg */
-  }
-  @media (min-width: 1024px) { /* lg: */
-    font-size: 1.25rem; /* text-xl */
-  }
+  /* Tablet specific adjustments */
+  font-size: 1.125rem; /* text-lg */
 `;
 
-// Define project data (UNCHANGED - PRESERVED USER'S DATA)
+// Define project data (DUPLICATED FOR TABLET)
 const projects = [
   {
     id: 'na-music-store',
@@ -230,7 +188,7 @@ const projects = [
 ];
 
 
-// Define blog post data (UNCHANGED - PRESERVED USER'S DATA)
+// Define blog post data (DUPLICATED FOR TABLET)
 const blogPosts = [
   {
     id: 'sql-tips-1',
@@ -255,7 +213,7 @@ const blogPosts = [
   }
 ];
 
-// Define LinkedIn-style posts data (UNCHANGED - PRESERVED USER'S DATA)
+// Define LinkedIn-style posts data (DUPLICATED FOR TABLET)
 const linkedinPosts = [
   {
     id: 'post-1',
@@ -287,7 +245,7 @@ const linkedinPosts = [
 ];
 
 
-// Define education data (UNCHANGED - PRESERVED USER'S DATA)
+// Define education data (DUPLICATED FOR TABLET)
 const education = [
   {
     degree: 'PG Diploma - Web Design and Development',
@@ -299,7 +257,7 @@ const education = [
   },
 ];
 
-// Define certifications data (UNCHANGED - PRESERVED USER'S DATA)
+// Define certifications data (DUPLICATED FOR TABLET)
 const certifications = [
   {
     name: 'Data Analysis with Python',
@@ -329,7 +287,7 @@ const certifications = [
 ];
 
 
-// Project Detail Page Component (keeping original Tailwind classes)
+// Project Detail Page Component (DUPLICATED AND ADJUSTED FOR TABLET)
 const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
   if (!project) {
     return (
@@ -341,7 +299,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
   }
 
   return (
-    <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
+    <div className={`min-h-screen font-inter pt-20 pb-10 px-8 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
       <button
         onClick={() => setCurrentPage('projects')}
         className={`flex items-center mb-8 px-4 py-2 rounded-full font-semibold transition-all duration-300 ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
@@ -349,19 +307,19 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         <ChevronLeft size={20} className="mr-2" /> Back to Projects
       </button>
 
-      <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+      <div className={`max-w-3xl mx-auto rounded-xl p-8 shadow-2xl ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+        <h1 className="text-4xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
           {project.title}
         </h1>
 
         <img
-          src={project.image}
+          src="/sid-photo.jpg" // Using a placeholder for the profile image
           alt={project.title}
-          className="w-full h-80 object-cover rounded-lg mb-8 shadow-lg"
+          className="w-full h-64 object-cover rounded-lg mb-8 shadow-lg"
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
         />
 
-        <p className="text-lg leading-relaxed mb-6 opacity-90">
+        <p className="text-base leading-relaxed mb-6 opacity-90">
           {project.fullDescription}
         </p>
 
@@ -419,14 +377,14 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
   );
 };
 
-// Blog Page Component (keeping original Tailwind classes)
+// Blog Page Component (DUPLICATED AND ADJUSTED FOR TABLET)
 const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
   return (
-    <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
-      <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+    <div className={`min-h-screen font-inter pt-20 pb-10 px-8 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
+      <h1 className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
         Daily Byte Blog & Posts
       </h1>
-      <div className="max-w-4xl mx-auto grid gap-8">
+      <div className="max-w-3xl mx-auto grid gap-8">
         {/* LinkedIn-style Posts Section */}
         <div className={`rounded-xl p-6 shadow-xl
           ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
@@ -442,7 +400,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                         <p className="text-sm opacity-70">{post.date}</p>
                       </div>
                     </div>
-                    <p className="mb-3 opacity-90">{post.content}</p>
+                    <p className="mb-3 opacity-90 text-base">{post.content}</p>
                     <div className="flex items-center text-sm opacity-80">
                       <span className="flex items-center mr-4"><Layers size={16} className="mr-1" /> {post.likes} Likes</span>
                       <span className="flex items-center"><MessageSquare size={16} className="mr-1" /> {post.comments} Comments</span>
@@ -462,7 +420,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                     ${theme === 'dark' ? 'bg-gray-700 border border-gray-600 hover:border-purple-500' : 'bg-gray-100 border border-gray-300 hover:border-purple-500'}`}>
                     <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{post.title}</h3>
                     <p className="text-sm opacity-70 mb-3">{post.date}</p>
-                    <p className="mb-4 opacity-80">{post.snippet}</p>
+                    <p className="mb-4 opacity-80 text-base">{post.snippet}</p>
                     <button
                       onClick={() => setCurrentPage('blog-post', post.id)}
                       className="flex items-center text-purple-600 hover:underline font-semibold"
@@ -478,7 +436,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       );
     };
 
-    // Blog Post Detail Component (keeping original Tailwind classes)
+    // Blog Post Detail Component (DUPLICATED AND ADJUSTED FOR TABLET)
     const BlogPostDetail = ({ post, setCurrentPage, theme }) => {
       if (!post) {
         return (
@@ -490,7 +448,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       }
 
       return (
-        <div className={`min-h-screen font-inter pt-20 pb-10 px-6 md:px-12 lg:px-24 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
+        <div className={`min-h-screen font-inter pt-20 pb-10 px-8 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
           <button
             onClick={() => setCurrentPage('blog')}
             className={`flex items-center mb-8 px-4 py-2 rounded-full font-semibold transition-all duration-300
@@ -499,13 +457,13 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
             <ChevronLeft size={20} className="mr-2" /> Back to Blog
           </button>
 
-          <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl
+          <div className={`max-w-3xl mx-auto rounded-xl p-8 shadow-2xl
             ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+            <h1 className="text-4xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
               {post.title}
             </h1>
             <p className="text-sm opacity-70 mb-6">{post.date}</p>
-            <p className="text-lg leading-relaxed opacity-90">
+            <p className="text-base leading-relaxed opacity-90">
               {post.content}
             </p>
           </div>
@@ -513,27 +471,27 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       );
     };
 
-    // Project Card Component (keeping original Tailwind classes)
+    // Project Card Component (DUPLICATED AND ADJUSTED FOR TABLET)
     const ProjectCard = ({ project, navigateToPage, theme }) => {
       return (
         <div className={`rounded-xl p-6 shadow-xl transform hover:scale-[1.02] transition-all duration-300 group cursor-pointer
           ${theme === 'dark' ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-purple-500' : 'bg-gradient-to-br from-white to-gray-100 border border-gray-200 hover:border-purple-500'}`}
-          onClick={() => navigateToPage('project-detail', project.id)} // Main card click navigates to detail page
+          onClick={() => navigateToPage('project-detail', project.id)}
         >
           <div className="relative h-48 mb-4 rounded-lg overflow-hidden shadow-md">
             <img
-              src={project.image}
+              src="/sid-photo.jpg" // Using a placeholder for the profile image
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
             />
             <div className={`absolute inset-0 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300
               ${theme === 'dark' ? 'bg-black/60' : 'bg-white/60'}`}>
-              <button className="px-4 py-2 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-700">View Details</button>
+              <button className="px-4 py-2 rounded-full bg-purple-600 text-white font-semibold">View Details</button>
             </div>
           </div>
-          <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{project.title}</h3>
-          <p className="mb-4 opacity-80">
+          <h3 className="text-xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{project.title}</h3>
+          <p className="mb-4 opacity-80 text-base">
             {project.description}
           </p>
           <div className="flex flex-wrap gap-2 text-sm font-medium mb-4">
@@ -548,7 +506,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
               href={project.liveDemo}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()} // Prevent card click from triggering
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center text-purple-600 hover:underline font-semibold text-sm"
             >
               <BarChart size={16} className="mr-1" /> Live Demo
@@ -557,7 +515,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
               href={project.caseStudy}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()} // Prevent card click from triggering
+              onClick={(e) => e.stopPropagation()}
               className="flex items-center text-purple-600 hover:underline font-semibold text-sm"
             >
               <BookOpen size={16} className="mr-1" /> Case Study
@@ -568,15 +526,15 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
     };
 
 
-    // Main App component
-    const App = () => {
-      const [theme, setTheme] = useState('light'); // Default to light mode
+    // Main App component for Tablet
+    const AppTablet = () => {
+      const [theme, setTheme] = useState('light');
       const [isScrolled, setIsScrolled] = useState(false);
-      const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project-detail', 'blog', 'blog-post', 'insights'
+      const [currentPage, setCurrentPage] = useState('home');
       const [selectedProjectId, setSelectedProjectId] = useState(null);
       const [selectedBlogPostId, setSelectedBlogPostId] = useState(null); 
-      const [currentProjectPageIndex, setCurrentProjectPageIndex] = useState(0); // For project slider
-      const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // New state for mobile menu
+      const [currentProjectPageIndex, setCurrentProjectPageIndex] = useState(0);
+      const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile menu is not used on tablet
 
       // State for contact form
       const [contactName, setContactName] = useState('');
@@ -614,26 +572,25 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         if (formStatus.type === 'success' || formStatus.type === 'error') {
           const timer = setTimeout(() => {
             setFormStatus({ type: 'idle', message: '' });
-          }, 5000); // Message disappears after 5 seconds
+          }, 5000);
           return () => clearTimeout(timer);
         }
       }, [formStatus]);
 
 
       // Smooth scroll to section (only for home page sections)
-      // Moved inside App component to have access to its state setters
       const scrollToSection = (id) => {
-        setCurrentPage('home'); // Ensure we are on the home page before scrolling
-        setIsMobileMenuOpen(false); // Close mobile menu on navigation
-        setTimeout(() => { // Small delay to allow page state to update
+        setCurrentPage('home');
+        // No mobile menu to close on tablet
+        setTimeout(() => {
           document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }, 100);
       };
 
-      // Moved inside App component to have access to its state setters
+      // Navigate to page
       const navigateToPage = (page, id = null) => {
         setCurrentPage(page);
-        setIsMobileMenuOpen(false); // Close mobile menu on navigation
+        // No mobile menu to close on tablet
         if (page === 'project-detail') {
           setSelectedProjectId(id);
         } else {
@@ -644,7 +601,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         } else {
           setSelectedBlogPostId(null);
         }
-        window.scrollTo(0, 0); // Scroll to top when navigating to a new page
+        window.scrollTo(0, 0);
       };
 
       // Handle contact form submission
@@ -652,19 +609,16 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         e.preventDefault();
         setFormStatus({ type: 'sending', message: 'Sending message...' });
 
-        // Prepare form data for Netlify Function
-        // Netlify Functions expect URL-encoded form data or JSON
         const formData = new URLSearchParams();
         formData.append('name', contactName);
         formData.append('email', contactEmail);
         formData.append('message', contactMessage);
 
         try {
-          // Send data to Netlify Function
           const response = await fetch('/.netlify/functions/send-contact-email', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded', // Important for Netlify Functions to parse form data
+              'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: formData.toString(),
           });
@@ -675,7 +629,6 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
             setContactEmail('');
             setContactMessage('');
           } else {
-            // Attempt to parse error message from function response
             const errorData = await response.json();
             setFormStatus({ type: 'error', message: `Failed to send message: ${errorData.message || 'Unknown error'}` });
           }
@@ -686,7 +639,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       };
 
 
-      // Sample skills data (for Toolbox Zone)
+      // Sample skills data (for Toolbox Zone) (DUPLICATED FOR TABLET)
       const skills = [
         { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
         { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
@@ -700,8 +653,8 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         { name: 'Data Warehousing', icon: <Database size={48} className="text-purple-700 mb-4" />, description: 'ETL, Data Modeling, OLAP' },
       ];
 
-      // Logic for project slider
-      const projectsPerPage = 2;
+      // Logic for project slider (DUPLICATED FOR TABLET)
+      const projectsPerPage = 2; // Show 2 projects per page on tablet
       const totalProjectPages = Math.ceil(projects.length / projectsPerPage);
 
       const displayedProjects = projects.slice(
@@ -723,7 +676,6 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
 
 
       // renderPageContent now accepts props (navigateToPage, theme, scrollToSection, setIsMobileMenuOpen)
-      // These functions are correctly passed down from the App component.
       const renderPageContent = (navigateToPage, theme, scrollToSection, setIsMobileMenuOpen) => {
         switch (currentPage) {
           case 'home':
@@ -733,7 +685,6 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 <HeroSection theme={theme}>
                   <HeroBackgroundPattern />
                   <HeroContent>
-                    {/* MODIFIED: Use the new combined heading component */}
                     <StyledCombinedHeroHeading theme={theme}>
                         <span className="hero-subtitle-text">Hey, I’m Sid</span>
                         <span className="hero-title-text">Empowering Smarter Decisions with Data</span>
@@ -745,47 +696,18 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 </HeroSection>
 
                 {/* About Section */}
-                <section id="about" className={`py-20 px-6 md:px-12 lg:px-24
+                <section id="about" className={`py-20 px-8
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                  {/* MODIFIED: Adjusted container flex properties for centering */}
-                  <div className="container mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center"> {/* Added flex-col items-center */}
+                  <div className="container mx-auto px-4 flex flex-col items-center">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
                     <div className={`rounded-xl shadow-2xl p-8 border
                       ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-                      <div className="grid md:grid-cols-2 gap-12 items-center">
-                        {/* Left Column: Content */}
-                        <div className="order-2 md:order-1">
-                          <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3>
-                          <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p>
-                          <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
-                            I'm a data analyst who doesn't just crunch numbers; I tell stories. My passion lies in transforming raw, complex datasets into clear, actionable insights that drive real-world impact. With a blend of analytical rigor and creative problem-solving, I bridge the gap between data and strategy.
-                          </p>
-                          <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
-                            My expertise spans the entire data lifecycle, from meticulous cleaning and robust modeling to compelling visualization and predictive analytics. I thrive on uncovering hidden patterns and empowering businesses with the intelligence they need to innovate and grow. Let's turn your data into your next big advantage.
-                          </p>
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mt-8">
-                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
-                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
-                                  <p className="text-sm opacity-80">Major Projects</p>
-                                  <p className="text-xs opacity-60">Data Analysis Projects</p>
-                              </div>
-                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">5+</h3>
-                                  <p className="text-sm opacity-80">Certifications</p>
-                                  <p className="text-xs opacity-60">Professional Credentials</p>
-                              </div>
-                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
-                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
-                                  <p className="text-sm opacity-80">Improvement</p>
-                                  <p className="text-xs opacity-60">User Reactivation Boost</p>
-                              </div>
-                          </div>
-                        </div>
-                        {/* Right Column: Photo and Social Media */}
-                        <div className="order-1 md:order-2 flex flex-col items-center justify-center space-y-8">
-                          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-purple-500">
+                      <div className="grid grid-cols-1 gap-12 items-center">
+                        {/* Top Column: Photo and Social Media */}
+                        <div className="flex flex-col items-center justify-center space-y-8 order-1">
+                          <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl border-4 border-purple-500">
                             <img
-                              src="/sid-photo.jpg" // Using a placeholder for the profile image
+                              src="/sid-photo.jpg"
                               alt="Teja Siddhartha Rajam"
                               className="w-full h-full object-cover object-left"
                               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/320x320/CCCCCC/000000?text=Profile+Photo"; }}
@@ -810,17 +732,45 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             <Award size={20} className="mr-2" /> View Certifications
                           </a>
                         </div>
+                        {/* Bottom Column: Content */}
+                        <div className="order-2">
+                          <h3 className="text-4xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3>
+                          <p className={`text-lg mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p>
+                          <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
+                            I'm a data analyst who doesn't just crunch numbers; I tell stories. My passion lies in transforming raw, complex datasets into clear, actionable insights that drive real-world impact. With a blend of analytical rigor and creative problem-solving, I bridge the gap between data and strategy.
+                          </p>
+                          <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
+                            My expertise spans the entire data lifecycle, from meticulous cleaning and robust modeling to compelling visualization and predictive analytics. I thrive on uncovering hidden patterns and empowering businesses with the intelligence they need to innovate and grow. Let's turn your data into your next big advantage.
+                          </p>
+                          <div className="grid grid-cols-3 gap-4 text-center mt-8">
+                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
+                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
+                                  <p className="text-sm opacity-80">Major Projects</p>
+                                  <p className="text-xs opacity-60">Data Analysis Projects</p>
+                              </div>
+                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
+                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">5+</h3>
+                                  <p className="text-sm opacity-80">Certifications</p>
+                                  <p className="text-xs opacity-60">Professional Credentials</p>
+                              </div>
+                              <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
+                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
+                                  <p className="text-sm opacity-80">Improvement</p>
+                                  <p className="text-xs opacity-60">User Reactivation Boost</p>
+                              </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </section>
 
-                {/* Education & Certifications Section (still uses Tailwind classes for now) */}
-                <section id="education-certifications" className={`py-20 px-6 md:px-12 lg:px-24
+                {/* Education & Certifications Section */}
+                <section id="education-certifications" className={`py-20 px-8
                   ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-                  <div className="max-w-6xl mx-auto">
+                  <div className="max-w-4xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Education & Certifications</h2>
-                    <div className="grid md:grid-cols-2 gap-12">
+                    <div className="grid grid-cols-1 gap-12">
                       {/* Education Column */}
                       <div>
                         <h3 className="text-3xl font-semibold mb-8 flex items-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-500">
@@ -859,12 +809,12 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   </div>
                 </section>
 
-                {/* Projects Section (still uses Tailwind classes for now) */}
-                <section id="projects" className={`py-20 px-6 md:px-12 lg:px-24
+                {/* Projects Section */}
+                <section id="projects" className={`py-20 px-8
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                  <div className="max-w-6xl mx-auto">
+                  <div className="max-w-4xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Projects</h2>
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-2 gap-8">
                       {displayedProjects.map(project => (
                         <ProjectCard key={project.id} project={project} navigateToPage={navigateToPage} theme={theme} />
                       ))}
@@ -895,12 +845,12 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   </div>
                 </section>
 
-                {/* Skills Section (Toolbox Zone - still uses Tailwind classes for now) */}
-                <section id="skills" className={`py-20 px-6 md:px-12 lg:px-24
+                {/* Skills Section (Toolbox Zone) */}
+                <section id="skills" className={`py-20 px-8
                   ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-                  <div className="max-w-5xl mx-auto">
+                  <div className="max-w-4xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Toolbox</h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-3 gap-8">
                       {skills.map((skill, index) => (
                         <div key={index} className={`flex flex-col items-center p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 group
                           ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
@@ -913,10 +863,10 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   </div>
                 </section>
 
-                {/* Contact Form & Social Links (still uses Tailwind classes for now) */}
-                <section id="contact" className={`py-20 px-6 md:px-12 lg:px-24
+                {/* Contact Form & Social Links */}
+                <section id="contact" className={`py-20 px-8
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                  <div className="max-w-xl mx-auto">
+                  <div className="max-w-2xl mx-auto">
                     <h2 className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-700">
                       Get in Touch
                     </h2>
@@ -1008,7 +958,8 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
             const post = blogPosts.find(p => p.id === selectedBlogPostId);
             return <BlogPostDetail post={post} setCurrentPage={navigateToPage} theme={theme} />;
           case 'insights': 
-            return <InsightsPage theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
+            // InsightsPageTablet will be created next, specifically for tablet
+            return <InsightsPageTablet theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
           default:
             return null;
         }
@@ -1016,27 +967,26 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
 
       return (
         <>
-          <GlobalStyle /> {/* Apply global styles */}
+          <GlobalStyle />
           <div className={`font-inter min-h-screen ${theme === 'dark' ? 'bg-gray-950 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
             {/* Header */}
-            <header className={`relative py-4 px-6 md:px-12 lg:px-24 flex items-center justify-between transition-colors duration-300
+            <header className={`relative py-4 px-8 flex items-center justify-between transition-colors duration-300
               ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
               
-              <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
-                <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
+              <div className="container mx-auto px-4 flex justify-between items-center">
+                <button onClick={() => navigateToPage('home')} className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
                 
-                {/* Desktop Navigation */}
-                {/* MODIFIED: Adjusted spacing for nav links */}
-                <nav className="hidden md:flex items-center space-x-4 lg:space-x-8"> {/* Adjusted space-x */}
-                  <button onClick={() => scrollToSection('hero')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
-                  <button onClick={() => scrollToSection('about')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
-                  <button onClick={() => scrollToSection('projects')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
-                  <button onClick={() => scrollToSection('skills')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-                  <button onClick={() => navigateToPage('insights')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
-                  <button onClick={() => scrollToSection('contact')} className="text-base lg:text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
+                {/* Tablet Navigation */}
+                <nav className="flex items-center space-x-6">
+                  <button onClick={() => scrollToSection('hero')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
+                  <button onClick={() => scrollToSection('about')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
+                  <button onClick={() => scrollToSection('projects')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
+                  <button onClick={() => scrollToSection('skills')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+                  <button onClick={() => navigateToPage('insights')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
+                  <button onClick={() => scrollToSection('contact')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
                 </nav>
 
-                <div className="flex items-center space-x-4 md:space-x-6">
+                <div className="flex items-center space-x-4">
                   <button
                     onClick={toggleTheme}
                     className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
@@ -1044,33 +994,16 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   >
                     {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
                   </button>
-                  {/* Mobile menu button */}
-                  <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 md:hidden"
-                    aria-label="Toggle mobile menu"
-                  >
-                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                  </button>
+                  {/* Mobile menu button is hidden on tablet */}
                 </div>
               </div>
-              {/* Mobile Navigation Overlay */}
-              <nav className={`absolute top-full left-0 w-full bg-gray-950/95 backdrop-blur-md z-40 flex flex-col items-center py-8 space-y-6 transition-all duration-300 ease-in-out origin-top
-                ${isMobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'} md:hidden`}>
-                <button onClick={() => scrollToSection('hero')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Home</button>
-                <button onClick={() => scrollToSection('about')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">About</button>
-                <button onClick={() => scrollToSection('projects')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Projects</button>
-                <button onClick={() => scrollToSection('skills')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-                <button onClick={() => navigateToPage('insights')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Insights</button>
-                <button onClick={() => scrollToSection('contact')} className="text-xl font-semibold text-white hover:text-indigo-400 transition-colors duration-200">Contact</button>
-              </nav>
             </header>
 
             {/* Pass all necessary props to renderPageContent */}
             {renderPageContent(navigateToPage, theme, scrollToSection, setIsMobileMenuOpen)} 
 
-            {/* Footer (still uses Tailwind classes for now) */}
-            <footer className={`py-10 px-6 ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-800'} text-gray-300 text-center`}>
+            {/* Footer */}
+            <footer className={`py-8 px-6 ${theme === 'dark' ? 'bg-gray-950' : 'bg-gray-800'} text-gray-300 text-center text-sm`}>
               <p>&copy; 2025 Teja Siddhartha Rajam. All rights reserved.</p>
             </footer>
           </div>
@@ -1078,4 +1011,4 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
       );
     };
 
-    export default App;
+    export default AppTablet;
