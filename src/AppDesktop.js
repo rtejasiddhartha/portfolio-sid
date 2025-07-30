@@ -94,8 +94,8 @@ const HeroContent = ({ children }) => {
 // Combined Hero Heading Component using styled-components (GRANULAR FONT SIZES FOR DESKTOP)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
-  margin-bottom: 1.5rem; /* mb-6 */
-  padding-bottom: 0.5rem; /* pb-2 */
+  margin-bottom: 1rem; /* Adjusted from 1.5rem for better spacing */
+  padding-bottom: 0.25rem; /* Adjusted from 0.5rem for better spacing */
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s;
   
@@ -109,22 +109,23 @@ const StyledCombinedHeroHeading = styled.h1`
   /* --- DESKTOP SPECIFIC STYLES --- */
   & > span.hero-subtitle-text {
     display: block;
-    font-size: 4.5rem; /* Original lg:text-7xl */
-    margin-bottom: 0.75rem; 
-    line-height: 1.25; 
+    font-size: 3.5rem; /* Adjusted from 4.5rem to fit better */
+    margin-bottom: 0.5rem; /* Adjusted spacing */
+    line-height: 1.1; /* Tighter line height for multi-line text */
   }
 
   & > span.hero-title-text {
     display: block;
-    font-size: 8rem; /* Original lg:text-9xl */
-    line-height: 1.25; 
+    font-size: 6.5rem; /* Adjusted from 8rem to fit better */
+    line-height: 1.1; /* Tighter line height for multi-line text */
   }
 `;
 
 // HeroDescription remains the same, using styled-components (duplicated and adjusted for desktop)
 const HeroDescription = styled.p`
-  font-size: 1.25rem; /* text-xl */
-  margin-bottom: 2.5rem; /* mb-10 */
+  font-size: 1.1rem; /* Adjusted from 1.25rem for better fit */
+  margin-top: 2rem; /* Added top margin for spacing from heading */
+  margin-bottom: 2.5rem; /* Kept original mb-10 */
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.2s;
@@ -955,7 +956,6 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
             const post = blogPosts.find(p => p.id === selectedBlogPostId);
             return <BlogPostDetail post={post} setCurrentPage={navigateToPage} theme={theme} />;
           case 'insights': 
-            // InsightsPageDesktop will be created next, specifically for desktop
             return <InsightsPageDesktop theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
           default:
             return null;
