@@ -94,8 +94,8 @@ const HeroContent = ({ children }) => {
 // Combined Hero Heading Component using styled-components (GRANULAR FONT SIZES FOR DESKTOP)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
-  margin-bottom: 1rem; /* Adjusted from 1.5rem for better spacing */
-  padding-bottom: 0.25rem; /* Adjusted from 0.5rem for better spacing */
+  margin-bottom: 0.5rem; /* Adjusted from 1rem to move content up */
+  padding-bottom: 0.25rem;
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s;
   
@@ -109,23 +109,24 @@ const StyledCombinedHeroHeading = styled.h1`
   /* --- DESKTOP SPECIFIC STYLES --- */
   & > span.hero-subtitle-text {
     display: block;
-    font-size: 3.5rem; /* Adjusted from 4.5rem to fit better */
-    margin-bottom: 0.5rem; /* Adjusted spacing */
-    line-height: 1.1; /* Tighter line height for multi-line text */
+    font-size: 3.5rem; /* Kept same font size */
+    margin-bottom: 0.25rem; /* Adjusted spacing to move content up */
+    line-height: 1.1; 
   }
 
   & > span.hero-title-text {
     display: block;
-    font-size: 6.5rem; /* Adjusted from 8rem to fit better */
+    font-size: 5.5rem; /* Reduced from 6.5rem to fit on fewer lines */
     line-height: 1.1; /* Tighter line height for multi-line text */
+    padding: 0 2rem; /* Reduced horizontal padding */
   }
 `;
 
 // HeroDescription remains the same, using styled-components (duplicated and adjusted for desktop)
 const HeroDescription = styled.p`
-  font-size: 1.1rem; /* Adjusted from 1.25rem for better fit */
-  margin-top: 2rem; /* Added top margin for spacing from heading */
-  margin-bottom: 2.5rem; /* Kept original mb-10 */
+  font-size: 1.25rem; /* Increased from 1.1rem */
+  margin-top: 2rem;
+  margin-bottom: 2.5rem;
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.2s;
@@ -311,7 +312,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         </h1>
 
         <img
-          src="/sid-photo.jpg" // Using a placeholder for the profile image
+          src={project.image} // Changed from /sid-photo.jpg to project.image
           alt={project.title}
           className="w-full h-80 object-cover rounded-lg mb-8 shadow-lg"
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
@@ -390,7 +391,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
           <div className="space-y-6">
             {linkedinPosts.map(post => (
               <div key={post.id} className={`p-4 rounded-lg shadow-md
-                ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-300'}`}>
+                ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-300'}`}>
                     <div className="flex items-center mb-3">
                       <img src={post.profilePic} alt={post.author} className="w-10 h-10 rounded-full mr-3" />
                       <div>
@@ -639,16 +640,16 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
 
       // Sample skills data (for Toolbox Zone) (DUPLICATED FOR DESKTOP)
       const skills = [
-        { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
-        { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
         { name: 'Python', icon: <Code size={48} className="text-blue-500 mb-4" />, description: 'Pandas, NumPy, Scikit-learn, Matplotlib' },
         { name: 'SQL', icon: <Database size={48} className="text-green-500 mb-4" />, description: 'Database Querying, Data Manipulation' },
-        { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
         { name: 'Power BI', icon: <BarChart size={48} className="text-indigo-500 mb-4" />, description: 'Dashboard Design, Data Modeling, DAX' },
-        { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
+        { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
+        { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
         { name: 'Real-time Analytics', icon: <Zap size={48} className="text-red-500 mb-4" />, description: 'Streaming Data, Live Dashboards' },
         { name: 'Cloud Platforms', icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
         { name: 'Data Warehousing', icon: <Database size={48} className="text-purple-700 mb-4" />, description: 'ETL, Data Modeling, OLAP' },
+        { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
+        { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
       ];
 
       // Logic for project slider (DUPLICATED FOR DESKTOP)
@@ -684,11 +685,11 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   <HeroBackgroundPattern />
                   <HeroContent>
                     <StyledCombinedHeroHeading theme={theme}>
-                        <span className="hero-subtitle-text">Hey, I’m Sid</span>
-                        <span className="hero-title-text">Empowering Smarter Decisions with Data</span>
+                        <span className="hero-subtitle-text">Hi, I’m Sid</span>
+                        <span className="hero-title-text">A Data Analyst Turning Complexity into Clarity.</span>
                     </StyledCombinedHeroHeading>
                     <HeroDescription theme={theme}>
-                      I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
+                      I turn complex datasets into clear, actionable insights using Python, SQL, Power BI, and AI — driving decisions that move businesses forward.
                     </HeroDescription>
                   </HeroContent>
                 </HeroSection>
@@ -703,13 +704,13 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       <div className="grid grid-cols-2 gap-12 items-center">
                         {/* Left Column: Content */}
                         <div className="order-2 md:order-1">
-                          <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3>
-                          <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p>
+                          <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hi, I’m Teja Siddhartha</h3>
+                          <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Insight Crafter | Data Storyteller</p>
                           <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
-                            I'm a data analyst who doesn't just crunch numbers; I tell stories. My passion lies in transforming raw, complex datasets into clear, actionable insights that drive real-world impact. With a blend of analytical rigor and creative problem-solving, I bridge the gap between data and strategy.
+                            A data analyst with a storyteller’s mind and a strategist’s heart. I don’t just analyze numbers — I connect the dots. My work is all about translating messy, real-world data into insights that people can actually understand and use. Whether it’s uncovering growth opportunities, streamlining operations, or spotting patterns before others do, I love solving problems with a mix of logic and creativity.
                           </p>
                           <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
-                            My expertise spans the entire data lifecycle, from meticulous cleaning and robust modeling to compelling visualization and predictive analytics. I thrive on uncovering hidden patterns and empowering businesses with the intelligence they need to innovate and grow. Let's turn your data into your next big advantage.
+                            I’m hands-on across the full data stack — cleaning, modeling, visualizing, and interpreting. Tools like Python, SQL, Power BI, and AI help me dig deep, but it’s the why behind the data that keeps me going. If you believe data can shape better decisions, we’re already on the same page.
                           </p>
                           <div className="grid grid-cols-3 gap-4 text-center mt-8">
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
@@ -977,7 +978,8 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 <nav className="flex items-center space-x-8">
                   <button onClick={() => scrollToSection('hero')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
                   <button onClick={() => scrollToSection('about')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
-                  <button onClick={() => scrollToSection('projects')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+                  <button onClick={() => scrollToSection('projects')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
+                  <button onClick={() => scrollToSection('skills')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
                   <button onClick={() => navigateToPage('insights')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
                   <button onClick={() => scrollToSection('contact')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
                 </nav>
