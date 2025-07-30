@@ -97,7 +97,7 @@ const StyledCombinedHeroHeading = styled.h1`
   margin-bottom: 1rem; /* Adjusted for mobile */
   padding-bottom: 0.25rem; /* Adjusted for mobile */
   animation: ${fadeInUp} 1s ease-out forwards;
-  animation-delay: 0.1s; /* delay-100 */
+  animation-delay: 0.1s;
   
   background-image: linear-gradient(to right, #a855f7, #ec4899);
   -webkit-background-clip: text;
@@ -127,7 +127,7 @@ const HeroDescription = styled.p`
   margin-bottom: 2rem; /* Adjusted for mobile */
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
-  animation-delay: 0.2s; /* delay-200 */
+  animation-delay: 0.2s;
 
   color: ${props => props.theme === 'dark' ? '#d1d5db' : '#374151'};
 
@@ -313,7 +313,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         </h1>
 
         <img
-          src={project.image}
+          src={project.image} // Changed from /sid-photo.jpg to project.image
           alt={project.title}
           className="w-full h-48 object-cover rounded-lg mb-6 shadow-lg"
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
@@ -480,7 +480,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         >
           <div className="relative h-32 mb-4 rounded-lg overflow-hidden shadow-md">
             <img
-              src="/sid-photo.jpg" // Using a placeholder for the profile image
+              src={project.image} // Changed from /sid-photo.jpg to project.image
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
@@ -641,16 +641,16 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
 
       // Sample skills data (for Toolbox Zone) (DUPLICATED FOR MOBILE)
       const skills = [
-        { name: 'Data Analytics', icon: <BarChart size={36} className="text-purple-500 mb-2" />, description: 'Cleaning, Exploration, Statistical Analysis' },
-        { name: 'AI & ML', icon: <Bot size={36} className="text-pink-500 mb-2" />, description: 'Machine Learning, Predictive Modeling' },
         { name: 'Python', icon: <Code size={36} className="text-blue-500 mb-2" />, description: 'Pandas, NumPy, Scikit-learn, Matplotlib' },
         { name: 'SQL', icon: <Database size={36} className="text-green-500 mb-2" />, description: 'Database Querying, Data Manipulation' },
-        { name: 'Excel', icon: <FileText size={36} className="text-emerald-500 mb-2" />, description: 'Advanced Formulas, Data Modeling, VBA' },
         { name: 'Power BI', icon: <BarChart size={36} className="text-indigo-500 mb-2" />, description: 'Dashboard Design, Data Modeling, DAX' },
-        { name: 'Tableau', icon: <Layers size={36} className="text-orange-500 mb-2" />, description: 'Interactive Visualizations, Storytelling' },
-        { name: 'Real-time Analytics', icon: <Zap size={36} className="text-red-500 mb-2" />, description: 'Streaming Data, Live Dashboards' },
+        { name: 'Data Analytics', icon: <BarChart size={36} className="text-purple-500 mb-2" />, description: 'Cleaning, Exploration, Statistical Analysis' },
+        { name: 'Excel', icon: <FileText size={36} className="text-emerald-500 mb-2" />, description: 'Advanced Formulas, Data Modeling, VBA' },
+        { name: 'Real-time Analytics', icon: <Zap size={36} className="text-red-500 mb-2" />, description: <>Real-time<br/>Analytics</> }, // Changed to two lines
         { name: 'Cloud Platforms', icon: <Briefcase size={36} className="text-cyan-500 mb-2" />, description: 'AWS, GCP, Azure Fundamentals' },
-        { name: 'Data Warehousing', icon: <Database size={36} className="text-purple-700 mb-2" />, description: 'ETL, Data Modeling, OLAP' },
+        { name: 'Data Warehousing', icon: <Database size={36} className="text-purple-700 mb-2" />, description: <>Data<br/>Warehousing</> }, // Changed to two lines
+        { name: 'AI & ML', icon: <Bot size={36} className="text-pink-500 mb-2" />, description: 'Machine Learning, Predictive Modeling' },
+        { name: 'Tableau', icon: <Layers size={36} className="text-orange-500 mb-2" />, description: 'Interactive Visualizations, Storytelling' },
       ];
 
       // Logic for project slider (DUPLICATED FOR MOBILE)
@@ -686,11 +686,11 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   <HeroBackgroundPattern />
                   <HeroContent>
                     <StyledCombinedHeroHeading theme={theme}>
-                        <span className="hero-subtitle-text">Hey, I’m Sid</span>
-                        <span className="hero-title-text">Empowering Smarter Decisions with Data</span>
+                        <span className="hero-subtitle-text">Hi, I’m Sid</span>
+                        <span className="hero-title-text">A Data Analyst Turning Complexity into Clarity.</span>
                     </StyledCombinedHeroHeading>
                     <HeroDescription theme={theme}>
-                      I strategically transform complex datasets into precise, actionable intelligence using Python, SQL, Power BI, and AI, driving optimal business outcomes.
+                      I turn complex datasets into clear, actionable insights using Python, SQL, Power BI, and AI — driving decisions that move businesses forward.
                     </HeroDescription>
                   </HeroContent>
                 </HeroSection>
@@ -715,35 +715,35 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                           </div>
                           <div className="flex justify-center space-x-4 text-2xl">
                             <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
-                              <Linkedin size={28} />
+                              <Linkedin size={28} className="text-blue-400 dark:text-blue-300" />
                             </a>
                             <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
-                              <Github size={28} />
+                              <Github size={28} className="text-gray-400 dark:text-gray-300" />
                             </a>
                             <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
-                              <Mail size={28} />
+                              <Mail size={28} className="text-red-400 dark:text-red-300" />
                             </a>
                           </div>
                           <a href="#" className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
                             <Download size={16} className="mr-1" /> Download Resume (PDF)
                           </a>
-                          <a href="#" className={`px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center
+                          <button onClick={() => scrollToSection('education-certifications')} className={`px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center
                             ${theme === 'dark' ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}>
                             <Award size={16} className="mr-1" /> View Certifications
-                          </a>
+                          </button>
                         </div>
                         {/* Bottom Column: Content */}
                         <div className="order-2">
-                          <h3 className="text-xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hello, I'm Teja Siddhartha Rajam</h3>
-                          <p className={`text-sm mb-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Data Storyteller | Insight Crafter | Attention to Detail | Turning Raw Data into Insights</p>
-                          <p className={`text-sm leading-relaxed mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
-                            I'm a data analyst who doesn't just crunch numbers; I tell stories. My passion lies in transforming raw, complex datasets into clear, actionable insights that drive real-world impact. With a blend of analytical rigor and creative problem-solving, I bridge the gap between data and strategy.
+                          <h3 className="text-xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hi, I’m Teja Siddhartha</h3> {/* Font size adjusted */}
+                          <p className={`text-sm mb-3 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Insight Crafter | Data Storyteller</p>
+                          <p className={`text-sm leading-relaxed mb-4 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
+                            A data analyst with a storyteller’s mind and a strategist’s heart. I don’t just analyze numbers — I connect the dots. My work is all about translating messy, real-world data into insights that people can actually understand and use. Whether it’s uncovering growth opportunities, streamlining operations, or spotting patterns before others do, I love solving problems with a mix of logic and creativity.
                           </p>
-                          <p className={`text-sm leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>
-                            My expertise spans the entire data lifecycle, from meticulous cleaning and robust modeling to compelling visualization and predictive analytics. I thrive on uncovering hidden patterns and empowering businesses with the intelligence they need to innovate and grow. Let's turn your data into your next big advantage.
+                          <p className={`text-sm leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
+                            I'm deeply involved at every stage of the data journey — from cleaning and shaping raw data to building models, crafting visuals, and drawing meaningful conclusions. I work with tools like Python, SQL, Power BI, and AI not just to analyze, but to uncover the <span className="font-italics">"WHY"</span> behind the numbers. For me, it’s not just about data — it’s about making smarter decisions. 
                           </p>
                           <div className="grid grid-cols-1 gap-3 text-center mt-6">
-                              <div className={`p-3 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
+                              <div className={`p-3 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
                                   <p className="text-xs opacity-80">Major Projects</p>
                                   <p className="text-xs opacity-60">Data Analysis Projects</p>
@@ -753,10 +753,10 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                                   <p className="text-xs opacity-80">Certifications</p>
                                   <p className="text-xs opacity-60">Professional Credentials</p>
                               </div>
-                              <div className={`p-3 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-200'}`}>
-                                  <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
-                                  <p className="text-xs opacity-80">Improvement</p>
-                                  <p className="text-xs opacity-60">User Reactivation Boost</p>
+                              <div className={`p-3 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
+                                  <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">10+</h3>
+                                  <p className="text-xs opacity-80">Tools & Libraries Used</p>
+                                  <p className="text-xs opacity-60">Across Projects & Practice Tasks</p>
                               </div>
                           </div>
                         </div>
@@ -882,7 +882,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             value={contactName}
                             onChange={(e) => setContactName(e.target.value)}
                             className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                              ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
                             placeholder="Your Name"
                             required
                           />
@@ -896,7 +896,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             value={contactEmail}
                             onChange={(e) => setContactEmail(e.target.value)}
                             className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                              ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
                             placeholder="your@example.com"
                             required
                           />
@@ -910,7 +910,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             value={contactMessage}
                             onChange={(e) => setContactMessage(e.target.value)}
                             className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:focus-border-indigo-500
-                              ${theme === 'dark' ? 'bg-gray-700 border-gray-600 text-gray-100' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
+                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
                             placeholder="Your message..."
                             required
                           ></textarea>
@@ -932,16 +932,16 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       </form>
                     </div>
                     <div className="mt-8 text-center">
-                      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Connect with Me</h3>
+                      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-cyan-300">Connect with Me</h3>
                       <div className="flex justify-center space-x-6 text-2xl">
                         <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
-                          <Linkedin size={28} />
+                          <Linkedin size={28} className="text-blue-400 dark:text-blue-300" />
                         </a>
                         <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
-                          <Github size={28} />
+                          <Github size={28} className="text-gray-400 dark:text-gray-300" />
                         </a>
                         <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
-                          <Mail size={28} />
+                          <Mail size={28} className="text-red-400 dark:text-red-300" />
                         </a>
                       </div>
                     </div>
@@ -958,7 +958,6 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
             const post = blogPosts.find(p => p.id === selectedBlogPostId);
             return <BlogPostDetail post={post} setCurrentPage={navigateToPage} theme={theme} />;
           case 'insights': 
-            // InsightsPageMobile will be created next, specifically for mobile
             return <InsightsPageMobile theme={theme} navigateToPage={navigateToPage} blogPosts={blogPosts} linkedinPosts={linkedinPosts} />;
           default:
             return null;
@@ -974,7 +973,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
               ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
               
               <div className="container mx-auto px-2 flex justify-between items-center">
-                <button onClick={() => navigateToPage('home')} className="text-xl font-extrabold text-indigo-600 dark:text-indigo-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
+                <button onClick={() => navigateToPage('home')} className="text-xl font-extrabold text-indigo-600 dark:text-cyan-300 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
                 
                 {/* Mobile menu button */}
                 <div className="flex items-center space-x-3">

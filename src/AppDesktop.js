@@ -704,13 +704,13 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       <div className="grid grid-cols-2 gap-12 items-center">
                         {/* Left Column: Content */}
                         <div className="order-2 md:order-1">
-                          <h3 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hi, I’m Teja Siddhartha</h3>
+                          <h3 className="text-3xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hi, I’m Teja Siddhartha</h3> {/* Font size reduced */}
                           <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Insight Crafter | Data Storyteller</p>
                           <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
                             A data analyst with a storyteller’s mind and a strategist’s heart. I don’t just analyze numbers — I connect the dots. My work is all about translating messy, real-world data into insights that people can actually understand and use. Whether it’s uncovering growth opportunities, streamlining operations, or spotting patterns before others do, I love solving problems with a mix of logic and creativity.
                           </p>
                           <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
-                            I’m hands-on across the full data stack — cleaning, modeling, visualizing, and interpreting. Tools like Python, SQL, Power BI, and AI help me dig deep, but it’s the why behind the data that keeps me going. If you believe data can shape better decisions, we’re already on the same page.
+                            I'm deeply involved at every stage of the data journey — from cleaning and shaping raw data to building models, crafting visuals, and drawing meaningful conclusions. I work with tools like Python, SQL, Power BI, and AI not just to analyze, but to uncover the <span className="font-italics">"WHY"</span> behind the numbers. For me, it’s not just about data - it’s about making smarter decisions. 
                           </p>
                           <div className="grid grid-cols-3 gap-4 text-center mt-8">
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
@@ -724,9 +724,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                                   <p className="text-xs opacity-60">Professional Credentials</p>
                               </div>
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
-                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">30%</h3>
-                                  <p className="text-sm opacity-80">Improvement</p>
-                                  <p className="text-xs opacity-60">User Reactivation Boost</p>
+                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">10+</h3> {/* Changed to 10+ */}
+                                  <p className="text-sm opacity-80">Tools & Libraries</p> {/* Changed text */}
+                                  <p className="text-xs opacity-60">Used Across Projects & Practice Tasks</p> {/* Changed text */}
                               </div>
                           </div>
                         </div>
