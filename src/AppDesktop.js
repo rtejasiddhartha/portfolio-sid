@@ -478,7 +478,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         >
           <div className="relative h-48 mb-4 rounded-lg overflow-hidden shadow-md">
             <img
-              src="/sid-photo.jpg" // Using a placeholder for the profile image
+              src={project.image} // Changed from /sid-photo.jpg to project.image
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
@@ -977,8 +977,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 <nav className="flex items-center space-x-8">
                   <button onClick={() => scrollToSection('hero')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
                   <button onClick={() => scrollToSection('about')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
-                  <button onClick={() => scrollToSection('projects')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
-                  <button onClick={() => scrollToSection('skills')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+                  <button onClick={() => scrollToSection('projects')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
                   <button onClick={() => navigateToPage('insights')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
                   <button onClick={() => scrollToSection('contact')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
                 </nav>
