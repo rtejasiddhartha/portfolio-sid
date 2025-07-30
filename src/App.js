@@ -96,7 +96,7 @@ const HeroContent = ({ children }) => {
   );
 };
 
-// Combined Hero Heading Component using styled-components (ADDED GRADIENT, FINE-TUNED FONT SIZES & LINE HEIGHT)
+// Combined Hero Heading Component using styled-components (AGRESSIVELY FINE-TUNED FONT SIZES FOR 2-3 LINES)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
   margin-bottom: 1.5rem; /* mb-6 */
@@ -116,59 +116,65 @@ const StyledCombinedHeroHeading = styled.h1`
   /* Overall line-height for headings (tighter by default) */
   line-height: 1.0; 
 
-  /* Styles for "Hey, I'm Sid" span */
+  /* Default (very small mobile - e.g., iPhone SE/mini portrait, <400px) */
   & > span.hero-subtitle-text {
     display: block;
-    font-size: 1.6rem; /* Original text-5xl (3rem) adjusted to fit */
-    margin-bottom: 0.2rem; /* Adjusted spacing */
-    line-height: 1.1; /* Adjusted line-height */
+    font-size: 1.1rem; /* Further reduced for very small screens */
+    margin-bottom: 0.1rem; 
+    line-height: 1.0; 
   }
 
-  /* Styles for "Empowering Smarter Decisions with Data" span */
   & > span.hero-title-text {
     display: block;
-    font-size: 2.5rem; /* Original text-6xl (4rem) adjusted to fit */
-    line-height: 1.1; /* Adjusted line-height */
+    font-size: 1.8rem; /* Further reduced for very small screens */
+    line-height: 1.0; 
   }
 
-  /* Responsive font sizes */
-  @media (min-width: 400px) { /* Small phone landscape / larger small phones */
+  /* Mobile (min-width: 400px - larger phones portrait) */
+  @media (min-width: 400px) {
     & > span.hero-subtitle-text {
-      font-size: 1.8rem; 
-      margin-bottom: 0.3rem; 
+      font-size: 1.3rem; 
+      margin-bottom: 0.15rem; 
     }
     & > span.hero-title-text {
-      font-size: 2.8rem; 
-    }
-  }
-
-  @media (min-width: 640px) { /* sm: screens (smaller tablets portrait, larger phones landscape) */
-    & > span.hero-subtitle-text {
       font-size: 2.2rem; 
-      margin-bottom: 0.4rem; 
-    }
-    & > span.hero-title-text {
-      font-size: 3.4rem; /* Adjusted to fit 2 lines strictly for sm */
     }
   }
 
-  @media (min-width: 768px) { /* md: screens (iPad portrait, larger tablets, small desktops) */
+  /* Small (min-width: 640px - smaller tablets portrait, larger phones landscape) */
+  @media (min-width: 640px) {
     & > span.hero-subtitle-text {
-      font-size: 3.0rem; /* Adjusted to approximate original md:text-6xl */
+      font-size: 1.6rem; /* Adjusted for sm screens */
+      margin-bottom: 0.25rem; 
+    }
+    & > span.hero-title-text {
+      font-size: 2.6rem; /* Adjusted for sm screens */
+    }
+  }
+
+  /* Medium (min-width: 768px - iPad portrait, larger tablets, small desktops) */
+  @media (min-width: 768px) {
+    /* Target for "Empowering Smarter Decisions with Data" to fit in 2 lines STRICTLY */
+    & > span.hero-subtitle-text {
+      font-size: 2.2rem; /* Reduced from 2.5rem */
+      margin-bottom: 0.4rem; 
+      line-height: 1.1; 
+    }
+    & > span.hero-title-text {
+      font-size: 3.0rem; /* Reduced from 3.5rem to fit 2 lines on MD */
+      line-height: 1.1; 
+    }
+  }
+  @media (min-width: 1024px) { /* Large (min-width: 1024px - standard desktops) */
+    /* Restore to larger sizes for desktop, assuming ample space */
+    & > span.hero-subtitle-text {
+      font-size: 3.5rem; /* Adjusted from 4.5rem for better desktop fit */
       margin-bottom: 0.75rem; 
       line-height: 1.25; 
     }
     & > span.hero-title-text {
-      font-size: 4.5rem; /* Adjusted to approximate original md:text-8xl and fit 2 lines */
+      font-size: 6rem; /* Adjusted from 8rem to fit better on slightly smaller desktops */
       line-height: 1.25; 
-    }
-  }
-  @media (min-width: 1024px) { /* lg: screens (standard desktops) */
-    & > span.hero-subtitle-text {
-      font-size: 4.5rem; /* lg:text-7xl */
-    }
-    & > span.hero-title-text {
-      font-size: 8rem; /* lg:text-9xl */
     }
   }
 `;
