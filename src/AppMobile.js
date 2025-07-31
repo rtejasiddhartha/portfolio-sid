@@ -646,9 +646,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         { name: 'Power BI', icon: <BarChart size={36} className="text-indigo-500 mb-2" />, description: 'Dashboard Design, Data Modeling, DAX' },
         { name: 'Data Analytics', icon: <BarChart size={36} className="text-purple-500 mb-2" />, description: 'Cleaning, Exploration, Statistical Analysis' },
         { name: 'Excel', icon: <FileText size={36} className="text-emerald-500 mb-2" />, description: 'Advanced Formulas, Data Modeling, VBA' },
-        { name: 'Real-time Analytics', icon: <Zap size={36} className="text-red-500 mb-2" />, description: <>Real-time<br/>Analytics</> }, // Changed to two lines
+        { name: <>Real-time<br/>Analytics</>, icon: <Zap size={36} className="text-red-500 mb-2" />, description: 'Streaming Data, Live Dashboards'}, // Changed to two lines
         { name: 'Cloud Platforms', icon: <Briefcase size={36} className="text-cyan-500 mb-2" />, description: 'AWS, GCP, Azure Fundamentals' },
-        { name: 'Data Warehousing', icon: <Database size={36} className="text-purple-700 mb-2" />, description: <>Data<br/>Warehousing</> }, // Changed to two lines
+        { name: <><center>Data</center>Warehousing</>, icon: <Database size={36} className="text-purple-700 mb-2" />, description: 'ETL, Data Modeling, OLAP' }, // Changed to two lines
         { name: 'AI & ML', icon: <Bot size={36} className="text-pink-500 mb-2" />, description: 'Machine Learning, Predictive Modeling' },
         { name: 'Tableau', icon: <Layers size={36} className="text-orange-500 mb-2" />, description: 'Interactive Visualizations, Storytelling' },
       ];

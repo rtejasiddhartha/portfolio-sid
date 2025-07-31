@@ -58,7 +58,7 @@ const fadeInUp = keyframes`
 // HeroSection - Adjusted padding and ensured single background element for desktop
 const HeroSection = ({ theme, children }) => {
   return (
-    <section className={`relative h-screen flex items-center justify-center px-24 py-12 overflow-hidden 
+    <section id="hero" className={`relative h-screen flex items-center justify-center px-24 py-12 overflow-hidden 
       ${theme === 'dark' 
         ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' 
         : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'} 
@@ -140,7 +140,7 @@ const projects = [
     id: 'na-music-store',
     title: 'North America Music Store Analysis',
     description: 'Used SQL and Power BI to analyze music sales trends, artist popularity, and album-level performance.',
-    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=Music+Store+Dashboard', // Placeholder
+    image: '/PROJECT-MUSIC.png', // Replaced placeholder with local image
     tags: ['SQL', 'Power BI', 'Excel'],
     liveDemo: '#',
     githubRepo: '#',
@@ -152,7 +152,7 @@ const projects = [
     id: 'crypto-analytics',
     title: 'CryptoPulse Real-time Analytics',
     description: 'Built a real-time analytics system using n8n and Python to monitor cryptocurrency market trends and send Telegram alerts.',
-    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=Crypto+Dashboard', // Placeholder
+    image: '/PROJECT-N8N.png', // Replaced placeholder with local image
     tags: ['Python', 'n8n', 'APIs', 'Real-time'],
     liveDemo: '#',
     githubRepo: '#',
@@ -164,7 +164,7 @@ const projects = [
     id: 'ai-sales-forecasting',
     title: 'AI-Powered Sales Forecasting',
     description: 'Built an Excel-based dynamic dashboard to forecast e-commerce sales using traditional techniques and AI tools like Copilot.',
-    image: 'https://placehold.co/600x300/6D28D9/FFFFFF?text=Sales+Forecasting+Dashboard', // Placeholder
+    image: '/PROJECT-SALES.png', // Replaced placeholder with local image
     tags: ['Excel', 'Forecasting', 'AI'],
     liveDemo: '#',
     githubRepo: '#',
@@ -176,7 +176,7 @@ const projects = [
     id: 'powerpulse-energy',
     title: 'Telangana PowerPulse AI',
     description: 'Forecasted electricity demand for smarter energy planning using Python and visual analytics.',
-    image: 'https://placehold.co/600x300/3B82F6/FFFFFF?text=PowerPulse+Dashboard', // Placeholder
+    image: '/PROJECT-POWERPULSE.png', // Replaced placeholder with local image
     tags: ['Python', 'Pandas', 'Visualization'],
     liveDemo: '#',
     githubRepo: '#',
@@ -306,7 +306,8 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         <ChevronLeft size={20} className="mr-2" /> Back to Projects
       </button>
 
-      <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+      <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl
+            ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
         <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
           {project.title}
         </h1>
@@ -439,7 +440,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
     const BlogPostDetail = ({ post, setCurrentPage, theme }) => {
       if (!post) {
         return (
-          <div className={`min-h-screen flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'}`}>
+          <div className={`min-h-screen flex flex-col items-center justify-center ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'} transition-colors duration-300`}>
             <p className="text-xl mb-4">Blog post not found.</p>
             <button onClick={() => setCurrentPage('blog')} className="px-6 py-3 rounded-full bg-purple-600 text-white font-semibold hover:bg-purple-700 transition-colors duration-200">Back to Blog</button>
           </div>
@@ -458,7 +459,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
 
           <div className={`max-w-4xl mx-auto rounded-xl p-8 shadow-2xl
             ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
               {post.title}
             </h1>
             <p className="text-sm opacity-70 mb-6">{post.date}</p>
@@ -582,7 +583,13 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         setCurrentPage('home');
         // No mobile menu to close on desktop
         setTimeout(() => {
-          document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+          // Check if element exists before attempting to scroll
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            console.warn(`Element with ID '${id}' not found for scrolling.`);
+          }
         }, 100);
       };
 
@@ -645,9 +652,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         { name: 'Power BI', icon: <BarChart size={48} className="text-indigo-500 mb-4" />, description: 'Dashboard Design, Data Modeling, DAX' },
         { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
         { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
-        { name: 'Real-time Analytics', icon: <Zap size={48} className="text-red-500 mb-4" />, description: <>Real-time<br/>Analytics</> }, // Changed to two lines
+        { name: <>Real-time<br/>Analytics</>, icon: <Zap size={48} className="text-red-500 mb-4" />, description: <>Streaming Data,<br/>Live Dashboards</> }, // Changed to two lines
         { name: 'Cloud Platforms', icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
-        { name: 'Data Warehousing', icon: <Database size={48} className="text-purple-700 mb-4" />, description: <>Data<br/>Warehousing</> }, // Changed to two lines
+        { name: <><center>Data</center>Warehousing</>, icon: <Database size={48} className="text-purple-700 mb-4" />, description: <>ETL, Data Modeling,<br/>OLAP</> }, // Changed to two lines
         { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
         { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
       ];
@@ -704,29 +711,29 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       <div className="grid grid-cols-2 gap-12 items-center">
                         {/* Left Column: Content */}
                         <div className="order-2 md:order-1">
-                          <h3 className="text-3xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hi, I’m Teja Siddhartha</h3> {/* Font size reduced */}
+                          <h3 className="text-3xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hi, I’m Teja Siddhartha</h3>
                           <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Data & BI Analyst | Insight Crafter | Data Storyteller</p>
                           <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
                             A data analyst with a storyteller’s mind and a strategist’s heart. I don’t just analyze numbers — I connect the dots. My work is all about translating messy, real-world data into insights that people can actually understand and use. Whether it’s uncovering growth opportunities, streamlining operations, or spotting patterns before others do, I love solving problems with a mix of logic and creativity.
                           </p>
                           <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
-                            I'm deeply involved at every stage of the data journey — from cleaning and shaping raw data to building models, crafting visuals, and drawing meaningful conclusions. I work with tools like Python, SQL, Power BI, and AI not just to analyze, but to uncover the <span className="font-italics">"WHY"</span> behind the numbers. For me, it’s not just about data - it’s about making smarter decisions. 
+                            I'm deeply involved at every stage of the data journey — from cleaning and shaping raw data to building models, crafting visuals, and drawing meaningful conclusions. I work with tools like Python, SQL, Power BI, and AI not just to analyze, but to uncover the <span className="font-italics">"WHY"</span> behind the numbers. For me, it’s not just about data — it’s about making smarter decisions. 
                           </p>
                           <div className="grid grid-cols-3 gap-4 text-center mt-8">
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
                                   <p className="text-sm opacity-80">Major Projects</p>
-                                  <p className="text-xs opacity-60">Data Analysis Projects</p>
+                                  <p className="text-xs opacity-60 dark:text-gray-100">Data Analysis Projects</p> {/* CHANGE 001: Text color for visibility */}
                               </div>
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">5+</h3>
                                   <p className="text-sm opacity-80">Certifications</p>
-                                  <p className="text-xs opacity-60">Professional Credentials</p>
+                                  <p className="text-xs opacity-60 dark:text-gray-100">Professional Credentials</p> {/* CHANGE 001: Text color for visibility */}
                               </div>
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
-                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">10+</h3> {/* Changed to 10+ */}
-                                  <p className="text-sm opacity-80">Tools & Libraries</p> {/* Changed text */}
-                                  <p className="text-xs opacity-60">Used Across Projects & Practice Tasks</p> {/* Changed text */}
+                                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">10+</h3>
+                                  <p className="text-sm opacity-80">Tools & Libraries Used</p>
+                                  <p className="text-xs opacity-60 dark:text-gray-100">Across Projects & Practice Tasks</p> {/* CHANGE 001: Text color for visibility */}
                               </div>
                           </div>
                         </div>
@@ -742,13 +749,13 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                           </div>
                           <div className="flex justify-center space-x-6 text-3xl">
                             <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
-                              <Linkedin size={36} />
+                              <Linkedin size={36} className="text-blue-400 dark:text-blue-300" />
                             </a>
                             <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
-                              <Github size={36} />
+                              <Github size={36} className="text-gray-400 dark:text-gray-300" />
                             </a>
                             <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
-                              <Mail size={36} />
+                              <Mail size={36} className="text-red-400 dark:text-red-300" />
                             </a>
                           </div>
                           <a href="#" className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
@@ -881,7 +888,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             value={contactName}
                             onChange={(e) => setContactName(e.target.value)}
                             className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`} /* Changed to bg-white for dark mode */
+                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
                             placeholder="Your Name"
                             required
                           />
@@ -895,7 +902,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             value={contactEmail}
                             onChange={(e) => setContactEmail(e.target.value)}
                             className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500
-                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`} /* Changed to bg-white for dark mode */
+                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
                             placeholder="your@example.com"
                             required
                           />
@@ -909,7 +916,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                             value={contactMessage}
                             onChange={(e) => setContactMessage(e.target.value)}
                             className={`mt-1 block w-full px-4 py-3 border rounded-md shadow-sm focus:ring-indigo-500 focus:focus-border-indigo-500
-                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`} /* Changed to bg-white for dark mode */
+                              ${theme === 'dark' ? 'bg-white border-gray-300 text-gray-900' : 'bg-gray-50 border-gray-300 text-gray-900'}`}
                             placeholder="Your message..."
                             required
                           ></textarea>
@@ -931,16 +938,16 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       </form>
                     </div>
                     <div className="mt-12 text-center">
-                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-cyan-300">Connect with Me</h3> {/* Changed to text-cyan-300 for dark mode */}
+                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-pink-400">Connect with Me</h3> {/* CHANGE 001: Changed to text-pink-400 for dark mode */}
                       <div className="flex justify-center space-x-8 text-3xl">
                         <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
-                          <Linkedin size={36} className="text-blue-400 dark:text-blue-300" /> {/* Brighter blue for icon */}
+                          <Linkedin size={36} className="text-blue-400 dark:text-blue-300" />
                         </a>
                         <a href="https://github.com/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="GitHub">
-                          <Github size={36} className="text-gray-400 dark:text-gray-300" /> {/* Brighter gray for icon */}
+                          <Github size={36} className="text-gray-400 dark:text-gray-300" />
                         </a>
                         <a href="mailto:rajamtejasiddhartha@gmail.com" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="Mail">
-                          <Mail size={36} className="text-red-400 dark:text-red-300" /> {/* Brighter red for icon */}
+                          <Mail size={36} className="text-red-400 dark:text-red-300" />
                         </a>
                       </div>
                     </div>
@@ -972,7 +979,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
               ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
               
               <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
-                <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-cyan-300 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
+                <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-pink-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button> {/* CHANGE 001: Changed to text-pink-400 for dark mode */}
                 
                 {/* Desktop Navigation */}
                 <nav className="flex items-center space-x-8">

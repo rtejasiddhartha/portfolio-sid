@@ -94,8 +94,8 @@ const HeroContent = ({ children }) => {
 // Combined Hero Heading Component using styled-components (GRANULAR FONT SIZES FOR TABLET)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
-  margin-bottom: 1rem; /* Adjusted for consistency with desktop */
-  padding-bottom: 0.25rem; /* Adjusted for consistency with desktop */
+  margin-bottom: 0.5rem; /* Adjusted from 1.5rem for better spacing */
+  padding-bottom: 0.25rem; /* Adjusted from 0.5rem for better spacing */
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s;
   
@@ -118,14 +118,15 @@ const StyledCombinedHeroHeading = styled.h1`
     display: block;
     font-size: 4.0rem; /* Larger for tablets, strictly 2 lines */
     line-height: 1.1; 
+    padding: 0 1rem; /* Reduced horizontal padding for tablet */
   }
 `;
 
 // HeroDescription remains the same, using styled-components (duplicated and adjusted for tablet)
 const HeroDescription = styled.p`
-  font-size: 1.125rem; /* text-lg */
+  font-size: 1.125rem; /* text-lg - Adjusted for tablet */
   margin-top: 2rem; /* Added top margin for spacing from heading */
-  margin-bottom: 2.5rem; /* Kept original mb-10 */
+  margin-bottom: 2.5rem;
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.2s;
@@ -305,7 +306,8 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         <ChevronLeft size={20} className="mr-2" /> Back to Projects
       </button>
 
-      <div className={`max-w-3xl mx-auto rounded-xl p-8 shadow-2xl ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+      <div className={`max-w-3xl mx-auto rounded-xl p-8 shadow-2xl
+            ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
         <h1 className="text-4xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
           {project.title}
         </h1>
@@ -390,7 +392,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
           <div className="space-y-6">
             {linkedinPosts.map(post => (
               <div key={post.id} className={`p-4 rounded-lg shadow-md
-                ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border-gray-300'}`}>
+                ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-300'}`}>
                     <div className="flex items-center mb-3">
                       <img src={post.profilePic} alt={post.author} className="w-10 h-10 rounded-full mr-3" />
                       <div>
@@ -644,9 +646,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         { name: 'Power BI', icon: <BarChart size={48} className="text-indigo-500 mb-4" />, description: 'Dashboard Design, Data Modeling, DAX' },
         { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
         { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
-        { name: 'Real-time Analytics', icon: <Zap size={48} className="text-red-500 mb-4" />, description: <>Real-time<br/>Analytics</> }, // Changed to two lines
+        { name: <>Real-time<br/>Analytics</>, icon: <Zap size={48} className="text-red-500 mb-4" />, description: <>Streaming Data,<br/>Live Dashboards</> }, // Changed to two lines
         { name: 'Cloud Platforms', icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
-        { name: 'Data Warehousing', icon: <Database size={48} className="text-purple-700 mb-4" />, description: <>Data<br/>Warehousing</> }, // Changed to two lines
+        { name: <><center>Data</center>Warehousing</>, icon: <Database size={48} className="text-purple-700 mb-4" />, description: <>ETL, Data Modeling,<br/>OLAP</> }, // Changed to two lines
         { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
         { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
       ];
