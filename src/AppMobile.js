@@ -58,7 +58,7 @@ const fadeInUp = keyframes`
 // HeroSection - Adjusted padding and ensured single background element for mobile
 const HeroSection = ({ theme, children }) => {
   return (
-    <section className={`relative h-screen flex items-center justify-center px-4 py-8 overflow-hidden 
+    <section id="hero" className={`relative h-screen flex items-center justify-center px-4 py-8 overflow-hidden 
       ${theme === 'dark' 
         ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' 
         : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'} 
@@ -94,8 +94,8 @@ const HeroContent = ({ children }) => {
 // Combined Hero Heading Component using styled-components (GRANULAR FONT SIZES FOR MOBILE)
 const StyledCombinedHeroHeading = styled.h1`
   font-weight: 800; /* font-extrabold */
-  margin-bottom: 1rem; /* Adjusted for mobile */
-  padding-bottom: 0.25rem; /* Adjusted for mobile */
+  margin-bottom: 0.5rem; /* Adjusted from 1rem to move content up */
+  padding-bottom: 0.25rem; /* Adjusted from 0.25rem for better spacing */
   animation: ${fadeInUp} 1s ease-out forwards;
   animation-delay: 0.1s;
   
@@ -118,12 +118,14 @@ const StyledCombinedHeroHeading = styled.h1`
     display: block;
     font-size: 1.8rem; /* Adjusted for mobile to fit 2 lines strictly */
     line-height: 1.1; 
+    padding: 0 0.5rem; /* Adjusted horizontal padding for mobile */
   }
 `;
 
 // HeroDescription remains the same, using styled-components (duplicated and adjusted for mobile)
 const HeroDescription = styled.p`
-  font-size: 0.8rem; /* Reduced for very small screens */
+  font-size: 0.9rem; /* Increased from 0.8rem for better fit */
+  margin-top: 1.5rem; /* Adjusted top margin for spacing from heading */
   margin-bottom: 2rem; /* Adjusted for mobile */
   opacity: 0.9;
   animation: ${fadeInUp} 1s ease-out forwards;
@@ -141,7 +143,7 @@ const projects = [
     id: 'na-music-store',
     title: 'North America Music Store Analysis',
     description: 'Used SQL and Power BI to analyze music sales trends, artist popularity, and album-level performance.',
-    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=Music+Store+Dashboard', // Placeholder
+    image: '/PROJECT-MUSIC.png', // Replaced placeholder with local image
     tags: ['SQL', 'Power BI', 'Excel'],
     liveDemo: '#',
     githubRepo: '#',
@@ -153,7 +155,7 @@ const projects = [
     id: 'crypto-analytics',
     title: 'CryptoPulse Real-time Analytics',
     description: 'Built a real-time analytics system using n8n and Python to monitor cryptocurrency market trends and send Telegram alerts.',
-    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=Crypto+Dashboard', // Placeholder
+    image: '/PROJECT-N8N.png', // Replaced placeholder with local image
     tags: ['Python', 'n8n', 'APIs', 'Real-time'],
     liveDemo: '#',
     githubRepo: '#',
@@ -165,7 +167,7 @@ const projects = [
     id: 'ai-sales-forecasting',
     title: 'AI-Powered Sales Forecasting',
     description: 'Built an Excel-based dynamic dashboard to forecast e-commerce sales using traditional techniques and AI tools like Copilot.',
-    image: 'https://placehold.co/600x300/6D28D9/FFFFFF?text=Sales+Forecasting+Dashboard', // Placeholder
+    image: '/PROJECT-SALES.png', // Replaced placeholder with local image
     tags: ['Excel', 'Forecasting', 'AI'],
     liveDemo: '#',
     githubRepo: '#',
@@ -177,7 +179,7 @@ const projects = [
     id: 'powerpulse-energy',
     title: 'Telangana PowerPulse AI',
     description: 'Forecasted electricity demand for smarter energy planning using Python and visual analytics.',
-    image: 'https://placehold.co/600x300/3B82F6/FFFFFF?text=PowerPulse+Dashboard', // Placeholder
+    image: '/PROJECT-POWERPULSE.png', // Replaced placeholder with local image
     tags: ['Python', 'Pandas', 'Visualization'],
     liveDemo: '#',
     githubRepo: '#',
@@ -253,7 +255,7 @@ const education = [
   },
   {
     degree: 'B.Tech - Computer Science and Engineering',
-    institution: 'Siddhartha Acadmy of Higher Education, Vijayawada, India',
+    institution: 'Siddhartha Academy of Higher Education, Vijayawada, India',
   },
 ];
 
@@ -313,9 +315,9 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         </h1>
 
         <img
-          src={project.image} // Changed from /sid-photo.jpg to project.image
+          src={project.image}
           alt={project.title}
-          className="w-full h-48 object-cover rounded-lg mb-6 shadow-lg"
+          className="w-full h-48 object-cover rounded-lg mb-6 shadow-lg" // Changed to h-48 and object-cover for mobile zoomed effect
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
         />
 
@@ -459,9 +461,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
 
           <div className={`max-w-full mx-auto rounded-xl p-6 shadow-2xl
             ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
-            <h1 className="text-2xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-              {post.title}
-            </h1>
+            <h1 className="text-2xl font-extrabold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{post.title}</h1>
             <p className="text-xs opacity-70 mb-4">{post.date}</p>
             <p className="text-sm leading-relaxed opacity-90">
               {post.content}
@@ -482,7 +482,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
             <img
               src={project.image} // Changed from /sid-photo.jpg to project.image
               alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-48 object-cover rounded-lg mb-6 shadow-lg" // Changed to h-48 and object-cover for mobile zoomed effect
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
             />
             <div className={`absolute inset-0 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300
@@ -646,9 +646,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         { name: 'Power BI', icon: <BarChart size={36} className="text-indigo-500 mb-2" />, description: 'Dashboard Design, Data Modeling, DAX' },
         { name: 'Data Analytics', icon: <BarChart size={36} className="text-purple-500 mb-2" />, description: 'Cleaning, Exploration, Statistical Analysis' },
         { name: 'Excel', icon: <FileText size={36} className="text-emerald-500 mb-2" />, description: 'Advanced Formulas, Data Modeling, VBA' },
-        { name: <>Real-time<br/>Analytics</>, icon: <Zap size={36} className="text-red-500 mb-2" />, description: 'Streaming Data, Live Dashboards'}, // Changed to two lines
+        { name: <>Real-time<br/>Analytics</>, icon: <Zap size={36} className="text-red-500 mb-2" />, description: <>Streaming Data,<br/>Live Dashboards</> }, // Changed to two lines
         { name: 'Cloud Platforms', icon: <Briefcase size={36} className="text-cyan-500 mb-2" />, description: 'AWS, GCP, Azure Fundamentals' },
-        { name: <><center>Data</center>Warehousing</>, icon: <Database size={36} className="text-purple-700 mb-2" />, description: 'ETL, Data Modeling, OLAP' }, // Changed to two lines
+        { name: <><center>Data</center>Warehousing</>, icon: <Database size={36} className="text-purple-700 mb-2" />, description: <>ETL, Data Modeling,<br/>OLAP</> }, // Changed to two lines
         { name: 'AI & ML', icon: <Bot size={36} className="text-pink-500 mb-2" />, description: 'Machine Learning, Predictive Modeling' },
         { name: 'Tableau', icon: <Layers size={36} className="text-orange-500 mb-2" />, description: 'Interactive Visualizations, Storytelling' },
       ];
@@ -745,18 +745,18 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                           <div className="grid grid-cols-1 gap-3 text-center mt-6">
                               <div className={`p-3 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
-                                  <p className="text-xs opacity-80">Major Projects</p>
-                                  <p className="text-xs opacity-60">Data Analysis Projects</p>
+                                  <p className="text-sm opacity-90">Major Projects</p>
+                                  <p className="text-xs opacity-80 dark:text-white">in Data Analysis</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
-                              <div className={`p-3 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
+                              <div className={`p-3 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">5+</h3>
-                                  <p className="text-xs opacity-80">Certifications</p>
-                                  <p className="text-xs opacity-60">Professional Credentials</p>
+                                  <p className="text-sm opacity-90">Certifications</p>
+                                  <p className="text-xs opacity-80 dark:text-gray-100">and Professional Credentials</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
                               <div className={`p-3 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">10+</h3>
-                                  <p className="text-xs opacity-80">Tools & Libraries Used</p>
-                                  <p className="text-xs opacity-60">Across Projects & Practice Tasks</p>
+                                  <p className="text-sm opacity-90">Tools & Libraries</p>
+                                  <p className="text-xs opacity-80 dark:text-gray-100">Used in Projects & Practice Tasks</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
                           </div>
                         </div>
@@ -779,9 +779,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                         <div className="space-y-4">
                           {education.map((item, index) => (
                             <div key={index} className={`p-4 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01]
-                              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+                              ${theme === 'dark' ? 'bg-gray-800 border border-blue-900  hover:border-blue-400' : 'bg-white border border-gray-200 hover:border-blue-400'}`}>
                               <h4 className="text-base font-semibold mb-1">{item.degree}</h4>
-                              <p className="text-gray-600 dark:text-gray-300 text-xs">{item.institution}</p>
+                              <p className="text-gray-400 dark:text-gray-300 text-xs">{item.institution}</p> {/* CHANGE 003: Text color for visibility */}
                             </div>
                           ))}
                         </div>
@@ -795,10 +795,10 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                         <div className="space-y-4">
                           {certifications.map((item, index) => (
                             <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-between p-4 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01] group
-                              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700 hover:border-green-500' : 'bg-white border border-gray-200 hover:border-green-500'}`}>
+                              ${theme === 'dark' ? 'bg-gray-800 border border-green-800 hover:border-green-300' : 'bg-white border border-gray-200 hover:border-green-500'}`}>
                               <div>
                                 <h4 className="text-base font-semibold mb-1">{item.name}</h4>
-                                <p className="text-gray-600 dark:text-gray-300 text-xs">{item.issuer}</p>
+                                <p className="text-gray-400 dark:text-gray-300 text-xs">{item.issuer}</p> {/* CHANGE 003: Text color for visibility */}
                               </div>
                               <ExternalLink size={16} className="text-gray-500 group-hover:text-green-500 transition-colors duration-200" />
                             </a>
@@ -853,7 +853,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                     <div className="grid grid-cols-2 gap-4">
                       {skills.map((skill, index) => (
                         <div key={index} className={`flex flex-col items-center p-4 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 group
-                          ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
+                          ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border border-gray-200'}`}> {/* CHANGE 005: Changed border color for dark mode */}
                           {skill.icon}
                           <h3 className="text-base font-semibold mb-1">{skill.name}</h3>
                           <p className="text-center text-xs opacity-80 group-hover:opacity-100 transition-opacity duration-300">{skill.description}</p>
@@ -871,7 +871,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       Get in Touch
                     </h2>
                     <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border
-                      ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+                      ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'}`}> {/* Adjusted dark mode bg to gray-700 for better contrast */}
                       <form onSubmit={handleContactSubmit} className="space-y-4">
                         <div>
                           <label htmlFor="name" className="block text-base font-medium text-gray-700 dark:text-gray-200">Name</label>
@@ -932,7 +932,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       </form>
                     </div>
                     <div className="mt-8 text-center">
-                      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-cyan-300">Connect with Me</h3>
+                      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-orange-300">Connect with Me</h3> {/* CHANGE 006: Changed to text-orange-300 for dark mode */}
                       <div className="flex justify-center space-x-6 text-2xl">
                         <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
                           <Linkedin size={28} className="text-blue-400 dark:text-blue-300" />
@@ -973,7 +973,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
               ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
               
               <div className="container mx-auto px-2 flex justify-between items-center">
-                <button onClick={() => navigateToPage('home')} className="text-xl font-extrabold text-indigo-600 dark:text-cyan-300 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
+                <button onClick={() => navigateToPage('home')} className={`text-xl font-extrabold ${theme === 'dark' ? 'text-[#F46540]' : 'text-indigo-600'} hover:opacity-80 transition-opacity duration-200 flex-shrink-0`}>Sid's Portfolio</button> {/* CHANGE 001: Conditional text color for dark mode */}
                 
                 {/* Mobile menu button */}
                 <div className="flex items-center space-x-3">

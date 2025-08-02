@@ -252,7 +252,7 @@ const education = [
   },
   {
     degree: 'B.Tech - Computer Science and Engineering',
-    institution: 'Siddhartha Acadmy of Higher Education, Vijayawada, India',
+    institution: 'Siddhartha Academy of Higher Education, Vijayawada, India',
   },
 ];
 
@@ -315,7 +315,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-80 object-cover rounded-lg mb-8 shadow-lg"
+          className="w-full h-64 object-cover rounded-lg mb-8 shadow-lg" // Changed to h-64 and object-cover for zoomed effect
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
         />
 
@@ -482,7 +482,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-64 object-cover rounded-lg mb-8 shadow-lg" // Changed to h-64 and object-cover for zoomed effect
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
             />
             <div className={`absolute inset-0 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300
@@ -722,18 +722,18 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                           <div className="grid grid-cols-3 gap-4 text-center mt-8">
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
-                                  <p className="text-sm opacity-80">Major Projects</p>
-                                  <p className="text-xs opacity-60 dark:text-gray-100">Data Analysis Projects</p> {/* CHANGE 001: Text color for visibility */}
+                                  <p className="text-sm opacity-90">Major Projects</p>
+                                  <p className="text-xs opacity-80 dark:text-gray-100">in Data Analysis</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">5+</h3>
-                                  <p className="text-sm opacity-80">Certifications</p>
-                                  <p className="text-xs opacity-60 dark:text-gray-100">Professional Credentials</p> {/* CHANGE 001: Text color for visibility */}
+                                  <p className="text-sm opacity-90">Certifications</p>
+                                  <p className="text-xs opacity-80 dark:text-gray-100">and Professional Credentials</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">10+</h3>
-                                  <p className="text-sm opacity-80">Tools & Libraries Used</p>
-                                  <p className="text-xs opacity-60 dark:text-gray-100">Across Projects & Practice Tasks</p> {/* CHANGE 001: Text color for visibility */}
+                                  <p className="text-sm opacity-90">Tools & Libraries</p>
+                                  <p className="text-xs opacity-80 dark:text-gray-100">Used in Projects & Practice Tasks</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
                           </div>
                         </div>
@@ -785,9 +785,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                         <div className="space-y-6">
                           {education.map((item, index) => (
                             <div key={index} className={`p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01]
-                              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+                              ${theme === 'dark' ? 'bg-gray-800 border border-blue-900  hover:border-blue-400' : 'bg-white border border-gray-200  hover:border-blue-400'}`}>
                               <h4 className="text-xl font-semibold mb-1">{item.degree}</h4>
-                              <p className="text-gray-600 dark:text-gray-300 text-sm">{item.institution}</p>
+                              <p className="text-gray-400 dark:text-gray-300 text-sm">{item.institution}</p> {/* CHANGE 003: Text color for visibility */}
                             </div>
                           ))}
                         </div>
@@ -801,10 +801,10 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                         <div className="space-y-6">
                           {certifications.map((item, index) => (
                             <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-between p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01] group
-                              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700 hover:border-green-500' : 'bg-white border border-gray-200 hover:border-green-500'}`}>
+                              ${theme === 'dark' ? 'bg-gray-800 border border-green-800 hover:border-green-300' : 'bg-white border border-gray-200 hover:border-green-500'}`}>
                               <div>
                                 <h4 className="text-xl font-semibold mb-1">{item.name}</h4>
-                                <p className="text-gray-600 dark:text-gray-300 text-sm">{item.issuer}</p>
+                                <p className="text-gray-400 dark:text-gray-300 text-sm">{item.issuer}</p> {/* CHANGE 003: Text color for visibility */}
                               </div>
                               <ExternalLink size={20} className="text-gray-500 group-hover:text-green-500 transition-colors duration-200" />
                             </a>
@@ -855,11 +855,11 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                 <section id="skills" className={`py-20 px-24
                   ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
                   <div className="max-w-5xl mx-auto">
-                    <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Toolbox</h2>
+                    <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Skills</h2>
                     <div className="grid grid-cols-4 gap-8">
                       {skills.map((skill, index) => (
                         <div key={index} className={`flex flex-col items-center p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 group
-                          ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
+                          ${theme === 'dark' ? 'bg-gray-700 border  border-purple-500' : 'bg-gray-100 border border-gray-200'}`}> {/* CHANGE 005: Changed border color for dark mode */}
                           {skill.icon}
                           <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
                           <p className="text-center text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">{skill.description}</p>
@@ -938,7 +938,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       </form>
                     </div>
                     <div className="mt-12 text-center">
-                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-pink-400">Connect with Me</h3> {/* CHANGE 001: Changed to text-pink-400 for dark mode */}
+                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-purple-500">Connect with Me</h3> {/* CHANGE 006: Changed to text-orange-300 for dark mode */}
                       <div className="flex justify-center space-x-8 text-3xl">
                         <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
                           <Linkedin size={36} className="text-blue-400 dark:text-blue-300" />
@@ -979,14 +979,14 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
               ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
               
               <div className="container mx-auto px-4 sm:px-6 md:px-8 flex justify-between items-center">
-                <button onClick={() => navigateToPage('home')} className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-pink-400 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button> {/* CHANGE 001: Changed to text-pink-400 for dark mode */}
+                <button onClick={() => navigateToPage('home')} className={`text-2xl sm:text-3xl font-extrabold ${theme === 'dark' ? 'text-[#F46540]' : 'text-indigo-600'} hover:opacity-80 transition-opacity duration-200 flex-shrink-0`}>Sid's Portfolio</button> {/* CHANGE 001: Conditional text color for dark mode */}
                 
                 {/* Desktop Navigation */}
                 <nav className="flex items-center space-x-8">
                   <button onClick={() => scrollToSection('hero')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Home</button>
                   <button onClick={() => scrollToSection('about')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
                   <button onClick={() => scrollToSection('projects')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
-                  <button onClick={() => scrollToSection('skills')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
+                  <button onClick={() => scrollToSection('skills')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Skills</button>
                   <button onClick={() => navigateToPage('insights')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
                   <button onClick={() => scrollToSection('contact')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
                 </nav>

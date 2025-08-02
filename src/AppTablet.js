@@ -58,7 +58,7 @@ const fadeInUp = keyframes`
 // HeroSection - Adjusted padding and ensured single background element for tablet
 const HeroSection = ({ theme, children }) => {
   return (
-    <section className={`relative h-screen flex items-center justify-center px-8 py-10 overflow-hidden 
+    <section id="hero" className={`relative h-screen flex items-center justify-center px-8 py-10 overflow-hidden 
       ${theme === 'dark' 
         ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-indigo-900' 
         : 'bg-gradient-to-br from-gray-100 via-gray-50 to-blue-100'} 
@@ -140,7 +140,7 @@ const projects = [
     id: 'na-music-store',
     title: 'North America Music Store Analysis',
     description: 'Used SQL and Power BI to analyze music sales trends, artist popularity, and album-level performance.',
-    image: 'https://placehold.co/600x300/8B5CF6/FFFFFF?text=Music+Store+Dashboard', // Placeholder
+    image: '/PROJECT-MUSIC.png', // Replaced placeholder with local image
     tags: ['SQL', 'Power BI', 'Excel'],
     liveDemo: '#',
     githubRepo: '#',
@@ -152,7 +152,7 @@ const projects = [
     id: 'crypto-analytics',
     title: 'CryptoPulse Real-time Analytics',
     description: 'Built a real-time analytics system using n8n and Python to monitor cryptocurrency market trends and send Telegram alerts.',
-    image: 'https://placehold.co/600x300/EC4899/FFFFFF?text=Crypto+Dashboard', // Placeholder
+    image: '/PROJECT-N8N.png', // Replaced placeholder with local image
     tags: ['Python', 'n8n', 'APIs', 'Real-time'],
     liveDemo: '#',
     githubRepo: '#',
@@ -164,7 +164,7 @@ const projects = [
     id: 'ai-sales-forecasting',
     title: 'AI-Powered Sales Forecasting',
     description: 'Built an Excel-based dynamic dashboard to forecast e-commerce sales using traditional techniques and AI tools like Copilot.',
-    image: 'https://placehold.co/600x300/6D28D9/FFFFFF?text=Sales+Forecasting+Dashboard', // Placeholder
+    image: '/PROJECT-SALES.png', // Replaced placeholder with local image
     tags: ['Excel', 'Forecasting', 'AI'],
     liveDemo: '#',
     githubRepo: '#',
@@ -176,7 +176,7 @@ const projects = [
     id: 'powerpulse-energy',
     title: 'Telangana PowerPulse AI',
     description: 'Forecasted electricity demand for smarter energy planning using Python and visual analytics.',
-    image: 'https://placehold.co/600x300/3B82F6/FFFFFF?text=PowerPulse+Dashboard', // Placeholder
+    image: '/PROJECT-POWERPULSE.png', // Replaced placeholder with local image
     tags: ['Python', 'Pandas', 'Visualization'],
     liveDemo: '#',
     githubRepo: '#',
@@ -313,9 +313,9 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         </h1>
 
         <img
-          src={project.image} // Changed from /sid-photo.jpg to project.image
+          src={project.image}
           alt={project.title}
-          className="w-full h-64 object-cover rounded-lg mb-8 shadow-lg"
+          className="w-full h-64 object-cover rounded-lg mb-8 shadow-lg" // Changed to h-64 and object-cover for zoomed effect
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
         />
 
@@ -459,9 +459,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
 
           <div className={`max-w-3xl mx-auto rounded-xl p-8 shadow-2xl
             ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
-            <h1 className="text-4xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-              {post.title}
-            </h1>
+            <h1 className="text-4xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">{post.title}</h1>
             <p className="text-sm opacity-70 mb-6">{post.date}</p>
             <p className="text-base leading-relaxed opacity-90">
               {post.content}
@@ -480,9 +478,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         >
           <div className="relative h-48 mb-4 rounded-lg overflow-hidden shadow-md">
             <img
-              src={project.image} // Changed from /sid-photo.jpg to project.image
+              src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-64 object-cover rounded-lg mb-8 shadow-lg" // Changed to h-64 and object-cover for zoomed effect
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
             />
             <div className={`absolute inset-0 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300
@@ -745,18 +743,18 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                           <div className="grid grid-cols-3 gap-4 text-center mt-8">
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">4+</h3>
-                                  <p className="text-sm opacity-80">Major Projects</p>
-                                  <p className="text-xs opacity-60">Data Analysis Projects</p>
+                                  <p className="text-sm opacity-90">Major Projects</p>
+                                  <p className="text-xs opacity-80 dark:text-white">in Data Analysis</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">5+</h3>
-                                  <p className="text-sm opacity-80">Certifications</p>
-                                  <p className="text-xs opacity-60">Professional Credentials</p>
+                                  <p className="text-sm opacity-90">Certifications</p>
+                                  <p className="text-xs opacity-80 dark:text-gray-100">Professional Credentials</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
                                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">10+</h3>
-                                  <p className="text-sm opacity-80">Tools & Libraries Used</p>
-                                  <p className="text-xs opacity-60">Across Projects & Practice Tasks</p>
+                                  <p className="text-sm opacity-90">Tools & Libraries</p>
+                                  <p className="text-xs opacity-80 dark:text-gray-100">Used in Projects & Practice Tasks</p> {/* CHANGE 002: Text color for visibility */}
                               </div>
                           </div>
                         </div>
@@ -779,9 +777,9 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                         <div className="space-y-6">
                           {education.map((item, index) => (
                             <div key={index} className={`p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01]
-                              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+                              ${theme === 'dark' ? 'bg-gray-800 border border-blue-900  hover:border-blue-400' : 'bg-white border border-gray-200 hover:border-blue-400'}`}>
                               <h4 className="text-xl font-semibold mb-1">{item.degree}</h4>
-                              <p className="text-gray-600 dark:text-gray-300 text-sm">{item.institution}</p>
+                              <p className="text-gray-400 dark:text-gray-300 text-sm">{item.institution}</p> {/* CHANGE 003: Text color for visibility */}
                             </div>
                           ))}
                         </div>
@@ -795,10 +793,10 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                         <div className="space-y-6">
                           {certifications.map((item, index) => (
                             <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-between p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.01] group
-                              ${theme === 'dark' ? 'bg-gray-800 border border-gray-700 hover:border-green-500' : 'bg-white border border-gray-200 hover:border-green-500'}`}>
+                              ${theme === 'dark' ? 'bg-gray-800 border border-green-800 hover:border-green-300' : 'bg-white border border-gray-200 hover:border-green-500'}`}>
                               <div>
                                 <h4 className="text-xl font-semibold mb-1">{item.name}</h4>
-                                <p className="text-gray-600 dark:text-gray-300 text-sm">{item.issuer}</p>
+                                <p className="text-gray-400 dark:text-gray-300 text-sm">{item.issuer}</p> {/* CHANGE 003: Text color for visibility */}
                               </div>
                               <ExternalLink size={20} className="text-gray-500 group-hover:text-green-500 transition-colors duration-200" />
                             </a>
@@ -853,7 +851,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                     <div className="grid grid-cols-3 gap-8">
                       {skills.map((skill, index) => (
                         <div key={index} className={`flex flex-col items-center p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 group
-                          ${theme === 'dark' ? 'bg-gray-700 border border-gray-600' : 'bg-gray-100 border border-gray-200'}`}>
+                          ${theme === 'dark' ? 'bg-gray-700 border border-orange-500' : 'bg-gray-100 border border-gray-200'}`}> {/* CHANGE 005: Changed border color for dark mode */}
                           {skill.icon}
                           <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
                           <p className="text-center text-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300">{skill.description}</p>
@@ -871,7 +869,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       Get in Touch
                     </h2>
                     <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border
-                      ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+                      ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'}`}> {/* Adjusted dark mode bg to gray-700 for better contrast */}
                       <form onSubmit={handleContactSubmit} className="space-y-6">
                         <div>
                           <label htmlFor="name" className="block text-lg font-medium text-gray-700 dark:text-gray-200">Name</label>
@@ -932,7 +930,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                       </form>
                     </div>
                     <div className="mt-12 text-center">
-                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-cyan-300">Connect with Me</h3>
+                      <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-orange-300">Connect with Me</h3> {/* CHANGE 006: Changed to text-orange-300 for dark mode */}
                       <div className="flex justify-center space-x-8 text-3xl">
                         <a href="https://www.linkedin.com/in/rtejasiddhartha/" target="_blank" className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" aria-label="LinkedIn">
                           <Linkedin size={36} className="text-blue-400 dark:text-blue-300" />
@@ -973,7 +971,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
               ${isScrolled ? (theme === 'dark' ? 'bg-gray-900 shadow-lg' : 'bg-white shadow-lg') : 'bg-transparent'}`}>  
               
               <div className="container mx-auto px-4 flex justify-between items-center">
-                <button onClick={() => navigateToPage('home')} className="text-2xl font-extrabold text-indigo-600 dark:text-cyan-300 hover:opacity-80 transition-opacity duration-200 flex-shrink-0">Sid's Portfolio</button>
+                <button onClick={() => navigateToPage('home')} className={`text-2xl font-extrabold ${theme === 'dark' ? 'text-[#F46540]' : 'text-indigo-600'} hover:opacity-80 transition-opacity duration-200 flex-shrink-0`}>Sid's Portfolio</button> {/* CHANGE 001: Conditional text color for dark mode */}
                 
                 {/* Tablet Navigation */}
                 <nav className="flex items-center space-x-6">
