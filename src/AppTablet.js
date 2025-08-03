@@ -315,7 +315,7 @@ const ProjectDetailPage = ({ project, setCurrentPage, theme }) => {
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-64 object-cover rounded-lg mb-8 shadow-lg" // Changed to h-64 and object-cover for zoomed effect
+          className="w-full h-48 object-contain rounded-lg mb-8 shadow-lg" 
           onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/600x300/CCCCCC/000000?text=Image+Error"; }}
         />
 
