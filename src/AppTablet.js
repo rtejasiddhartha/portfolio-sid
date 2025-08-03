@@ -645,7 +645,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
         { name: 'Data Analytics', icon: <BarChart size={48} className="text-purple-500 mb-4" />, description: 'Cleaning, Exploration, Statistical Analysis' },
         { name: 'Excel', icon: <FileText size={48} className="text-emerald-500 mb-4" />, description: 'Advanced Formulas, Data Modeling, VBA' },
         { name: <>Real-time<br/>Analytics</>, icon: <Zap size={48} className="text-red-500 mb-4" />, description: <>Streaming Data,<br/>Live Dashboards</> }, // Changed to two lines
-        { name: 'Cloud Platforms', icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
+        { name: <><center>Cloud</center>Platforms</>, icon: <Briefcase size={48} className="text-cyan-500 mb-4" />, description: 'AWS, GCP, Azure Fundamentals' },
         { name: <><center>Data</center>Warehousing</>, icon: <Database size={48} className="text-purple-700 mb-4" />, description: <>ETL, Data Modeling,<br/>OLAP</> }, // Changed to two lines
         { name: 'AI & ML', icon: <Bot size={48} className="text-pink-500 mb-4" />, description: 'Machine Learning, Predictive Modeling' },
         { name: 'Tableau', icon: <Layers size={48} className="text-orange-500 mb-4" />, description: 'Interactive Visualizations, Storytelling' },
@@ -979,7 +979,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   <button onClick={() => scrollToSection('about')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
                   <button onClick={() => scrollToSection('projects')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
                   <button onClick={() => scrollToSection('skills')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Toolbox</button>
-                  <button onClick={() => navigateToPage('insights')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
+                  {/* <button onClick={() => navigateToPage('insights')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button> */}
                   <button onClick={() => scrollToSection('contact')} className="text-base font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
                 </nav>
 

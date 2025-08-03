@@ -987,7 +987,7 @@ const BlogPage = ({ setCurrentPage, theme, blogPosts, linkedinPosts }) => {
                   <button onClick={() => scrollToSection('about')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">About</button>
                   <button onClick={() => scrollToSection('projects')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Projects</button>
                   <button onClick={() => scrollToSection('skills')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Skills</button>
-                  <button onClick={() => navigateToPage('insights')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button>
+                  {/* <button onClick={() => navigateToPage('insights')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Insights</button> */}
                   <button onClick={() => scrollToSection('contact')} className="text-lg font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">Contact</button>
                 </nav>
 
