@@ -1,0 +1,50 @@
+{
+  "name": "react-portfolio-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "React data analyst portfolio with project showcase and contact email function",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "lucide-react": "^0.525.0",
+    "nodemailer": "^6.9.14",
+    "querystring": "^0.2.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-scripts": "latest",
+    "styled-components": "^6.x.x"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",       
+    "babel-plugin-styled-components": "^2.x.x",
+    "customize-cra": "^1.0.0",
+    "postcss": "^8.5.6",             
+    "react-app-rewired": "^2.2.1",
+    "tailwindcss": "^3.4.17"    
+  },
+  "babel": {
+    "plugins": [
+      "babel-plugin-styled-components"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
