@@ -145,7 +145,7 @@ const projects = [
   description: 'Built an end-to-end analytics system to monitor crypto market trends, coin performance, and volatility using automated pipelines and Power BI dashboards.',
   image: '/PROJECT-CRYPTO.png',
   tags: ['Python', 'SQL', 'BigQuery', 'Power BI', 'n8n', 'AI','Excel'],
-  liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiZDg3MGUyMjQtZjJlZC00MmZmLTk2NTItZTQyOGI5Y2ZjMTcxIiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9',          // Power BI / hosted demo link
+  liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiZDg3MGUyMjQtZjJlZC00MmZmLTk2NTItZTQyOGI5Y2ZjMTcxIiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9&pageName=3e73130aec9e07ad0e26',          // Power BI / hosted demo link
   githubRepo: 'https://github.com/rtejasiddhartha/n8n-crypto-live',        // GitHub repo link
   caseStudy: null,        // keep null / unused (no case study)
   fullDescription: 'This project implements a production-style crypto analytics pipeline, starting from automated data ingestion using n8n and CoinGecko APIs, followed by data cleaning and transformation in Python. Analytics-ready tables were modeled in BigQuery to support both trend-based and snapshot analysis. Power BI dashboards were built to track overall market health, coin-level performance, dominance, volatility, and 24-hour changes, with slicer-aware logic to handle single and multi-coin selections accurately.',
