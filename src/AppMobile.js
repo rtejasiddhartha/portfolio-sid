@@ -157,7 +157,7 @@ const projects = [
   description: 'Built an end-to-end churn analytics solution using Python and SQL to predict churn risk and support data-driven retention strategies.',
   image: '/PROJECT-CHURN.png',
   tags: ['Python', 'SQL', 'Power BI', 'Machine Learning', 'EDA','Excel'],
-  liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiYWEyYzIwYWEtMTQ2Mi00MjUzLWFkMjEtZTQ4MmFkY2IzY2Y3IiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9',          // Power BI dashboard (to be added)
+  liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiYWEyYzIwYWEtMTQ2Mi00MjUzLWFkMjEtZTQ4MmFkY2IzY2Y3IiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9&pageName=96ef2374c898c7fb3173',          // Power BI dashboard (to be added)
   githubRepo: 'https://github.com/rtejasiddhartha/customer-churn-analysis',
   caseStudy: null,        // no case study
   fullDescription: 'This project covers the complete analytics lifecycle for churn prediction in a subscription-based business. The workflow includes data cleaning, exploratory data analysis, outlier detection, and feature classification using Python. A Logistic Regression model was built with class-imbalance handling to predict churn probability. Customers were segmented into Low, Medium, and High risk groups, and churn risk was mapped to actionable business strategies such as retention calls, targeted offers, and monitoring. The final output was a BI-ready dataset designed for dashboards and operational decision-making.',
