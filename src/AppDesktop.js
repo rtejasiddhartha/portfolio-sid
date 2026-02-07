@@ -153,13 +153,8 @@ const projects = [
   title: 'Customer Churn Analytics & Risk Segmentation (SaaS)',
   description: 'Developed an end-to-end churn analytics system to identify at-risk customers and support data-driven retention decisions in a subscription-based business.',
   image: '/PROJECT-CHURN.png',
-<<<<<<< HEAD
-  tags: ['Python', 'SQL', 'Power BI', 'Machine Learning', 'EDA','Excel'],
-  liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiYWEyYzIwYWEtMTQ2Mi00MjUzLWFkMjEtZTQ4MmFkY2IzY2Y3IiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9&pageName=96ef2374c898c7fb3173',          // Power BI dashboard (to be added)
-=======
   tags: ['Python', 'SQL', 'Power BI', 'Machine Learning', 'EDA', 'Excel'],
   liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiYWEyYzIwYWEtMTQ2Mi00MjUzLWFkMjEtZTQ4MmFkY2IzY2Y3IiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9&pageName=96ef2374c898c7fb3173',
->>>>>>> f2d5cf8 (Minor Content Changes)
   githubRepo: 'https://github.com/rtejasiddhartha/customer-churn-analysis',
   caseStudy: null,
   fullDescription: 'Built a production-style churn analytics pipeline covering data ingestion, preprocessing, exploratory analysis, and feature engineering for a subscription-based SaaS dataset. Modeled churn using Logistic Regression with explicit class-imbalance handling to preserve recall in a low churn-rate environment. Optimized probability thresholds beyond default cutoffs to balance churn detection with retention capacity. Scored the full customer base and segmented users into Low, Medium, and High churn-risk tiers, translating model outputs into actionable retention strategies such as proactive outreach, targeted offers, and monitoring. Delivered BI-ready datasets optimized for churn KPIs, cohort analysis, and operational dashboards.',
