@@ -138,51 +138,56 @@ const HeroDescription = styled.p`
 const projects = [
 {
   id: 'crypto-market-analytics',
-  title: 'Automated Crypto Market Analytics Platform',
-  description: 'Built an end-to-end analytics system to monitor crypto market trends, coin performance, and volatility using automated pipelines and Power BI dashboards.',
+  title: 'Live Crypto Market Analytics & AI Insight Platform',
+  description: 'Designed and built an end-to-end crypto analytics platform that automates live market data ingestion, transforms it into analytics-ready models, and delivers KPI-driven insights through BI dashboards and AI-assisted narratives.',
   image: '/PROJECT-CRYPTO.png',
-  tags: ['Python', 'SQL', 'BigQuery', 'Power BI', 'n8n', 'AI','Excel'],
-  liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiZDg3MGUyMjQtZjJlZC00MmZmLTk2NTItZTQyOGI5Y2ZjMTcxIiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9&pageName=3e73130aec9e07ad0e26',          // Power BI / hosted demo link
-  githubRepo: 'https://github.com/rtejasiddhartha/n8n-crypto-live',        // GitHub repo link
-  caseStudy: null,        // keep null / unused (no case study)
-  fullDescription: 'This project implements a production-style crypto analytics pipeline, starting from automated data ingestion using n8n and CoinGecko APIs, followed by data cleaning and transformation in Python. Analytics-ready tables were modeled in BigQuery to support both trend-based and snapshot analysis. Power BI dashboards were built to track overall market health, coin-level performance, dominance, volatility, and 24-hour changes, with slicer-aware logic to handle single and multi-coin selections accurately.',
-  aiSummary: 'This project demonstrates how automated data pipelines, cloud modeling, and BI dashboards can be combined to monitor fast-moving crypto markets. It highlights my ability to design end-to-end analytics workflows, define meaningful KPIs, and translate complex market data into clear, decision-ready insights.'
+  tags: ['Python', 'SQL', 'BigQuery', 'Power BI', 'n8n', 'AI', 'Streamlit', 'Excel'],
+  liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiZDg3MGUyMjQtZjJlZC00MmZmLTk2NTItZTQyOGI5Y2ZjMTcxIiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9&pageName=3e73130aec9e07ad0e26',
+  githubRepo: 'https://github.com/rtejasiddhartha/n8n-crypto-live',
+  caseStudy: null,
+  fullDescription: 'This project implements a production-style crypto analytics pipeline, beginning with automated data ingestion via n8n and public crypto APIs, followed by data validation, cleaning, and feature preparation in Python. Curated, analytics-ready datasets were modeled in BigQuery to support market-wide trend analysis, coin-level performance tracking, dominance metrics, volatility indicators, and rolling time-window comparisons. Interactive Power BI dashboards were designed with slicer-aware logic to ensure accurate insights across single-asset and multi-asset views, enabling clear interpretation of rapidly changing market conditions.',
+  aiSummary: 'This project showcases my ability to design automation-first analytics systems that combine data engineering, cloud modeling, BI visualization, and AI-assisted insight generation. It demonstrates how complex, high-velocity market data can be translated into structured KPIs, narrative insights, and decision-ready analytics with controlled AI usage.'
 },
 {
   id: 'customer-churn-analysis',
-  title: 'Customer Churn Analysis & Risk Segmentation',
-  description: 'Built an end-to-end churn analytics solution using Python and SQL to predict churn risk and support data-driven retention strategies.',
+  title: 'Customer Churn Analytics & Risk Segmentation (SaaS)',
+  description: 'Developed an end-to-end churn analytics system to identify at-risk customers and support data-driven retention decisions in a subscription-based business.',
   image: '/PROJECT-CHURN.png',
+<<<<<<< HEAD
   tags: ['Python', 'SQL', 'Power BI', 'Machine Learning', 'EDA','Excel'],
   liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiYWEyYzIwYWEtMTQ2Mi00MjUzLWFkMjEtZTQ4MmFkY2IzY2Y3IiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9&pageName=96ef2374c898c7fb3173',          // Power BI dashboard (to be added)
+=======
+  tags: ['Python', 'SQL', 'Power BI', 'Machine Learning', 'EDA', 'Excel'],
+  liveDemo: 'https://app.powerbi.com/view?r=eyJrIjoiYWEyYzIwYWEtMTQ2Mi00MjUzLWFkMjEtZTQ4MmFkY2IzY2Y3IiwidCI6IjA0MzJkMmY1LTA0MzUtNGJjMy1iNDBjLThhOTdmZTJkODc2YSJ9&pageName=96ef2374c898c7fb3173',
+>>>>>>> f2d5cf8 (Minor Content Changes)
   githubRepo: 'https://github.com/rtejasiddhartha/customer-churn-analysis',
-  caseStudy: null,        // no case study
-  fullDescription: 'This project covers the complete analytics lifecycle for churn prediction in a subscription-based business. The workflow includes data cleaning, exploratory data analysis, outlier detection, and feature classification using Python. A Logistic Regression model was built with class-imbalance handling to predict churn probability. Customers were segmented into Low, Medium, and High risk groups, and churn risk was mapped to actionable business strategies such as retention calls, targeted offers, and monitoring. The final output was a BI-ready dataset designed for dashboards and operational decision-making.',
-  aiSummary: 'This project demonstrates how predictive modeling and risk segmentation can be applied to real business problems. It highlights my ability to translate customer behavior data into churn risk signals and align model outputs with practical retention actions.'
+  caseStudy: null,
+  fullDescription: 'Built a production-style churn analytics pipeline covering data ingestion, preprocessing, exploratory analysis, and feature engineering for a subscription-based SaaS dataset. Modeled churn using Logistic Regression with explicit class-imbalance handling to preserve recall in a low churn-rate environment. Optimized probability thresholds beyond default cutoffs to balance churn detection with retention capacity. Scored the full customer base and segmented users into Low, Medium, and High churn-risk tiers, translating model outputs into actionable retention strategies such as proactive outreach, targeted offers, and monitoring. Delivered BI-ready datasets optimized for churn KPIs, cohort analysis, and operational dashboards.',
+  aiSummary: 'Demonstrates the application of interpretable predictive modeling and risk segmentation to real-world retention problems, emphasizing decision support, recurring-revenue economics, and analytics outputs designed for business consumption.'
+},
+{
+  id: 'na-music-retail-analytics',
+  title: 'North America Music Retail Analytics (SQL Data Warehouse)',
+  description: 'SQL-first analytics platform demonstrating a full OLTP → OLAP data warehouse, star-schema modeling, and business-driven insights for a multi-store music retail operation across the US and Canada.',
+  image: '/PROJECT-MUSIC.png',
+  tags: ['SQL','MySQL','OLTP','OLAP','Business Intelligence'],
+  liveDemo: 'https://onedrive.live.com/:p:/g/personal/FC4753770F211A32/IQCgoNoLbq3URqcskedAuMzZAawcTaHHOcbsIowJipkZweQ?resid=FC4753770F211A32!s0bdaa0a0ad6e46d4a72c91e740b8ccd9&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy9mYzQ3NTM3NzBmMjExYTMyL0lRQ2dvTm9MYnEzVVJxY3NrZWRBdU16WkFhd2NUYUhIT2Nic0lvd0ppcGtad2VR',
+  githubRepo: 'https://github.com/rtejasiddhartha/Music-Retail-Analytics',
+  caseStudy: null,
+  fullDescription: 'This project simulates a large-scale, digital-first music retail business operating across North America. I designed and implemented a fully normalized OLTP schema and a complementary OLAP analytics layer using star-schema principles. The system models customers, orders, order items, invoices, artists, albums, vendors, stores, and geographic hierarchies. Strong data integrity was enforced using primary and foreign keys, constraints, and triggers. Advanced SQL techniques—including CTEs, window functions, conditional aggregations, and analytical joins—were used to analyze 55K+ orders and 130K+ line items across 4 years of data. The platform generates insights on revenue growth, customer behavior and retention, channel performance, inventory movement, vendor contribution, and artist/album profitability, with SQL serving as the primary analytical engine.',
+  aiSummary: 'A production-style SQL analytics system showcasing end-to-end data modeling, OLTP to OLAP design, and business-first analytical problem solving using advanced SQL.'
 },
 {
   id: 'healthcare-wearable-analytics',
   title: 'Healthcare Wearable Data Analytics',
-  description: 'Analyzed multi-year wearable health data to detect sleep, activity, and heart-rate risk patterns using Python and Power BI.',
+  description: 'Built a wearable health analytics pipeline to identify sleep, activity, and heart-rate risk patterns using Python and Power BI.',
   image: '/PROJECT-HEALTHCARE.png',
   tags: ['Python', 'Data Cleaning', 'Feature Engineering', 'Machine Learning', 'Power BI'],
-  liveDemo: '#',          // Power BI dashboard / image link
-  githubRepo: '#',        // GitHub repo (if public)
-  caseStudy: null,        // no case study
-  fullDescription: 'This project involved transforming raw XML wearable data into structured, analysis-ready datasets using Python. Data quality validation and normalization logic were applied to handle device sync gaps, inconsistent intervals, and missing days. Sleep quality features such as efficiency, stage distribution, fragmentation, and extreme sleep flags were engineered alongside activity and movement metrics. Heart rate and HRV analytics were performed to capture physiological stress signals. All features were combined into a unified longitudinal health timeline, enabling trend-based risk detection rather than daily snapshot analysis. A Logistic Regression model was used to classify elevated health-risk days, and insights were delivered through Power BI dashboards for patient-level monitoring.',
-  aiSummary: 'This project demonstrates how wearable health data can be transformed into meaningful health insights through feature engineering and predictive analytics. It highlights my ability to handle noisy real-world data, engineer interpretable features, and deliver risk-focused dashboards suitable for preventive health analysis.'
-},
-{
-  id: 'na-music-retail-analytics',
-  title: 'North America Music Retail Analytics',
-  description: 'Designed and built an end-to-end SQL analytics platform to analyze sales, customers, and artist performance across a multi-store music retail business.',
-  image: '/PROJECT-MUSIC.png',
-  tags: ['SQL', 'MySQL', 'Data Modeling', 'Advanced Queries'],
-  liveDemo: '#',          // optional image / dashboard link
-  githubRepo: '#',        // GitHub repo link
-  caseStudy: null,        // no case study
-  fullDescription: 'This project simulates a large-scale music retail business operating across the United States and Canada. A fully normalized 17-table relational schema was designed covering artists, albums, tracks, customers, vendors, invoices, orders, and multi-location store operations. Primary and foreign keys, constraints, and triggers were implemented to enforce data integrity. Advanced SQL techniques such as CTEs, window functions, conditional aggregations, and analytical joins were used to analyze over 60,000 orders and 130,000 order items. Business insights were generated on revenue growth, customer purchasing behavior, vendor spending, inventory movement, artist and album performance, and store-wise sales distribution.',
-  aiSummary: 'This project demonstrates strong SQL-centric analytical problem solving. It highlights my ability to design relational schemas, write complex analytical queries, and extract meaningful business insights using SQL as the primary analytics tool.'
+  liveDemo: '#',
+  githubRepo: 'https://github.com/rtejasiddhartha/Wearable-Analytics',
+  caseStudy: null,
+  fullDescription: 'Designed an end-to-end analytics workflow to transform raw multi-year wearable XML data into structured, analysis-ready datasets using Python. Implemented robust data validation and normalization to handle device sync gaps, irregular sampling intervals, and missing days. Engineered sleep quality features including efficiency, stage distribution, fragmentation, and extreme sleep flags, alongside activity, movement, heart-rate, and HRV-based physiological stress metrics. All features were unified into a longitudinal health timeline to enable trend-based risk detection rather than isolated daily snapshots. A Logistic Regression model was applied to classify elevated health-risk days, with insights delivered through interactive Power BI dashboards for patient-level monitoring and pattern exploration.',
+  aiSummary: 'This project showcases my ability to work with noisy real-world wearable data, engineer interpretable health features, and apply predictive modeling to support preventive, risk-focused health analytics.'
 }
 
 ];
@@ -805,7 +810,7 @@ const skills = [
                 </HeroSection>
 
                 {/* About Section */}
-                <section id="about" className={`pt-8 pb-18 px-24
+                <section id="about" className={`pt-6 pb-12 px-18
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
                   <div className="container mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">About Me</h2>
@@ -817,12 +822,12 @@ const skills = [
                           <h3 className="text-3xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">Hi, I’m Teja Siddhartha</h3>
                           <p className={`text-lg md:text-xl mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}> Data & BI Analyst | SQL • Python • Power BI | End-to-End Analytics</p>
                           <p className={`text-lg leading-relaxed mb-6 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
-                            I am a Data Analyst with hands-on experience building end-to-end analytics solutions across domains such as finance, customer analytics, healthcare, and retail. My work focuses on transforming raw, messy data into structured datasets, meaningful KPIs, and interactive dashboards that support business and operational decision-making.
+                            I am a Data Analyst experienced in building end-to-end analytics solutions across finance, customer analytics, healthcare, retail, and digital asset markets. I transform raw data into structured datasets, well-defined KPIs, and interactive dashboards that support business and operational decisions.
                           </p>
                           <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
-                            I have worked extensively with Python, SQL, Power BI, Excel, BigQuery, and automation tools to design analytics pipelines — from data ingestion and cleaning to modeling, analysis, and visualization. My projects demonstrate strong foundations in data cleaning, exploratory data analysis (EDA), feature engineering, KPI design, and dashboard development. </p>
+                           I work extensively with Python, SQL, Power BI, Excel, and BigQuery to design analytics pipelines — from ingestion and cleaning to modeling and visualization. My experience includes normalized OLTP schema design, OLAP modeling for multi-dimensional analysis, EDA, feature engineering, KPI architecture, and dashboard development. </p>
                             <p className={`text-lg leading-relaxed mb-8 ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
-                            Across my projects, I have analyzed crypto market trends, customer churn risk, wearable healthcare data, and large-scale retail transactions, applying both descriptive and predictive analytics to uncover patterns, assess risk, and generate actionable insights. I aim to build analytics solutions that are not only technically sound, but also practical, interpretable, and business-ready.
+                            Across projects, I have analyzed crypto market trends, customer churn risk, wearable health data, and large-scale retail transactions, applying descriptive and predictive analytics to quantify risk and generate actionable insights. I focus on building analytics solutions that are technically robust, interpretable, and aligned with real business needs.
                           </p>
                           <div className="grid grid-cols-3 gap-4 text-center mt-8">
                               <div className={`p-4 rounded-xl shadow-md ${theme === 'dark' ? 'bg-gray-700 border border-purple-500' : 'bg-gray-100 border-gray-200'}`}>
@@ -926,7 +931,7 @@ const skills = [
                 </section>
 
                 {/* Projects Section */}
-                <section id="projects" className={`py-20 px-24
+                <section id="projects" className={`py-8 px-24
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
                   <div className="max-w-6xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Projects</h2>
@@ -962,7 +967,7 @@ const skills = [
                 </section>
 
                 {/* Skills Section (Toolbox Zone) */}
-                <section id="skills" className={`py-20 px-24
+                <section id="skills" className={`py-8 px-24
                   ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
                   <div className="max-w-5xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">My Skills</h2>
@@ -980,7 +985,7 @@ const skills = [
                 </section>
 
                 {/* Contact Form & Social Links */}
-                <section id="contact" className={`py-20 px-24
+                <section id="contact" className={`py-8 px-24
                   ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}>
                   <div className="max-w-xl mx-auto">
                     <h2 className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-700">
